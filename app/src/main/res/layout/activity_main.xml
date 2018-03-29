@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="rrdl.be4care.MainActivity">
+    android:padding="16dp"
+    tools:context="rrdl.be4care.Controllers.MainActivity">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="151dp"
+    <LinearLayout
+        android:id="@+id/layout_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="UPLOAD IMAGE"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="198dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnChoose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Choose" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button" />
+
+        <Button
+            android:id="@+id/btnUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Upload" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>
