@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "157753360001",
+    "firebase_url": "https://be4care1.firebaseio.com",
+    "project_id": "be4care1",
+    "storage_bucket": "be4care1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157753360001:android:2406e2cb10cdc047",
+        "android_client_info": {
+          "package_name": "rrdl.be4care"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157753360001-mdg04qbcrb5o11srhpqs819sbp9uv3ui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rrdl.be4care",
+            "certificate_hash": "27917be8cfebfb82773de4e4159b2f3b441cf121"
+          }
+        },
+        {
+          "client_id": "157753360001-m66g925vq4na0ga3u4tvkie7dd0bkg9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApihNgTkDsZW0qq20oyXQ_c1atq_3BgCA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157753360001-m66g925vq4na0ga3u4tvkie7dd0bkg9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
