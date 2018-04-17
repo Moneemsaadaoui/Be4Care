@@ -47,7 +47,9 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex) {
                     case 0:
-                        fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
+                        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                      //  fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
                         break;
                     case 1:
                         fm.beginTransaction().replace(R.id.MainContainer, new SearchFragment()).commit();
