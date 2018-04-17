@@ -21,7 +21,28 @@
         <item>@drawable/last</item>
 
     </integer-array>
+<!--Test-->
 
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Be4Care</string>
+    <string name="slide_1_desc">Toute votre santé dans vos mains</string>
+
+    <string name="slide_2_title">Notre Mission</string>
+    <string name="slide_2_desc">Vous aider à prendre les meilleures decisions concernant votre capital de santé. \n
+    Dr Stéphane Quesnot</string>
+
+    <string name="slide_3_title">Centralisez et conserver</string>
+    <string name="slide_3_desc">vos données de santé sous forme numérique en quelques secondes</string>
+
+    <string name="slide_4_title">Un stockage personnel et sécurisé </string>
+    <string name="slide_4_desc">disponible a tout moment</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

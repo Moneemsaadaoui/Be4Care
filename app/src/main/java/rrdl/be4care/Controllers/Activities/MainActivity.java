@@ -1,7 +1,6 @@
 package rrdl.be4care.Controllers.Activities;
 
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
         final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
+        spaceNavigationView.showTextOnly();
         spaceNavigationView.addSpaceItem(new SpaceItem("Documents", R.mipmap.file));
         spaceNavigationView.addSpaceItem(new SpaceItem("Recherche", R.mipmap.file));
         spaceNavigationView.setCentreButtonIcon(R.drawable.ic_add_black_24dp);
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
         spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
                 startActivity(intent);
             }
 
