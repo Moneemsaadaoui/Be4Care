@@ -17,14 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Controllers.LoginActivity"
+            android:name=".Controllers.Activities.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".Controllers.MainActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Controllers.Activities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Controllers.Activities.Main2Activity" />
+        <activity android:name=".Controllers.Activities.AddDocumentActivity"></activity>
     </application>
 
 </manifest>

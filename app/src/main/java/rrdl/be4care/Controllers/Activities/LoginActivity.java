@@ -1,4 +1,4 @@
-package rrdl.be4care.Controllers;
+package rrdl.be4care.Controllers.Activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#ffcd7f"));
         }*/
-        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+        Intent intent=new Intent(LoginActivity.this,Main2Activity.class);
         startActivity(intent);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
