@@ -21,7 +21,7 @@
         <item>@drawable/last</item>
 
     </integer-array>
-<!--Test-->
+    <!--Test-->
 
     <string name="title_activity_welcome">Home Screen</string>
     <string name="next">NEXT</string>

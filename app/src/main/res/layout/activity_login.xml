@@ -20,9 +20,18 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/lchevron"
+        android:text="RETOUR"
+        android:textColor="@android:color/white" />
+
     <Space
         android:layout_width="match_parent"
-        android:layout_height="136dp" />
+        android:layout_height="49dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -51,50 +60,47 @@
         android:textColor="@android:color/white" />
 
     <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edittext_rounded"
+        android:ems="10"
+        android:hint="Numero Telephone"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/edittext_rounded"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Mot de passe"
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textColor="@android:color/white" />
 
-    <ScrollView
-        android:id="@+id/login_form"
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:buttonTint="@android:color/white"
+        android:text="J'accepte les conditions d'utilisation"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/email_sign_in_button"
+        style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_button"
+        android:text="Valider"
+        android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/email_login_form"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </android.support.design.widget.TextInputLayout>
-
-            <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/rounded_button"
-                android:text="Valider"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>
