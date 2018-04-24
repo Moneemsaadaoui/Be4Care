@@ -16,9 +16,6 @@
     </string>
     <integer-array name="img_id_arr">
         <item>@drawable/first</item>
-        <item>@drawable/second</item>
-        <item>@drawable/third</item>
-        <item>@drawable/last</item>
 
     </integer-array>
     <!--Test-->
