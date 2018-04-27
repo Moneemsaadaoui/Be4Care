@@ -1,4 +1,4 @@
-package rrdl.be4care.Controllers.Activities;
+package rrdl.be4care.Views.Activities;
 
 
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -15,10 +14,10 @@ import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 
-import rrdl.be4care.Controllers.Fragments.MainUIFragments.DocumentsFragment;
-import rrdl.be4care.Controllers.Fragments.MainUIFragments.ProfileFragment;
-import rrdl.be4care.Controllers.Fragments.MainUIFragments.SearchFragment;
-import rrdl.be4care.Controllers.Fragments.MainUIFragments.ShortcutFragment;
+import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
+import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
+import rrdl.be4care.Views.Fragments.MainUIFragments.SearchFragment;
+import rrdl.be4care.Views.Fragments.MainUIFragments.ShortcutFragment;
 import rrdl.be4care.R;
 
 public class MainActivity extends AppCompatActivity implements ProfileFragment.OnFragmentInteractionListener,

@@ -1,4 +1,4 @@
-package rrdl.be4care.Controllers.Activities;
+package rrdl.be4care.Views.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -42,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         final JSONObject request = new JSONObject();
         queue = Volley.newRequestQueue(this);
         try {
-            request.put("username","moneem");
-            request.put("password","helloworld");
+            request.put("username", "moneem");
+            request.put("password", "helloworld");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -51,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 "https://peaceful-forest-76384.herokuapp.com/api/users/login", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 Toast.makeText(getBaseContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
@@ -60,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
                 Toast.makeText(getBaseContext(), "ERROR", Toast.LENGTH_SHORT).show();
             }
 

@@ -7,7 +7,7 @@
     android:background="@drawable/gradient"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context="rrdl.be4care.Controllers.Activities.LoginActivity">
+    tools:context=".Views.Activities.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

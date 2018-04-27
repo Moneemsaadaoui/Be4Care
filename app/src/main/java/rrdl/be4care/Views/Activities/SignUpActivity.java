@@ -1,4 +1,4 @@
-package rrdl.be4care.Controllers.Activities;
+package rrdl.be4care.Views.Activities;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
@@ -15,14 +15,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;

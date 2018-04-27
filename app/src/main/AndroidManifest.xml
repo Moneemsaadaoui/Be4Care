@@ -17,15 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".Controllers.Activities.SignUpActivity"
+            android:name=".Views.Activities.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".Controllers.Activities.MainActivity">
+        <activity android:name=".Views.Activities.MainActivity">
 
         </activity>
-        <activity android:name=".Controllers.Activities.WelcomeActivity" />
-        <activity android:name=".Controllers.Activities.AddDocumentActivity" />
-        <activity android:name=".Controllers.Activities.LoginActivity"
+        <activity android:name=".Views.Activities.WelcomeActivity" />
+        <activity android:name=".Views.Activities.AddDocumentActivity" />
+        <activity android:name=".Views.Activities.LoginActivity"
             android:label="Be4Care">
             <intent-filter>
 
