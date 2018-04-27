@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*Intent intent=new Intent(MainActivity.this,Main2Activity.class);
-        startActivity(intent);*/
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex) {
                     case 0:
-                        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                        Intent intent=new Intent(MainActivity.this,SignUpActivity.class);
                         startActivity(intent);
                       //  fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
                         break;
@@ -78,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             }
         });
     }
+    /*
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -93,10 +93,19 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
         }
     }
 
-
+*/
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+            super.onSaveInstanceState(outState);
+            spaceNavigationView.onSaveInstanceState(outState);
+        }
+
 }
 
