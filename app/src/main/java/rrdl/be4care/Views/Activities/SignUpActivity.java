@@ -73,12 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
      /*   Intent intent=new Intent(LoginActivity.this,WelcomeActivity.class);
         startActivity(intent);*/
         // Set up the login form.
-        try {
-            request.put("username","moneem");
-            request.put("password","helloworld" );
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
 
         signin = findViewById(R.id.email_sign_in_button);
         signin.setOnClickListener(new OnClickListener() {
