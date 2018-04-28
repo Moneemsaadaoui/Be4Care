@@ -25,7 +25,7 @@
             android:text="Connexion"
             android:textAlignment="textStart"
             android:textColor="@android:color/white"
-            android:textSize="60sp"
+            android:textSize="50sp"
             android:textStyle="bold" />
 
         <EditText

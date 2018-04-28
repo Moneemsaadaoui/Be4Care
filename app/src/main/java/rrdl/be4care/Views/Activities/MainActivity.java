@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);}
         final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
+        fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
+      /*  SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
         spaceNavigationView.showTextOnly();
         spaceNavigationView.addSpaceItem(new SpaceItem("Documents", R.mipmap.file));
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex) {
                     case 0:
-                        Intent intent=new Intent(MainActivity.this,SignUpActivity.class);
+                        Intent intent=new Intent(MainActivity.this,WelcomeActivity.class);
                         startActivity(intent);
                       //  fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
                         break;
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             }
         });
     }
-    /*
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -93,18 +94,19 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
     }
 
 */
+    }
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
-
+/*
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
             super.onSaveInstanceState(outState);
             spaceNavigationView.onSaveInstanceState(outState);
-        }
+        }*/
 
 }
 

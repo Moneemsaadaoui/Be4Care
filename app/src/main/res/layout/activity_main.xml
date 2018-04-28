@@ -12,13 +12,4 @@
 
     </FrameLayout>
 
-    <com.luseen.spacenavigation.SpaceNavigationView
-        android:id="@+id/space"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        app:active_item_color="#000000"
-        app:centre_button_color="#ff6f00"
-        app:space_background_color="#FFFFFFFF"
-        app:space_item_text_size="10dp" />
 </FrameLayout>

@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import rrdl.be4care.R;
 
 public class LoginActivity extends AppCompatActivity {
+    private String BACKEND_URL = "https://peaceful-forest-76384.herokuapp.com/api/";
     private Button mLoginBtn, mSignup;
     private EditText Email, Password;
     RequestQueue queue;
@@ -69,8 +70,9 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-
-                queue.add(jsonObjectRequest);
+        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
+           //     queue.add(jsonObjectRequest);
 
 
             }
@@ -84,11 +86,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+        //Change status bar color to transparent
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
-        //Change status bar color
-
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -96,5 +97,22 @@ public class LoginActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.parseColor("#ffcd7f"));
         }
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
+
 }
-/**/
+
+
