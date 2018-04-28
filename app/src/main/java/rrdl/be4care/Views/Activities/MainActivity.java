@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -36,6 +37,15 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             window.setStatusBarColor(Color.TRANSPARENT);}
         final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
+
+
+   /*     BottomNavigationView mBottomBar;
+        mBottomBar = findViewById(R.id.Bottombar);
+        mBottomBar.inflateMenu(R.menu.bottom_nav);*/
+
+
+
+
       /*  SpaceNavigationView spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
         spaceNavigationView.showTextOnly();

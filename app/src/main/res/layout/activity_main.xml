@@ -12,4 +12,13 @@
 
     </FrameLayout>
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/Bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/space_white"
+        app:menu="@menu/bottom_nav"
+    />
+
 </FrameLayout>
