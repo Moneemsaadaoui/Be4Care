@@ -25,6 +25,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Pattern;
+
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import rrdl.be4care.R;
 
@@ -87,10 +89,19 @@ public class LoginActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(Email.getText()==null){
+                    Toast.makeText(LoginActivity.this, "Email est vide", Toast.LENGTH_SHORT).show();
+                }else if(!isValidEmaillId(Email.getText().toString().trim())){
+                    Toast.makeText(LoginActivity.this, "Format Email Invalide", Toast.LENGTH_SHORT).show();
+
+                }else if(Password.getText().toString().trim()==null)
+                {
+                    Toast.makeText(LoginActivity.this, "Mot passe vide", Toast.LENGTH_SHORT).show();
+                }else{
                 mLoginBtn.startAnimation();
                 //do the call here and on success load main acitivty
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
+                startActivity(intent);}
             }
         });
 
@@ -119,6 +130,15 @@ public class LoginActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+    }
+    private boolean isValidEmaillId(String email){
+
+        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
     @Override
     protected void onResume() {
