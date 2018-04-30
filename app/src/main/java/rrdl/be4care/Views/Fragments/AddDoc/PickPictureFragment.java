@@ -1,16 +1,22 @@
 package rrdl.be4care.Views.Fragments.AddDoc;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import rrdl.be4care.R;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,11 +31,12 @@ public class PickPictureFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private  int mREQUEST_IMAGE_CAPTURE ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private ImageView preview;
     private OnFragmentInteractionListener mListener;
 
     public PickPictureFragment() {
@@ -64,10 +71,30 @@ public class PickPictureFragment extends Fragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == mREQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            preview.setImageBitmap(imageBitmap);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pick_picture, container, true);
+        View view = inflater.inflate(R.layout.fragment_pick_picture, container, false);
         Button cancel = view.findViewById(R.id.cancel);
+        ImageView preview=view.findViewById(R.id.preview);
+        final int REQUEST_IMAGE_CAPTURE = 1;
+       
+          {  Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                mREQUEST_IMAGE_CAPTURE=REQUEST_IMAGE_CAPTURE;
+            }
+
+         }
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +122,7 @@ public class PickPictureFragment extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
 
     @Override
     public void onDetach() {

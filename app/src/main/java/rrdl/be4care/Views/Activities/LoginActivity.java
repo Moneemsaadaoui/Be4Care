@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Email.getText()==null){
+              /*  if(Email.getText()==null){
                     Toast.makeText(LoginActivity.this, "Email est vide", Toast.LENGTH_SHORT).show();
                 }else if(!isValidEmaillId(Email.getText().toString().trim())){
                     Toast.makeText(LoginActivity.this, "Format Email Invalide", Toast.LENGTH_SHORT).show();
@@ -97,11 +97,11 @@ public class LoginActivity extends AppCompatActivity {
                 }else if(Password.getText().toString().trim()==null)
                 {
                     Toast.makeText(LoginActivity.this, "Mot passe vide", Toast.LENGTH_SHORT).show();
-                }else{
+                }else{*/
                 mLoginBtn.startAnimation();
                 //do the call here and on success load main acitivty
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);}
+                startActivity(intent);
             }
         });
 

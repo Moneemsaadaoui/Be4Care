@@ -3,12 +3,18 @@ package rrdl.be4care.Views.Fragments.MainUIFragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.ListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,8 +70,21 @@ public class DocumentsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_documents, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_documents, container, false);
+        ListAdapter la = new ListAdapter();
+
+        Toolbar toolbar;
+        CollapsingToolbarLayout collapsingToolbarLayout;
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);
+
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        collapsingToolbarLayout.setTitle("Documents");
+        RecyclerView rv = view.findViewById(R.id.documentRecycler);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        rv.setAdapter(la);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

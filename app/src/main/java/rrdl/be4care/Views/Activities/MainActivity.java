@@ -45,25 +45,25 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
 
         BottomBar mBottomBar;
        mBottomBar = findViewById(R.id.bottomBar);
-         /*mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(int tabId) {
                 switch(tabId)
                 {
-                    case R.id.menu_document:fm.beginTransaction().replace(R.id.MainContainer,new DocumentsFragment()).commit();
+                    case R.id.tab_document:fm.beginTransaction().replace(R.id.MainContainer,new DocumentsFragment()).commit();
                         break;
-                    case R.id.menu_search:fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
+                    case R.id.tab_search:fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
                         break;
-                    case R.id.menu_add:Intent intent=new Intent(MainActivity.this,AddDocumentActivity.class);
+                    case R.id.tab_add:Intent intent=new Intent(MainActivity.this,AddDocumentActivity.class);
                         startActivity(intent);
                         break;
-                    case R.id.menu_shortcut:fm.beginTransaction().replace(R.id.MainContainer,new ShortcutFragment()).commit();
+                    case R.id.tab_shortcut:fm.beginTransaction().replace(R.id.MainContainer,new ShortcutFragment()).commit();
                         break;
-                    case R.id.menu_profile:fm.beginTransaction().replace(R.id.MainContainer,new ProfileFragment()).commit();
+                    case R.id.tab_profile:fm.beginTransaction().replace(R.id.MainContainer,new ProfileFragment()).commit();
                         break;
                 }
             }
-        });*/
+        });
 
 
 
