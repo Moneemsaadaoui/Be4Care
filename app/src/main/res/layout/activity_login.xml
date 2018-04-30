@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gradientcontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@drawable/bg_anim"
     android:orientation="vertical"
     android:padding="15dp"
     tools:context=".Views.Activities.LoginActivity">
@@ -52,24 +53,26 @@
             android:textAlignment="center"
             android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/LoginButton"
+        <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+            android:id="@+id/LoginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/rounded_button"
-            android:text="Connecter" />
+            android:text="Connecter"
+            app:spinning_bar_width="4dp" />
 
         <Button
             android:id="@+id/signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_marginBottom="15dp"
             android:layout_marginTop="30dp"
             android:background="@color/space_transparent"
             android:text="Creer un Compte ?"
             android:textColor="@color/cardview_light_background"
-            android:textSize="24sp" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 

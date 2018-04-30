@@ -19,7 +19,12 @@
 
     </integer-array>
     <!--Test-->
-
+    <integer-array name="icons">
+        <item>@drawable/file</item>
+        <item>@drawable/phonebook</item>
+        <item>@drawable/hand</item>
+        <item>@drawable/bubble</item>
+    </integer-array>
     <string name="title_activity_welcome">Home Screen</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>

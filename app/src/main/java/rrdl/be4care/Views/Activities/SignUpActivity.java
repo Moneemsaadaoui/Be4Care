@@ -2,6 +2,7 @@ package rrdl.be4care.Views.Activities;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -14,7 +15,9 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    private Button login, signin;
+    private Button login, validateBtn;
     private EditText mEmail,mPassword;
     private JSONObject request;
     private String AccessToken;
@@ -74,13 +77,20 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(intent);*/
         // Set up the login form.
 
-
-        signin = findViewById(R.id.email_sign_in_button);
-        signin.setOnClickListener(new OnClickListener() {
+        final CheckBox terms=findViewById(R.id.termsbox);
+        validateBtn = findViewById(R.id.email_sign_in_button);
+        validateBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
+            if(!terms.isChecked())
+            {
+                Toast.makeText(SignUpActivity.this, "You have to agree first (placeholder text)", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Intent intent=new Intent(SignUpActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
             }
         });
         mProgressView = findViewById(R.id.login_progress);

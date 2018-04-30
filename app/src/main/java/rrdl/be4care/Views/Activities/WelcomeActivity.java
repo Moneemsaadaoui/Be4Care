@@ -121,8 +121,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-       // startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
-        finish();
+        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
     }
 
     //  viewpager change listener
@@ -181,7 +180,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
             View view = layoutInflater.inflate(layouts[position], container, false);
             container.addView(view);
-
             return view;
         }
 

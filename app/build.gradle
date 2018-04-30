@@ -32,6 +32,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:cardview-v7:26.1.0'
     compile 'com.google.code.gson:gson:2.8.2'
+    implementation 'br.com.simplepass:loading-button-android:1.12.1'
+    compile 'com.roughike:bottom-bar:2.3.1'
+
+
 }
 
 

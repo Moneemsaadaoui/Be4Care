@@ -12,13 +12,16 @@
 
     </FrameLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/Bottombar"
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        app:itemBackground="@color/space_white"
-        app:menu="@menu/bottom_nav"
-    />
-
+        app:bb_tabXmlResource="@xml/bottombar_tabs"
+        app:bb_inActiveTabAlpha="0.6"
+        app:bb_activeTabAlpha="1"
+        app:bb_inActiveTabColor="#222222"
+        app:bb_activeTabColor="@color/colorPrimary"
+        app:bb_showShadow="true" />
 </FrameLayout>

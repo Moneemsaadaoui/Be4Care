@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_document"
+        icon="@drawable/ic_action_name"
+        title="Documents" />
+
+    <tab
+        id="@+id/tab_search"
+        icon="@drawable/ic_search"
+        title="Recherche" />
+
+    <tab
+        id="@+id/tab_add"
+        icon="@drawable/ic_add"
+        inActiveColor="#ffab00"
+        activeColor="#ff7700"
+        title="Ajouter" />
+    <tab
+        id="@+id/tab_shortcut"
+        icon="@drawable/ic_shortcut"
+        title="Raccourcis" />
+    <tab
+        id="@+id/tab_profile"
+        icon="@drawable/ic_profile"
+        title="Profile" />
+</tabs>

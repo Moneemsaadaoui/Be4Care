@@ -6,14 +6,18 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
@@ -39,9 +43,27 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
         fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
 
 
-   /*     BottomNavigationView mBottomBar;
-        mBottomBar = findViewById(R.id.Bottombar);
-        mBottomBar.inflateMenu(R.menu.bottom_nav);*/
+        BottomBar mBottomBar;
+       mBottomBar = findViewById(R.id.bottomBar);
+         /*mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(int tabId) {
+                switch(tabId)
+                {
+                    case R.id.menu_document:fm.beginTransaction().replace(R.id.MainContainer,new DocumentsFragment()).commit();
+                        break;
+                    case R.id.menu_search:fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
+                        break;
+                    case R.id.menu_add:Intent intent=new Intent(MainActivity.this,AddDocumentActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.menu_shortcut:fm.beginTransaction().replace(R.id.MainContainer,new ShortcutFragment()).commit();
+                        break;
+                    case R.id.menu_profile:fm.beginTransaction().replace(R.id.MainContainer,new ProfileFragment()).commit();
+                        break;
+                }
+            }
+        });*/
 
 
 
