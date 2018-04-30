@@ -7,4 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".Views.Activities.AddDocumentActivity">
 
+    <ImageView
+        android:id="@+id/testiv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_light_disabled" />
 </FrameLayout>

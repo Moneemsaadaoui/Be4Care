@@ -1,8 +1,10 @@
 package rrdl.be4care.Views.Activities;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -10,8 +12,12 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+
+import java.io.IOException;
 
 import rrdl.be4care.Utils.CameraUtility;
 import rrdl.be4care.Views.Fragments.AddDoc.InfoFragment;
@@ -32,8 +38,9 @@ public class AddDocumentActivity extends AppCompatActivity implements InfoFragme
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(Color.TRANSPARENT);}*/
+    }
 
-
+    public void camera() {
         final CharSequence[] items = {"Take Photo", "Choose from Library",
                 "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(AddDocumentActivity.this);
@@ -52,46 +59,65 @@ public class AddDocumentActivity extends AppCompatActivity implements InfoFragme
                         galleryIntent();
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
+                    finish();
                 }
             }
         });
         builder.show();
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data); }
+        super.onActivityResult(requestCode, resultCode, data);
+        ImageView iv = findViewById(R.id.testiv);
+        Uri uri = data.getData();
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            iv.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            Log.i("TAG", "Some exception " + e);
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-    private void cameraIntent()
-    {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,REQUEST_CAMERA);
-    }
-
-    private void galleryIntent()
-    {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case CameraUtility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(userChoosenTask.equals("Take Photo"))
-                        cameraIntent();
-                    else if(userChoosenTask.equals("Choose from Library"))
-                        galleryIntent();
-                } else {
-                    //code for deny
-                }
-                break;
         }
     }
-}
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        camera();
+    }
+
+    @Override
+        public void onFragmentInteraction (Uri uri){
+
+        }
+        public void cameraIntent ()
+        {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, REQUEST_CAMERA);
+        }
+
+        public void galleryIntent ()
+        {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);//
+            startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+        }
+        @Override
+        public void onRequestPermissionsResult ( int requestCode, String[] permissions,
+        int[] grantResults){
+            switch (requestCode) {
+                case CameraUtility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
+                    if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                        if (userChoosenTask.equals("Take Photo"))
+                            cameraIntent();
+                        else if (userChoosenTask.equals("Choose from Library"))
+                            galleryIntent();
+                    } else {
+                        //code for deny
+                    }
+                    break;
+            }
+        }
+    }
