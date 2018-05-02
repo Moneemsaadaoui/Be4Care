@@ -17,15 +17,15 @@ import rrdl.be4care.R;
  * Created by moneem on 18/04/18.
  */
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<Document> response;
     public LoadDocuments load;
     private Context mContext;
     private callback mCallback;
 
-    public ListAdapter(Context context,List<Document>response) {
+    public ListAdapter(Context context, List<Document> response) {
         mContext = context;
-        this.response=response;
+        this.response = response;
     }
 
     @Override
@@ -37,11 +37,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
-        Document current = response.iterator().next();
-        holder._date.setText(current.getDate());
-        holder._type.setText(current.getType());
-        holder._source.setText(current.getHStructure());
-    }
+            holder._date.setText(response.get(position).getDate());
+            holder._type.setText(response.get(position).getType());
+            holder._source.setText(response.get(position).getHStructure());
+        }
+
 
     @Override
     public int getItemCount() {
