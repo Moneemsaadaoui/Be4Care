@@ -22,19 +22,13 @@
             android:layout_gravity="center_vertical"
             android:orientation="vertical">
 
-            <ProgressBar
-                android:id="@+id/login_progress"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:visibility="gone" />
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
                 android:text="Inscription"
+                android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="45sp"
                 android:textStyle="bold"
@@ -44,28 +38,41 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/edittext_rounded"
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:textAlignment="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
+
+            <EditText
+                android:id="@+id/phonenumber"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/edittext_rounded"
+                android:ems="10"
+                android:hint="Phone number"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColorHint="@android:color/white" />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/edittext_rounded"
                 android:ems="10"
                 android:hint="Mot de passe"
                 android:inputType="textPassword"
                 android:textAlignment="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white" />
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/termsbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -79,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_button"
                 android:text="Valider"
                 android:textStyle="bold" />

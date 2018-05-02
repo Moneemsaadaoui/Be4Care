@@ -40,13 +40,13 @@ import rrdl.be4care.R;
 import rrdl.be4care.Utils.ApiService;
 
 public class LoginActivity extends AppCompatActivity {
-    private String BACKEND_URL = "https://peaceful-forest-76384.herokuapp.com/api/";
     private Button mSignupBtn;
     private EditText Email, Password;
     private CircularProgressButton mLoginBtn;
     RequestQueue queue;
     LinearLayout container;
     AnimationDrawable anim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,23 +69,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        final CircularProgressButton mLoginBtn=findViewById(R.id.LoginBtn);
+        final CircularProgressButton mLoginBtn = findViewById(R.id.LoginBtn);
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              /*  if(Email.getText()==null){
-                    Toast.makeText(LoginActivity.this, "Email est vide", Toast.LENGTH_SHORT).show();
-                }else if(!isValidEmaillId(Email.getText().toString().trim())){
-                    Toast.makeText(LoginActivity.this, "Format Email Invalide", Toast.LENGTH_SHORT).show();
 
-                }else if(Password.getText().toString().trim()==null)
-                {
-                    Toast.makeText(LoginActivity.this, "Mot passe vide", Toast.LENGTH_SHORT).show();
-                }else{*/
                 mLoginBtn.startAnimation();
-                //do the call here and on success load main acitivty
-                Auth auth=new Auth(getApplicationContext());
-                auth.Login(mLoginBtn);
+                Auth auth = new Auth(getApplicationContext());
+                auth.Login(mLoginBtn, Email, Password);
             }
         });
 
@@ -115,15 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
-    private boolean isValidEmaillId(String email){
 
-        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
-    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -138,26 +121,10 @@ public class LoginActivity extends AppCompatActivity {
             anim.stop();
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }
 
 
-/*        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-                "https://peaceful-forest-76384.herokuapp.com/api/users/login", request, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(getBaseContext(), response.toString(), Toast.LENGTH_SHORT).show();
-
-                //  mPreferences.edit().putString("AccessToken",AccessToken).commit();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(getBaseContext(), "ERROR", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-*/

@@ -19,6 +19,7 @@ import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import rrdl.be4care.Controllers.LoadDocuments;
 import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.SearchFragment;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);}
+        new LoadDocuments(getApplicationContext()).Load_Docs();
         final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
 
