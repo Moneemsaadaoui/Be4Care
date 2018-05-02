@@ -28,7 +28,6 @@ import rrdl.be4care.R;
 public class MainActivity extends AppCompatActivity implements ProfileFragment.OnFragmentInteractionListener,
         SearchFragment.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
 
-    SpaceNavigationView spaceNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

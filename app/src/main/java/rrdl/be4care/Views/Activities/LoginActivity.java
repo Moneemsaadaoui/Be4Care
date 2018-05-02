@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.CircularPropagation;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +30,14 @@ import org.json.JSONObject;
 import java.util.regex.Pattern;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rrdl.be4care.Controllers.Auth;
+import rrdl.be4care.Models.Login;
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.ApiService;
 
 public class LoginActivity extends AppCompatActivity {
     private String BACKEND_URL = "https://peaceful-forest-76384.herokuapp.com/api/";
@@ -38,11 +47,12 @@ public class LoginActivity extends AppCompatActivity {
     RequestQueue queue;
     LinearLayout container;
     AnimationDrawable anim;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
         container = (LinearLayout) findViewById(R.id.gradientcontainer);
         anim = (AnimationDrawable) container.getBackground();
         anim.setEnterFadeDuration(6000);
@@ -50,33 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         mSignupBtn = findViewById(R.id.signup);
         Email = findViewById(R.id.Login_Email_Edit);
         Password = findViewById(R.id.Login_Password_edit);
-        final JSONObject request = new JSONObject();
-        queue = Volley.newRequestQueue(this);
-        try {
-            request.put("username", "moneem");
-            request.put("password", "helloworld");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-                "https://peaceful-forest-76384.herokuapp.com/api/users/login", request, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(getBaseContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
-                //  mPreferences.edit().putString("AccessToken",AccessToken).commit();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(getBaseContext(), "ERROR", Toast.LENGTH_SHORT).show();
-            }
-
-        });
 
         mSignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,8 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                 }else{*/
                 mLoginBtn.startAnimation();
                 //do the call here and on success load main acitivty
-                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
+                Auth auth=new Auth(getApplicationContext());
+                auth.Login(mLoginBtn);
             }
         });
 
@@ -157,3 +141,23 @@ public class LoginActivity extends AppCompatActivity {
 }
 
 
+/*        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                "https://peaceful-forest-76384.herokuapp.com/api/users/login", request, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(getBaseContext(), response.toString(), Toast.LENGTH_SHORT).show();
+
+                //  mPreferences.edit().putString("AccessToken",AccessToken).commit();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                Toast.makeText(getBaseContext(), "ERROR", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+*/
