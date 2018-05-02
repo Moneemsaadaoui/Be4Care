@@ -1,11 +1,16 @@
 package rrdl.be4care.Utils;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
+import rrdl.be4care.Controllers.LoadDocuments;
+import rrdl.be4care.Models.Document;
 import rrdl.be4care.R;
 
 /**
@@ -13,9 +18,15 @@ import rrdl.be4care.R;
  */
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
-    private String[] test={"this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test"};
-    private String[] test2={"this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test"};
-    private String[] test3={"this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test","this is a test"};
+    private List<Document> response;
+    public LoadDocuments load;
+    private Context mContext;
+    private callback mCallback;
+
+    public ListAdapter(Context context,List<Document>response) {
+        mContext = context;
+        this.response=response;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -26,23 +37,32 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
-    holder._date.setText(test[position]);
-    holder._type.setText(test2[position]);
-    holder._source.setText(test3[position]);
+        Document current = response.iterator().next();
+        holder._date.setText(current.getDate());
+        holder._type.setText(current.getType());
+        holder._source.setText(current.getHStructure());
     }
 
     @Override
     public int getItemCount() {
-        return test.length;
+        return response.size();
     }
 
+    /*@Override
+    public void getDocument(List<Document> d) {
+        response = d;
+    }*/
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView _date,_type,_source;
+        private TextView _date, _type, _source;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            _date=itemView.findViewById(R.id.date);
-            _type=itemView.findViewById(R.id.type);
-            _source=itemView.findViewById(R.id.source);
+            _date = itemView.findViewById(R.id.date);
+            _type = itemView.findViewById(R.id.type);
+            _source = itemView.findViewById(R.id.source);
         }
     }
+
+
 }

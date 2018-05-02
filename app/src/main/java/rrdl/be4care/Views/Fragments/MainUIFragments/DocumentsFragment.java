@@ -13,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import rrdl.be4care.Controllers.LoadDocuments;
 import rrdl.be4care.R;
-import rrdl.be4care.Utils.ListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,8 +71,8 @@ public class DocumentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_documents, container, false);
-        // Inflate the layout for this fragment
-        ListAdapter la = new ListAdapter();
+      // Inflate the layout for this fragment
+
 
         Toolbar toolbar;
         CollapsingToolbarLayout collapsingToolbarLayout;
@@ -83,7 +83,11 @@ public class DocumentsFragment extends Fragment {
         collapsingToolbarLayout.setTitle("Documents");
         RecyclerView rv = view.findViewById(R.id.documentRecycler);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        rv.setAdapter(la);
+
+        LoadDocuments loadDocuments = new LoadDocuments(getContext(), getActivity().getIntent()
+                .getExtras().getString("TOKEN"),
+               rv );
+        loadDocuments.Load_Docs();
         return view;
     }
 

@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
-import org.json.JSONObject;
-
 import java.util.regex.Pattern;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
@@ -20,7 +18,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Login;
 import rrdl.be4care.Utils.ApiService;
-import rrdl.be4care.Views.Activities.LoginActivity;
 import rrdl.be4care.Views.Activities.MainActivity;
 
 public class Auth {
@@ -35,7 +32,6 @@ public class Auth {
 
 
     public void Login(final CircularProgressButton button, EditText email, EditText password) {
-        pref = mContext.getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
         user.addProperty("username", email.getText().toString().trim());
         user.addProperty("password", password.getText().toString().trim());
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
@@ -47,10 +43,9 @@ public class Auth {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
                 Toast.makeText(mContext, response.body().getId().toString(), Toast.LENGTH_SHORT).show();
-
-                        pref.edit().putString("TOKEN", response.body().getId()).apply();
                 Intent intent = new Intent(mContext, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("TOKEN",response.body().getId());
                 mContext.startActivity(intent);
                 button.revertAnimation();
             }

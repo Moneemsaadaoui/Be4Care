@@ -6,25 +6,18 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.luseen.spacenavigation.SpaceItem;
-import com.luseen.spacenavigation.SpaceNavigationView;
-import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import rrdl.be4care.Controllers.LoadDocuments;
+import rrdl.be4care.R;
 import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.SearchFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ShortcutFragment;
-import rrdl.be4care.R;
 
 public class MainActivity extends AppCompatActivity implements ProfileFragment.OnFragmentInteractionListener,
         SearchFragment.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
@@ -38,29 +31,33 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);}
-        new LoadDocuments(getApplicationContext()).Load_Docs();
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
         final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
+        fm.beginTransaction().replace(R.id.MainContainer, new SearchFragment()).commit();
 
 
         BottomBar mBottomBar;
-       mBottomBar = findViewById(R.id.bottomBar);
-         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+        mBottomBar = findViewById(R.id.bottomBar);
+        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(int tabId) {
-                switch(tabId)
-                {
-                    case R.id.tab_document:fm.beginTransaction().replace(R.id.MainContainer,new DocumentsFragment()).commit();
+                switch (tabId) {
+                    case R.id.tab_document:
+                        fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
                         break;
-                    case R.id.tab_search:fm.beginTransaction().replace(R.id.MainContainer,new SearchFragment()).commit();
+                    case R.id.tab_search:
+                        fm.beginTransaction().replace(R.id.MainContainer, new SearchFragment()).commit();
                         break;
-                    case R.id.tab_add:Intent intent=new Intent(MainActivity.this,AddDocumentActivity.class);
+                    case R.id.tab_add:
+                        Intent intent = new Intent(MainActivity.this, AddDocumentActivity.class);
                         startActivity(intent);
                         break;
-                    case R.id.tab_shortcut:fm.beginTransaction().replace(R.id.MainContainer,new ShortcutFragment()).commit();
+                    case R.id.tab_shortcut:
+                        fm.beginTransaction().replace(R.id.MainContainer, new ShortcutFragment()).commit();
                         break;
-                    case R.id.tab_profile:fm.beginTransaction().replace(R.id.MainContainer,new ProfileFragment()).commit();
+                    case R.id.tab_profile:
+                        fm.beginTransaction().replace(R.id.MainContainer, new ProfileFragment()).commit();
                         break;
                 }
             }
@@ -128,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
 
 */
     }
+
     @Override
     public void onFragmentInteraction(Uri uri) {
 

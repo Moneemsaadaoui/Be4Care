@@ -2,21 +2,14 @@ package rrdl.be4care.Views.Fragments.MainUIFragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import rrdl.be4care.R;
-import rrdl.be4care.Utils.ListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,7 +67,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        ListAdapter la = new ListAdapter();
+      /*  ListAdapter la = new ListAdapter(;
         //insert collapsed logic here !
         Toolbar toolbar;
         CollapsingToolbarLayout collapsingToolbarLayout;
@@ -86,7 +79,7 @@ public class SearchFragment extends Fragment {
 
         RecyclerView rv = view.findViewById(R.id.SearchRecycler);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        rv.setAdapter(la);
+        rv.setAdapter(la);**/
         return view;
     }
 
