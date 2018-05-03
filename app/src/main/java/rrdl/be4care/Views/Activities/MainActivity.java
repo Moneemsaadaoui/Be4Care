@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -18,16 +19,16 @@ import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.SearchFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ShortcutFragment;
+import rrdl.be4care.Views.Fragments.PersonalProfileFragment;
 
-public class MainActivity extends AppCompatActivity implements ProfileFragment.OnFragmentInteractionListener,
+public class MainActivity extends AppCompatActivity implements PersonalProfileFragment.OnFragmentInteractionListener,ProfileFragment.OnFragmentInteractionListener,
         SearchFragment.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Toast.makeText(this, getIntent().getExtras().getString("TOKEN"), Toast.LENGTH_SHORT).show();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
         fm.beginTransaction().replace(R.id.MainContainer, new SearchFragment()).commit();
 
 
+
         BottomBar mBottomBar;
         mBottomBar = findViewById(R.id.bottomBar);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ProfileFragment.O
             public void onTabSelected(int tabId) {
                 switch (tabId) {
                     case R.id.tab_document:
-                        fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
+                        fm.beginTransaction().replace(R.id.MainContainer, new PersonalProfileFragment()).commit();
                         break;
                     case R.id.tab_search:
                         fm.beginTransaction().replace(R.id.MainContainer, new SearchFragment()).commit();

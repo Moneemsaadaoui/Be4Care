@@ -4,40 +4,20 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.CircularPropagation;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.regex.Pattern;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Controllers.Auth;
-import rrdl.be4care.Models.Login;
 import rrdl.be4care.R;
-import rrdl.be4care.Utils.ApiService;
 
 public class LoginActivity extends AppCompatActivity {
     private Button mSignupBtn;
@@ -51,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
 
         container = (LinearLayout) findViewById(R.id.gradientcontainer);
         anim = (AnimationDrawable) container.getBackground();
@@ -91,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.parseColor("#ffcd7f"));
         }
     }
+
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

@@ -22,30 +22,37 @@ import rrdl.be4care.Views.Activities.MainActivity;
 
 public class Auth {
 
-
+    private SharedPreferences prefs;
     private JsonObject user = new JsonObject();
     private Context mContext;
-    private SharedPreferences pref;
+
+    //constructor
     public Auth(Context context) {
         this.mContext = context;
+
     }
 
 
     public void Login(final CircularProgressButton button, EditText email, EditText password) {
+        final SharedPreferences prefs = mContext.getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+
         user.addProperty("username", email.getText().toString().trim());
         user.addProperty("password", password.getText().toString().trim());
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("https://peaceful-forest-76384.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
-        ApiService apiservice = retrofit.create(ApiService.class);
+        final ApiService apiservice = retrofit.create(ApiService.class);
         Call<Login> call = apiservice.login(user);
+
+
         call.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
-                Toast.makeText(mContext, response.body().getId().toString(), Toast.LENGTH_SHORT).show();
+                String authtoken=response.body().getId();
                 Intent intent = new Intent(mContext, MainActivity.class);
+                intent.putExtra("TOKEN",authtoken);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("TOKEN",response.body().getId());
                 mContext.startActivity(intent);
                 button.revertAnimation();
             }
@@ -58,6 +65,7 @@ public class Auth {
         });
 
     }
+
 
     private boolean isValidEmaillId(String email) {
 

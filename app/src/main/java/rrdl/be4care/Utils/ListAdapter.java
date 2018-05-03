@@ -61,6 +61,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             _date = itemView.findViewById(R.id.date);
             _type = itemView.findViewById(R.id.type);
             _source = itemView.findViewById(R.id.source);
+
         }
     }
 

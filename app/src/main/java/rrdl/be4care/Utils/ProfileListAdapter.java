@@ -1,6 +1,7 @@
 package rrdl.be4care.Utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 import rrdl.be4care.R;
+import rrdl.be4care.Views.Activities.ProfileActivity;
 
 /**
  * Created by moneem on 18/04/18.
@@ -55,6 +54,13 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
             _icon = itemView.findViewById(R.id.icon);
             _icon.setScaleX(0.5f);//resize
             _icon.setScaleY(0.5f);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(mContext, ProfileActivity.class);
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 }

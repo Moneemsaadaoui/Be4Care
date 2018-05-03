@@ -86,10 +86,10 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_margin="15dp"
-                    android:src="@mipmap/ic_launcher_round" />
+                    android:src="@drawable/stephane" />
 
                 <View
                     android:layout_width="match_parent"

@@ -37,6 +37,7 @@
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
+            android:text="moneem"
             android:textAlignment="center"
             android:textColor="@color/cardview_light_background" />
 
@@ -49,6 +50,7 @@
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
+            android:text="helloworld"
             android:textAlignment="center"
             android:textColor="@android:color/white" />
 
