@@ -3,6 +3,7 @@ package rrdl.be4care.Views.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -44,9 +45,9 @@ public class MainActivity extends AppCompatActivity implements PersonalProfileFr
             window.setStatusBarColor(Color.TRANSPARENT);
         }
         final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.MainContainer, new SearchFragment()).commit();
-
-
+        fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
+        SharedPreferences prefs=getSharedPreferences("GLOBAL",MODE_PRIVATE);
+        prefs.edit().putString("TOKEN",getIntent().getExtras().getString("TOKEN")).commit();
 
         BottomBar mBottomBar;
         mBottomBar = findViewById(R.id.bottomBar);
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements PersonalProfileFr
             public void onTabSelected(int tabId) {
                 switch (tabId) {
                     case R.id.tab_document:
-                        fm.beginTransaction().replace(R.id.MainContainer, new PersonalProfileFragment()).commit();
+                        fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
                         break;
                     case R.id.tab_search:
                         fm.beginTransaction().replace(R.id.MainContainer, new SearchFragment()).commit();

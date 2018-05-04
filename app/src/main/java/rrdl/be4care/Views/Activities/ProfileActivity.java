@@ -14,8 +14,7 @@ public class ProfileActivity extends AppCompatActivity implements PersonalProfil
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         android.support.v4.app.FragmentManager fm=getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.Container,new PersonalProfileFragment());
-
+        fm.beginTransaction().add(R.id.profilecontainer,new PersonalProfileFragment()).commit();
     }
 
     @Override

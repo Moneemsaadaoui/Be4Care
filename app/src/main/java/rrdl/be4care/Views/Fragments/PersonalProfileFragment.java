@@ -73,8 +73,7 @@ public class PersonalProfileFragment extends Fragment {
 
         RoundedBitmapDrawable pdp = (RoundedBitmapDrawable) RoundedBitmapDrawable.createFromPath("@drawable/stephane");
         ListView profile_list = view.findViewById(R.id.ProfileElements);
-        GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, getActivity().getIntent().getExtras().getString("TOKEN")
-        );
+        GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
         userservice.getUser();
         // Inflate the layout for this fragment
         return view;
