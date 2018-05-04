@@ -25,8 +25,9 @@
         <activity
             android:name=".Views.Activities.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Views.Activities.MainActivity"
-            android:noHistory="true"/>
+        <activity
+            android:name=".Views.Activities.MainActivity"
+            android:noHistory="true" />
         <activity android:name=".Views.Activities.WelcomeActivity" />
         <activity android:name=".Views.Activities.AddDocumentActivity" />
         <activity
@@ -38,7 +39,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.Activities.ProfileActivity"></activity>
+        <activity android:name=".Views.Activities.ProfileActivity" />
+        <activity android:name=".Views.Fragments.CompleteProfileActivity"></activity>
     </application>
 
 </manifest>

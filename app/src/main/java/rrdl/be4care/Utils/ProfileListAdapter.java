@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import rrdl.be4care.R;
 import rrdl.be4care.Views.Activities.ProfileActivity;
@@ -48,7 +49,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
         private TextView _title;
         private ImageView _icon;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             _title = itemView.findViewById(R.id.title);
             _icon = itemView.findViewById(R.id.icon);
@@ -57,8 +58,16 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent=new Intent(mContext, ProfileActivity.class);
-                    mContext.startActivity(intent);
+                    switch(itemView.getId())
+                    {
+                        case 0:
+                            Intent intent=new Intent(mContext,ProfileActivity.class);
+                            mContext.startActivity(intent);
+                            break;
+                        case 1:
+                            Toast.makeText(mContext, "Not implemented yet", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
         }

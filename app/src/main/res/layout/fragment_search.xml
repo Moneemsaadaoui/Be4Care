@@ -15,7 +15,7 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="fill_parent"
-            android:layout_height="230dp">
+            android:layout_height="180dp">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/CollapsingToolbarLayout1"
@@ -36,10 +36,21 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="15dp"
+                    android:text="Recherche"
+                    android:textSize="60sp"
+                    android:textStyle="bold" />
+
                 <SearchView
                     android:layout_width="match_parent"
-                    app:iconifiedByDefault="false"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    app:iconifiedByDefault="false" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
 

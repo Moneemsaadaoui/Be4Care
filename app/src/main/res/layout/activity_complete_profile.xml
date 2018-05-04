@@ -80,7 +80,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_margin="15dp"
-                        android:src="@drawable/stephane" />
+                        android:src="@drawable/ic_add" />
 
                 </LinearLayout>
 

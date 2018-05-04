@@ -70,6 +70,7 @@ public class PersonalProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personalprofile, container, false);
         SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+
         RoundedBitmapDrawable pdp = (RoundedBitmapDrawable) RoundedBitmapDrawable.createFromPath("@drawable/stephane");
         ListView profile_list = view.findViewById(R.id.ProfileElements);
         GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, getActivity().getIntent().getExtras().getString("TOKEN")

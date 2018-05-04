@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -80,16 +81,14 @@
                 android:text="J'accepte les conditions d'utilisation"
                 android:textColor="@android:color/white" />
 
-            <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
+            <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
+                android:id="@+id/signupbtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_button"
                 android:text="Valider"
-                android:textStyle="bold" />
+                app:spinning_bar_width="4dp" />
 
         </LinearLayout>
     </ScrollView>

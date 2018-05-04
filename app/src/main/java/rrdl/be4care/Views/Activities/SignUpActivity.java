@@ -1,15 +1,10 @@
 package rrdl.be4care.Views.Activities;
 
-import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -19,9 +14,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import rrdl.be4care.Controllers.SignupService;
 import rrdl.be4care.R;
 
 /**
@@ -51,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     private Button login, validateBtn;
+    private EditText mPhone;
     private EditText mEmail,mPassword;
     private JSONObject request;
     private String AccessToken;
@@ -61,7 +58,9 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         mEmailView=findViewById(R.id.email);
         mPasswordView=findViewById(R.id.password);
+        mPhone=findViewById(R.id.phonenumber);
 
+        final CircularProgressButton circularProgressButton=findViewById(R.id.signupbtn);
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
@@ -78,22 +77,22 @@ public class SignUpActivity extends AppCompatActivity {
         // Set up the login form.
 
         final CheckBox terms=findViewById(R.id.termsbox);
-        validateBtn = findViewById(R.id.email_sign_in_button);
-        validateBtn.setOnClickListener(new OnClickListener() {
+        circularProgressButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-            if(!terms.isChecked())
-            {
-                Toast.makeText(SignUpActivity.this, "You have to agree first (placeholder text)", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                Intent intent=new Intent(SignUpActivity.this,MainActivity.class);
-                startActivity(intent);
-            }
+                if(!terms.isChecked())
+                {
+                    Toast.makeText(SignUpActivity.this, "You have to agree first (placeholder text)", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    circularProgressButton.startAnimation();
+                    SignupService signupService=new SignupService(mEmailView,mPasswordView,mPhone,circularProgressButton,getBaseContext());
+                }
             }
         });
-        mProgressView = findViewById(R.id.login_progress);
+
+
        /* login = findViewById(R.id.login);
         login.setOnClickListener(new OnClickListener() {
             @Override
