@@ -59,7 +59,7 @@
                             android:textStyle="bold" />
 
                         <Button
-                            android:id="@+id/button3"
+                            android:id="@+id/edit"
                             style="@style/Widget.AppCompat.Button"
                             android:layout_width="55dp"
                             android:layout_height="wrap_content"

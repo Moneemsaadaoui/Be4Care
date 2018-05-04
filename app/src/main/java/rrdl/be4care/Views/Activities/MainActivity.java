@@ -1,7 +1,6 @@
 package rrdl.be4care.Views.Activities;
 
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -29,13 +28,6 @@ public class MainActivity extends AppCompatActivity implements PersonalProfileFr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Dialog dialog=new Dialog(this,R.style.NewDialog);
-       // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-      /*  dialog.setCancelable(true);
-        dialog.setContentView(R.layout.popup_login);
-        dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
-        dialog.show();*/
 
 
         Toast.makeText(this, getIntent().getExtras().getString("TOKEN"), Toast.LENGTH_SHORT).show();

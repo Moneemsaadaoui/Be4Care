@@ -1,5 +1,6 @@
 package rrdl.be4care.Views.Fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import rrdl.be4care.Controllers.GetUserInfo;
@@ -70,7 +72,20 @@ public class PersonalProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personalprofile, container, false);
         SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+        Button editbutton = view.findViewById(R.id.edit);
+        editbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
+                dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
+                dialog.setCancelable(true);
+                dialog.setContentView(R.layout.popup_login);
+                dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
+                dialog.show();
+
+            }
+        });
         RoundedBitmapDrawable pdp = (RoundedBitmapDrawable) RoundedBitmapDrawable.createFromPath("@drawable/stephane");
         ListView profile_list = view.findViewById(R.id.ProfileElements);
         GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
