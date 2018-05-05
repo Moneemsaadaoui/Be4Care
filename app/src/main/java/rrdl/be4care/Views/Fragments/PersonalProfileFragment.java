@@ -73,6 +73,7 @@ public class PersonalProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personalprofile, container, false);
         SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         Button editbutton = view.findViewById(R.id.edit);
+
         editbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

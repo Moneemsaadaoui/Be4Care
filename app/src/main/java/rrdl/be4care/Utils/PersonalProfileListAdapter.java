@@ -16,12 +16,15 @@ public class PersonalProfileListAdapter extends BaseAdapter {
     private User user;
     String[] titles = {"Identifiant", "Nom", "Prénom", "Numero Telephone", "Date de naissance"};
     String[] data = {"Identifiant", "Nom", "Prénom", "Numero Telephone", "Date de naissance", "Sexe"};
-
     public PersonalProfileListAdapter(Context context, User user) {
         mContext = context;
         this.user = user;
+        RoundedImageView profilepic;
+
+
         Toast.makeText(context, user.getEmail() + user.getName() + user.getLastName()
                 + user.getBDate() + user.getPhNumber(), Toast.LENGTH_SHORT).show();
+
         try {
 
             data[0] = user.getEmail();

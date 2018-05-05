@@ -44,7 +44,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             holder._date.setText(response.get(position).getDate().substring(0,Math.min(response.get(position).getDate().length(),10)));
             holder._type.setText(response.get(position).getDr());
             holder._source.setText(response.get(position).getHStructure() + " , "+ response.get(position).getPlace());
-        Glide.with(mContext).load(response.get(position).getUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder._thumb);
+        Glide.with(mContext).load(response.get(position).getUrl()).override(75,75).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder._thumb);
         }
 
 
