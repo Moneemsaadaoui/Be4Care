@@ -76,14 +76,12 @@ public class PersonalProfileFragment extends Fragment {
         editbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
+                final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
                 dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
                 dialog.setCancelable(true);
                 dialog.setContentView(R.layout.popup_login);
                 dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
                 dialog.show();
-
             }
         });
         RoundedBitmapDrawable pdp = (RoundedBitmapDrawable) RoundedBitmapDrawable.createFromPath("@drawable/stephane");
