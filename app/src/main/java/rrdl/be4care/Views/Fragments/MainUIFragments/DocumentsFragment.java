@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +30,7 @@ public class DocumentsFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -78,16 +79,26 @@ public class DocumentsFragment extends Fragment {
         CollapsingToolbarLayout collapsingToolbarLayout;
         toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
         collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);
+        mSwipeRefreshLayout=view.findViewById(R.id.swiperefresh);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         collapsingToolbarLayout.setTitle("Documents");
         RecyclerView rv = view.findViewById(R.id.documentRecycler);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        LoadDocuments loadDocuments = new LoadDocuments(getContext(), getActivity().getIntent()
+        final LoadDocuments loadDocuments = new LoadDocuments(getContext(), getActivity().getIntent()
                 .getExtras().getString("TOKEN"),
                rv );
         loadDocuments.Load_Docs();
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (mSwipeRefreshLayout.isRefreshing()) {
+                    mSwipeRefreshLayout.setRefreshing(false);
+                }
+
+            }
+        });
         return view;
     }
 

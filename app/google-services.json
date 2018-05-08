@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "157753360001",
-    "firebase_url": "https://be4care1.firebaseio.com",
-    "project_id": "be4care1",
-    "storage_bucket": "be4care1.appspot.com"
+    "project_number": "1024420284742",
+    "firebase_url": "https://be4care-22550.appspot.com",
+    "project_id": "be4care-3022a",
+    "storage_bucket": "be4care-22550.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:157753360001:android:2406e2cb10cdc047",
+        "mobilesdk_app_id": "1:1024420284742:android:2406e2cb10cdc047",
         "android_client_info": {
           "package_name": "rrdl.be4care"
         }
       },
       "oauth_client": [
         {
-          "client_id": "157753360001-mdg04qbcrb5o11srhpqs819sbp9uv3ui.apps.googleusercontent.com",
+          "client_id": "1024420284742-aasim8c9q2oi89it9hqb7sd9idg40ah7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "rrdl.be4care",
@@ -23,13 +23,13 @@
           }
         },
         {
-          "client_id": "157753360001-m66g925vq4na0ga3u4tvkie7dd0bkg9p.apps.googleusercontent.com",
+          "client_id": "1024420284742-jcccv18k94e8lgrchhm42usclqjatoqv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyApihNgTkDsZW0qq20oyXQ_c1atq_3BgCA"
+          "current_key": "AIzaSyDcweZExby25ifWsgAQ554o20SFWKM6Zb4"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "157753360001-m66g925vq4na0ga3u4tvkie7dd0bkg9p.apps.googleusercontent.com",
+              "client_id": "1024420284742-jcccv18k94e8lgrchhm42usclqjatoqv.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

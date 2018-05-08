@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.android.volley.RequestQueue;
-
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import rrdl.be4care.Controllers.Auth;
 import rrdl.be4care.R;
@@ -23,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button mSignupBtn;
     private EditText Email, Password;
     private CircularProgressButton mLoginBtn;
-    RequestQueue queue;
     LinearLayout container;
     AnimationDrawable anim;
 

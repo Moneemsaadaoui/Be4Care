@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_disabled" />
+             />
 
         <LinearLayout
             android:layout_width="match_parent"

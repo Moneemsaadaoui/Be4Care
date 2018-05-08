@@ -1,28 +1,24 @@
-package rrdl.be4care.Views.Fragments.MainUIFragments;
+package rrdl.be4care.Views.Fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import rrdl.be4care.Controllers.LoadDocuments;
 import rrdl.be4care.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SearchFragment.OnFragmentInteractionListener} interface
+ * {@link Repertoire.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SearchFragment#newInstance} factory method to
+ * Use the {@link Repertoire#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchFragment extends Fragment {
+public class Repertoire extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +30,7 @@ public class SearchFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SearchFragment() {
+    public Repertoire() {
         // Required empty public constructor
     }
 
@@ -44,11 +40,11 @@ public class SearchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
+     * @return A new instance of fragment Repertoire.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
+    public static Repertoire newInstance(String param1, String param2) {
+        Repertoire fragment = new Repertoire();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,29 +61,11 @@ public class SearchFragment extends Fragment {
         }
     }
 
-    @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
-      /*  ListAdapter la = new ListAdapter(;
-        //insert collapsed logic here !
-        Toolbar toolbar;
-        CollapsingToolbarLayout collapsingToolbarLayout;
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);
-
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        collapsingToolbarLayout.setTitle("Recherche");*/
-        RecyclerView rv = view.findViewById(R.id.SearchRecycler);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        LoadDocuments loadDocuments = new LoadDocuments(getContext(), getActivity().getIntent()
-                .getExtras().getString("TOKEN"),
-                rv );
-        
-        loadDocuments.Load_Docs();
-        return view;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_repertoire, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
