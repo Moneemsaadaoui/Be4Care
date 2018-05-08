@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import rrdl.be4care.Controllers.GetUserInfo;
+import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.R;
 
 /**
@@ -87,8 +87,10 @@ public class PersonalProfileFragment extends Fragment {
         });
         RoundedBitmapDrawable pdp = (RoundedBitmapDrawable) RoundedBitmapDrawable.createFromPath("@drawable/stephane");
         ListView profile_list = view.findViewById(R.id.ProfileElements);
-        GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
-        userservice.getUser();
+       /* GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
+        userservice.getUser();*/
+        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),profile_list, prefs.getString("TOKEN", "ERROR"));
+        getMyDoctors.getDoctors();
         // Inflate the layout for this fragment
         return view;
     }

@@ -103,7 +103,8 @@
                 <ListView
                     android:id="@+id/ProfileElements"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:isScrollContainer="true" />
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
