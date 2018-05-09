@@ -27,17 +27,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Views.Activities.MainActivity"
-            android:taskAffinity=""
-            android:noHistory="true" />
+            android:taskAffinity="" />
         <activity android:name=".Views.Activities.WelcomeActivity" />
         <activity android:name=".Views.Activities.AddDocumentActivity" />
         <activity
             android:name=".Views.Activities.LoginActivity"
             android:label="Be4Care"
-            android:taskAffinity=""
             android:noHistory="true"
-
-            >
+            android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,7 +42,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Views.Activities.ProfileActivity" />
-        <activity android:name=".Views.Fragments.CompleteProfileActivity"></activity>
+        <activity android:name=".Views.Fragments.CompleteProfileActivity" />
+        <activity android:name=".Views.Activities.DocumentDetails"></activity>
     </application>
 
 </manifest>
