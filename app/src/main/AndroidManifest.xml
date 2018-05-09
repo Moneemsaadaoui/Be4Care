@@ -43,7 +43,8 @@
         </activity>
         <activity android:name=".Views.Activities.ProfileActivity" />
         <activity android:name=".Views.Fragments.CompleteProfileActivity" />
-        <activity android:name=".Views.Activities.DocumentDetails"></activity>
+        <activity android:name=".Views.Activities.DocumentDetails" />
+        <activity android:name=".Views.Activities.DoctorDetail"></activity>
     </application>
 
 </manifest>

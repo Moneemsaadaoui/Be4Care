@@ -22,20 +22,18 @@ import rrdl.be4care.R;
 public class DoctorDetailAdapter extends BaseAdapter {
     private Context mContext;
     private Doctor mDoctor;
-    String[] titles = {"Date de document", "Professionnel de santé", "Type de document"
-            , "Structure de santé", "Lieu","Notes"};
-    String[]data= {"Date de document", "Professionnel de santé", "Type de document"
-            , "Structure de santé", "Lieu","Notes"};;
-    public DoctorDetailAdapter(Context context,Doctor document) {
+    String[] titles = {"Adresse", "Numero de Telephone", "Adresse Email"
+            , "Structure de santé"};
+    String[]data = {"Adresse", "Numero de Telephone", "Adresse Email"
+            , "Structure de santé"};
+    public DoctorDetailAdapter(Context context,Doctor doctor) {
         try{
-            mDoctor = document;
+            mDoctor = doctor;
             mContext = context;
-            /*data[0] = mDoctor.getFullName();
-            data[1] = mDoctor.getDr();
-            data[2] = mDoctor.getType();
-            data[3] = mDoctor.getHStructure();
-            data[4] = mDoctor.getPlace();
-            data[5] = mDoctor.getNote();*/
+            data[0] = mDoctor.getAdress();
+            data[1] = mDoctor.getPhNumber();
+            data[2] = mDoctor.getEmail();
+            data[3] = mDoctor.getHealthStruct();
         }catch(Exception e){e.printStackTrace();}
     }
 
