@@ -26,6 +26,9 @@ public class Document {
     @SerializedName("place")
     @Expose
     private String place;
+    @SerializedName("note")
+    @Expose
+    private String note;
     @SerializedName("usersId")
     @Expose
     private String usersId;
@@ -84,6 +87,14 @@ public class Document {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getUsersId() {

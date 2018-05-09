@@ -2,8 +2,12 @@ package rrdl.be4care.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,15 +17,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.User;
 import rrdl.be4care.Utils.ApiService;
 import rrdl.be4care.Utils.PersonalProfileListAdapter;
+import rrdl.be4care.Utils.RoundedImageView;
 
 public class GetUserInfo {
     private Context mContext;
     private ListView mListView;
     private String Token;
     private SharedPreferences prefs;
-    public GetUserInfo(Context context, ListView list,String token){
+    private RoundedImageView mRoundedImageView;
+    public GetUserInfo(Context context, ListView list, String token, RoundedImageView roundedImageView){
         Token=token;
         mContext=context;
+        mRoundedImageView=roundedImageView;
         mListView=list;
         prefs=context.getSharedPreferences("AUTH",Context.MODE_PRIVATE);
     }
@@ -36,6 +43,7 @@ public class GetUserInfo {
             public void onResponse(Call<User> call, Response<User> response) {
                 PersonalProfileListAdapter ppla=new PersonalProfileListAdapter(mContext,response.body());
                 mListView.setAdapter(ppla);
+                Glide.with(mContext).load(response.body().getPUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).override(75,75).into(mRoundedImageView);
             }
 
             @Override

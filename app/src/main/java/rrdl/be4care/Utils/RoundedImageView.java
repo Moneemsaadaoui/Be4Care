@@ -1,6 +1,5 @@
 package rrdl.be4care.Utils;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,8 +11,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-@SuppressLint("AppCompatCustomView")
-class RoundedImageView extends ImageView {
+public class RoundedImageView extends ImageView {
     public RoundedImageView(Context context) {
         super(context);
     }

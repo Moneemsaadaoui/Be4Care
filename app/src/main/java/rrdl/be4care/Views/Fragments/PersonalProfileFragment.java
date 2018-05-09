@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import rrdl.be4care.Utils.RoundedImageView;
+import com.bumptech.glide.Glide;
 
 import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.R;
@@ -73,7 +75,6 @@ public class PersonalProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personalprofile, container, false);
         SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         Button editbutton = view.findViewById(R.id.edit);
-
         editbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,7 +86,8 @@ public class PersonalProfileFragment extends Fragment {
                 dialog.show();
             }
         });
-        RoundedBitmapDrawable pdp = (RoundedBitmapDrawable) RoundedBitmapDrawable.createFromPath("@drawable/stephane");
+        RoundedImageView profilepic=view.findViewById(R.id.profilepic);
+
         ListView profile_list = view.findViewById(R.id.ProfileElements);
        /* GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
         userservice.getUser();*/

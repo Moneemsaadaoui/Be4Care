@@ -78,10 +78,9 @@
 
                     <rrdl.be4care.Utils.RoundedImageView
                         android:id="@+id/profilepic"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_margin="15dp"
-                        android:src="@drawable/stephane" />
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:layout_margin="15dp" />
 
                 </LinearLayout>
 
@@ -103,6 +102,7 @@
                 <ListView
                     android:id="@+id/ProfileElements"
                     android:layout_width="match_parent"
+                    android:layout_gravity="top"
                     android:layout_height="match_parent"
                     android:isScrollContainer="true" />
 

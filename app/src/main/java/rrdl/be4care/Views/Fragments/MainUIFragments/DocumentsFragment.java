@@ -87,7 +87,6 @@ public class DocumentsFragment extends Fragment {
         RecyclerView rv = view.findViewById(R.id.documentRecycler);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
-
         final LoadDocuments loadDocuments = new LoadDocuments(getContext(), prefs.getString("AUTH",""),
                rv );
         loadDocuments.Load_Docs();
