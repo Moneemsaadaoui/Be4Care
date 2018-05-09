@@ -27,12 +27,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Views.Activities.MainActivity"
+            android:taskAffinity=""
             android:noHistory="true" />
         <activity android:name=".Views.Activities.WelcomeActivity" />
         <activity android:name=".Views.Activities.AddDocumentActivity" />
         <activity
             android:name=".Views.Activities.LoginActivity"
-            android:label="Be4Care">
+            android:label="Be4Care"
+            android:taskAffinity=""
+            android:noHistory="true"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

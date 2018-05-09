@@ -1,6 +1,7 @@
 package rrdl.be4care.Views.Fragments.MainUIFragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -85,9 +86,9 @@ public class DocumentsFragment extends Fragment {
         collapsingToolbarLayout.setTitle("Documents");
         RecyclerView rv = view.findViewById(R.id.documentRecycler);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
 
-        final LoadDocuments loadDocuments = new LoadDocuments(getContext(), getActivity().getIntent()
-                .getExtras().getString("TOKEN"),
+        final LoadDocuments loadDocuments = new LoadDocuments(getContext(), prefs.getString("AUTH",""),
                rv );
         loadDocuments.Load_Docs();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

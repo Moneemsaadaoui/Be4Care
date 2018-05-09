@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements PersonalProfileFr
         setContentView(R.layout.activity_main);
 
 
-        Toast.makeText(this, getIntent().getExtras().getString("TOKEN"), Toast.LENGTH_SHORT).show();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -38,8 +37,12 @@ public class MainActivity extends AppCompatActivity implements PersonalProfileFr
         }
         final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
+
         SharedPreferences prefs=getSharedPreferences("GLOBAL",MODE_PRIVATE);
-        prefs.edit().putString("TOKEN",getIntent().getExtras().getString("TOKEN")).commit();
+        if(prefs==null) {
+            prefs.edit().putString("TOKEN", getIntent().getExtras().getString("TOKEN")).commit();
+        }
+        Toast.makeText(this, prefs.getString("AUTH","") + "from shared prefz", Toast.LENGTH_SHORT).show();
 
         BottomBar mBottomBar;
         mBottomBar = findViewById(R.id.bottomBar);

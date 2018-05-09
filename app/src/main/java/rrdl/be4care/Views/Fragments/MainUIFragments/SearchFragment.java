@@ -2,6 +2,7 @@ package rrdl.be4care.Views.Fragments.MainUIFragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -81,9 +82,8 @@ public class SearchFragment extends Fragment {
         collapsingToolbarLayout.setTitle("Recherche");*/
         RecyclerView rv = view.findViewById(R.id.SearchRecycler);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        LoadDocuments loadDocuments = new LoadDocuments(getContext(), getActivity().getIntent()
-                .getExtras().getString("TOKEN"),
+        SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
+        LoadDocuments loadDocuments = new LoadDocuments(getContext(), prefs.getString("AUTH",""),
                 rv );
         
         loadDocuments.Load_Docs();

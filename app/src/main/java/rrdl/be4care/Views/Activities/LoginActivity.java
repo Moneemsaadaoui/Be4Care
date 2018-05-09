@@ -1,6 +1,7 @@
 package rrdl.be4care.Views.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
@@ -37,7 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         Email = findViewById(R.id.Login_Email_Edit);
         Password = findViewById(R.id.Login_Password_edit);
 
-
+        SharedPreferences pref=getSharedPreferences("GLOBAL",MODE_PRIVATE);
+        if(pref.getString("AUTH","").length()!=0)
+        {
+            Intent intent=new Intent(this,MainActivity.class);
+            startActivity(intent);
+        };
         mSignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
