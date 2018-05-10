@@ -12,8 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+
+import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.R;
 import rrdl.be4care.Utils.RoundedImageView;
+import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,6 +58,8 @@ public class ProfileFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+        Gson gson = new Gson();
+        Doctor doc = gson.fromJson(param1, Doctor.class);
         return fragment;
     }
 
@@ -70,12 +76,20 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
-        Button logout=view.findViewById(R.id.contact);
+        Button contacts=view.findViewById(R.id.contact);
+        Button profile=view.findViewById(R.id.profilebtn);
         RoundedImageView riv=view.findViewById(R.id.profilepic);
         Bitmap bmp= BitmapFactory.decodeResource(getContext().getResources(),R.drawable.stephane);
         riv.setImageBitmap(bmp);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gson gson=new Gson();
 
-        logout.setOnClickListener(new View.OnClickListener() {
+                  getFragmentManager().beginTransaction().replace(R.id.MainContainer, new DoctorListingFragment()).commit();
+            }
+        });
+        contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);

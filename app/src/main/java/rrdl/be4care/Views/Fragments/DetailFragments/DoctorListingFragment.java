@@ -1,45 +1,42 @@
-package rrdl.be4care.Views.Fragments;
+package rrdl.be4care.Views.Fragments.DetailFragments;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
-import rrdl.be4care.Utils.RoundedImageView;
-import com.bumptech.glide.Glide;
+import android.widget.TextView;
 
 import rrdl.be4care.Controllers.GetMyDoctors;
+import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.R;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PersonalProfileFragment.OnFragmentInteractionListener} interface
+ * {@link DoctorListingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PersonalProfileFragment#newInstance} factory method to
+ * Use the {@link DoctorListingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PersonalProfileFragment extends Fragment {
+public class DoctorListingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private Doctor doc;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public PersonalProfileFragment() {
+    public DoctorListingFragment() {
         // Required empty public constructor
     }
 
@@ -49,11 +46,11 @@ public class PersonalProfileFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
+     * @return A new instance of fragment DoctorDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PersonalProfileFragment newInstance(String param1, String param2) {
-        PersonalProfileFragment fragment = new PersonalProfileFragment();
+    public static DoctorListingFragment newInstance(String param1, String param2) {
+        DoctorListingFragment fragment = new DoctorListingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,27 +70,10 @@ public class PersonalProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_personalprofile, container, false);
-        SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
-        Button editbutton = view.findViewById(R.id.edit);
-        editbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
-                dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
-                dialog.setCancelable(true);
-                dialog.setContentView(R.layout.popup_login);
-                dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
-                dialog.show();
-            }
-        });
-        RoundedImageView profilepic=view.findViewById(R.id.profilepic);
-       ListView profile_list = view.findViewById(R.id.ProfileElements);
-       /* GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
-        userservice.getUser();*/
-        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),profile_list, prefs.getString("TOKEN", "ERROR"));
+        View view = inflater.inflate(R.layout.fragment_doctor_detail, container, false);
+        RecyclerView recyclerView=view.findViewById(R.id.doctorlist);
+        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),recyclerView);
         getMyDoctors.getDoctors();
-        // Inflate the layout for this fragment
         return view;
     }
 

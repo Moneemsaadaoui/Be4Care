@@ -10,16 +10,16 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:visibility="invisible"
             android:id="@+id/fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
+            android:visibility="invisible"
             app:srcCompat="@android:drawable/star_big_on" />
 
         <TextView
-            android:id="@+id/Title"
+            android:id="@+id/doclistTitle"
             android:layout_width="283dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

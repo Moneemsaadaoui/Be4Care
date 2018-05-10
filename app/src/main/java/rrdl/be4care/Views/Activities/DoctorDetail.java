@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import rrdl.be4care.Controllers.GetDoctorDetail;
+import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.R;
 
@@ -20,13 +21,10 @@ public class DoctorDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_detail);
-        title=findViewById(R.id.drname);
-        rv=findViewById(R.id.datalist);
+        rv = findViewById(R.id.datalist);
         Gson gson=new Gson();
-        Doctor doc= gson.fromJson(getIntent().getStringExtra("DOCTOR"),Doctor.class);
-        GetDoctorDetail service=new GetDoctorDetail(this,doc,title,rv);
-        Toast.makeText(this, doc.getFullName(), Toast.LENGTH_SHORT).show();
-        service.getDetails();
-
+        doc=gson.fromJson(getIntent().getStringExtra("DOCREF"),Doctor.class);
+        GetDoctorDetail getDoctorDetail=new GetDoctorDetail(this,doc,title,rv);
+        getDoctorDetail.getDetails();
     }
 }

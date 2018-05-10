@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +70,8 @@ public class Repertoire extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_repertoire, container, false);
         SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
-        ListView repertoirelist=view.findViewById(R.id.repertoirelist);
-        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),repertoirelist, prefs.getString("TOKEN", "ERROR"));
+        RecyclerView repertoirelist=view.findViewById(R.id.repertoirelist);
+        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),repertoirelist);
         getMyDoctors.getDoctors();
         return view;
     }

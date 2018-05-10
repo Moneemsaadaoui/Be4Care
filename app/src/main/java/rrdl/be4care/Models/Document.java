@@ -3,7 +3,9 @@ package rrdl.be4care.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Document {
+import io.realm.RealmObject;
+
+public class Document  {
 
     @SerializedName("url")
     @Expose

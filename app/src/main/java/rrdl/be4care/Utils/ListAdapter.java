@@ -54,20 +54,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    Reservoir.init(mContext, 2048); //in bytes
-                } catch (IOException e) {
-                    //failure
-                }
-                try {
-                    Reservoir.put("DOC_REF", response.get(position));
-                    Toast.makeText(mContext, "done", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                }
-                Gson gson=new Gson();
 
-                Intent intent=new Intent(mContext,DocumentDetails.class);
-                intent.putExtra("DOC_REF",gson.toJson(response.get(position)));
+                Gson gson = new Gson();
+
+                Intent intent = new Intent(mContext, DocumentDetails.class);
+                intent.putExtra("DOC_REF", gson.toJson(response.get(position)));
                 // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 mContext.startActivity(intent);
             }
@@ -80,10 +71,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return response.size();
     }
 
-    /*@Override
-    public void getDocument(List<Document> d) {
-        response = d;
-    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView _date, _type, _source;

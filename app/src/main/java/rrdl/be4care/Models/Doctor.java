@@ -3,7 +3,10 @@ package rrdl.be4care.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Doctor {
+import io.realm.Realm;
+import io.realm.RealmObject;
+
+public class Doctor extends RealmObject {
 
     @SerializedName("fullName")
     @Expose

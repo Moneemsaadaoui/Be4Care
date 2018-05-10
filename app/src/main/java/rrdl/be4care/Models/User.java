@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class User {
+import io.realm.RealmObject;
+
+public class User  {
     @SerializedName("name")
     @Expose
     private String name;
@@ -91,9 +93,6 @@ public class User {
         this.pUrl = pUrl;
     }
 
-    public String getRealm() {
-        return realm;
-    }
 
     public void setRealm(String realm) {
         this.realm = realm;

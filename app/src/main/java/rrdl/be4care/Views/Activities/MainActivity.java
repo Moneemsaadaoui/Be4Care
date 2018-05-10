@@ -16,13 +16,14 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import rrdl.be4care.R;
+import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.SearchFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ShortcutFragment;
-import rrdl.be4care.Views.Fragments.PersonalProfileFragment;
+import rrdl.be4care.Views.Fragments.DetailFragments.PersonalProfileFragment;
 
-public class MainActivity extends AppCompatActivity implements PersonalProfileFragment.OnFragmentInteractionListener,ProfileFragment.OnFragmentInteractionListener,
+public class MainActivity extends AppCompatActivity implements DoctorListingFragment.OnFragmentInteractionListener,PersonalProfileFragment.OnFragmentInteractionListener,ProfileFragment.OnFragmentInteractionListener,
         SearchFragment.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
