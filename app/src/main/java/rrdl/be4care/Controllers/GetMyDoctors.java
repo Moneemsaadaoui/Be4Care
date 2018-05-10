@@ -2,6 +2,7 @@ package rrdl.be4care.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -21,7 +22,6 @@ public class GetMyDoctors {
     private String Token;
     private SharedPreferences prefs;
     public GetMyDoctors(Context context, ListView list, String token){
-
         Token=token;
         mContext=context;
         mListView=list;

@@ -23,7 +23,7 @@ public class DoctorDetail extends AppCompatActivity {
         title=findViewById(R.id.drname);
         rv=findViewById(R.id.datalist);
         Gson gson=new Gson();
-        Doctor doc= gson.fromJson(getIntent().getStringExtra("DOC_REF"),Doctor.class);
+        Doctor doc= gson.fromJson(getIntent().getStringExtra("DOCTOR"),Doctor.class);
         GetDoctorDetail service=new GetDoctorDetail(this,doc,title,rv);
         Toast.makeText(this, doc.getFullName(), Toast.LENGTH_SHORT).show();
         service.getDetails();

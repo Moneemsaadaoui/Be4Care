@@ -1,17 +1,19 @@
 package rrdl.be4care.Views.Fragments.MainUIFragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import rrdl.be4care.R;
-import rrdl.be4care.Utils.ProfileListAdapter;
+import rrdl.be4care.Utils.RoundedImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,10 +70,19 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
-        RecyclerView rv=view.findViewById(R.id.ProfileRecycler);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        ProfileListAdapter pla=new ProfileListAdapter();
-        rv.setAdapter(pla);
+        Button logout=view.findViewById(R.id.contact);
+        RoundedImageView riv=view.findViewById(R.id.profilepic);
+        Bitmap bmp= BitmapFactory.decodeResource(getContext().getResources(),R.drawable.stephane);
+        riv.setImageBitmap(bmp);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
+                prefs.edit().putString("AUTH","").commit();
+
+            }
+        });
         return view;
     }
 

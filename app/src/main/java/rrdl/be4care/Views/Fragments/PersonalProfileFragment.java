@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,8 +88,7 @@ public class PersonalProfileFragment extends Fragment {
             }
         });
         RoundedImageView profilepic=view.findViewById(R.id.profilepic);
-
-        ListView profile_list = view.findViewById(R.id.ProfileElements);
+       ListView profile_list = view.findViewById(R.id.ProfileElements);
        /* GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
         userservice.getUser();*/
         GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),profile_list, prefs.getString("TOKEN", "ERROR"));

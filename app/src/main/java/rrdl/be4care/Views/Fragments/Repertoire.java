@@ -1,13 +1,16 @@
 package rrdl.be4care.Views.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.R;
 
 /**
@@ -64,8 +67,12 @@ public class Repertoire extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_repertoire, container, false);
+        View view=inflater.inflate(R.layout.fragment_repertoire, container, false);
+        SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+        ListView repertoirelist=view.findViewById(R.id.repertoirelist);
+        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),repertoirelist, prefs.getString("TOKEN", "ERROR"));
+        getMyDoctors.getDoctors();
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

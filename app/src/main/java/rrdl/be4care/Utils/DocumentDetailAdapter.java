@@ -23,20 +23,24 @@ public class DocumentDetailAdapter extends BaseAdapter {
     private Context mContext;
     private Document mDocument;
     String[] titles = {"Date de document", "Professionnel de santé", "Type de document"
-            , "Structure de santé", "Lieu","Notes"};
-    String[]data= {"Date de document", "Professionnel de santé", "Type de document"
-            , "Structure de santé", "Lieu","Notes"};;
-    public DocumentDetailAdapter(Context context,Document document) {
-     try{
-        mDocument = document;
-        mContext = context;
-        data[0] = mDocument.getDate().substring(0, Math.min(mDocument.getDate().length(), 10));
-        data[1] = mDocument.getDr();
-        data[2] = mDocument.getType();
-        data[3] = mDocument.getHStructure();
-        data[4] = mDocument.getPlace();
-        data[5] = mDocument.getNote();
-    }catch(Exception e){e.printStackTrace();}
+            , "Structure de santé", "Lieu", "Notes"};
+    String[] data = {"Date de document", "Professionnel de santé", "Type de document"
+            , "Structure de santé", "Lieu", "Notes"};
+    ;
+
+    public DocumentDetailAdapter(Context context, Document document) {
+        try {
+            mDocument = document;
+            mContext = context;
+            data[0] = mDocument.getDate().substring(0, Math.min(mDocument.getDate().length(), 10));
+            data[1] = mDocument.getDr();
+            data[2] = mDocument.getType();
+            data[3] = mDocument.getHStructure();
+            data[4] = mDocument.getPlace();
+            data[5] = mDocument.getNote();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

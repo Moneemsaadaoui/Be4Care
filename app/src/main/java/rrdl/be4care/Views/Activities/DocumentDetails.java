@@ -35,6 +35,5 @@ public class DocumentDetails extends AppCompatActivity {
         GetDocumentDetails service=new GetDocumentDetails(this,doc,preview,title,rv);
         Toast.makeText(this, doc.getDr(), Toast.LENGTH_SHORT).show();
         service.getDetails();
-
     }
 }

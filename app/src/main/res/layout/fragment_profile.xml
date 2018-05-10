@@ -8,7 +8,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
@@ -21,9 +20,94 @@
         android:textSize="45dp"
         android:textStyle="bold" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/ProfileRecycler"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <rrdl.be4care.Utils.RoundedImageView
+            android:id="@+id/profilepic"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="0dp" />
+
+
+        <Button
+            android:layout_gravity="center_vertical"
+            android:id="@+id/profilebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:text="Mon Profil" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/Répertoire"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/phonebook"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:text="Repertoire" />
+
+    <View
+        android:id="@+id/view11"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/apropos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/hand"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:text="A Propos" />
+
+    <View
+        android:id="@+id/view12"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/mentionlegal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/file"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:text="Mention Legales" />
+
+    <View
+        android:id="@+id/view13"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/bubble"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        android:text="Contacts" />
 
 </LinearLayout>
