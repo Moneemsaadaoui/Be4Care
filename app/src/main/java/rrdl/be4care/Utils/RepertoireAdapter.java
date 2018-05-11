@@ -35,20 +35,33 @@ public class RepertoireAdapter extends RecyclerView.Adapter<RepertoireAdapter.Vi
     public RepertoireAdapter(Context context, List<Doctor> response) {
         mContext = context;
         this.response = response;
-        Toast.makeText(context, this.response.size()+" as a size", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, this.response.size() + " as a size", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.document_item, parent, false);
+                .inflate(R.layout.repertoire_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(RepertoireAdapter.ViewHolder holder, final int position) {
-        holder._title.setText("hello");
+            holder._title.setText(response.get(position).getFullName());
+            if(response.get(position).getStar()){
+                holder._imgview.setVisibility(View.VISIBLE);
+            }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Gson gson = new Gson();
 
+                    Intent intent = new Intent(mContext, DoctorDetail.class);
+                    intent.putExtra("DOCTOR", gson.toJson(response.get(position)));
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    mContext.startActivity(intent);
+                }
+            });
     }
 
     @Override
