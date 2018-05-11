@@ -22,10 +22,11 @@ public class DoctorDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_detail);
         rv = findViewById(R.id.datalist);
+        title=findViewById(R.id.drname);
         Gson gson=new Gson();
         doc=gson.fromJson(getIntent().getStringExtra("DOCTOR"),Doctor.class);
         Toast.makeText(this, doc.getFullName()+" from details", Toast.LENGTH_SHORT).show();
-        //GetDoctorDetail getDoctorDetail=new GetDoctorDetail(this,doc,title,rv);
-      //  getDoctorDetail.getDetails();
+        GetDoctorDetail getDoctorDetail=new GetDoctorDetail(this,doc,title,rv);
+        getDoctorDetail.getDetails();
     }
 }

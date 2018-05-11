@@ -3,11 +3,15 @@
     <tab
         id="@+id/tab_document"
         icon="@drawable/ic_action_name"
+        inActiveColor="#d6d6d6"
+        activeColor="#ff7700"
         title="Documents" />
 
     <tab
         id="@+id/tab_search"
         icon="@drawable/ic_search"
+        inActiveColor="#d6d6d6"
+        activeColor="#ff7700"
         title="Recherche" />
 
     <tab
@@ -15,13 +19,17 @@
         icon="@drawable/ic_add"
         inActiveColor="#ffab00"
         activeColor="#ff7700"
-        title="Ajouter" />
+        title="" />
     <tab
         id="@+id/tab_shortcut"
         icon="@drawable/ic_shortcut"
+        inActiveColor="#d6d6d6"
+        activeColor="#ff7700"
         title="Raccourcis" />
     <tab
         id="@+id/tab_profile"
         icon="@drawable/ic_profile"
+        inActiveColor="#d6d6d6"
+        activeColor="#ff7700"
         title="Profile" />
 </tabs>

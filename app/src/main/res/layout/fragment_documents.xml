@@ -15,12 +15,12 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="fill_parent"
-            android:layout_height="230dp">
+            android:layout_height="150dp">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/CollapsingToolbarLayout1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:background="@color/cardview_light_background"
                 app:collapsedTitleTextAppearance="@color/badge_background_color"
                 app:expandedTitleTextAppearance="@color/bg_screen2"
