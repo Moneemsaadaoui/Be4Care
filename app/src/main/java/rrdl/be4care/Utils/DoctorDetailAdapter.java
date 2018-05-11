@@ -30,10 +30,7 @@ public class DoctorDetailAdapter extends BaseAdapter {
         try{
             mDoctor = doctor;
             mContext = context;
-            data[0] = mDoctor.getAdress();
-            data[1] = mDoctor.getPhNumber();
-            data[2] = mDoctor.getEmail();
-            data[3] = mDoctor.getHealthStruct();
+
         }catch(Exception e){e.printStackTrace();}
     }
 

@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import org.w3c.dom.Text;
+
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Utils.DoctorDetailAdapter;
 
@@ -16,18 +18,24 @@ public class GetDoctorDetail {
     private Doctor mDoctor;
     private TextView title;
     private ListView mListView;
-
-    public GetDoctorDetail(Context context, Doctor document, TextView title, ListView list) {
+    private TextView address,numtel,email,sturct;
+    public GetDoctorDetail(Context context, Doctor document, TextView title,
+    TextView adress,TextView numtel,TextView email,TextView sturct) {
+        this.address=adress;
+        this.numtel=numtel;
+        this.email=email;
+        this.sturct=sturct;
         mDoctor = document;
         mContext = context;
-        mListView = list;
         this.title = title;
     }
 
     public void getDetails() {
         title.setText("Dr " + mDoctor.getFullName());
-        DoctorDetailAdapter dda = new DoctorDetailAdapter(mContext, mDoctor);
-        mListView.setAdapter(dda);
+        address.setText(mDoctor.getAdress());
+        numtel.setText(mDoctor.getPhNumber());
+        email.setText(mDoctor.getEmail());
+        sturct.setText(mDoctor.getHealthStruct());
     }
 }
 

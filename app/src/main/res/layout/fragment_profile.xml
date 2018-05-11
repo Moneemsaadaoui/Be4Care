@@ -40,7 +40,8 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            android:text="Mon Profil" />
+            android:text="Mon Profil"
+            android:textAlignment="viewStart" />
     </LinearLayout>
 
     <View
@@ -69,7 +70,8 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            android:text="Repertoire" />
+            android:text="Repertoire"
+            android:textAlignment="viewStart" />
 
     </LinearLayout>
 
@@ -100,7 +102,8 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            android:text="A Propos" />
+            android:text="A Propos"
+            android:textAlignment="viewStart" />
     </LinearLayout>
 
     <View
@@ -131,7 +134,8 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            android:text="Mention Legales" />
+            android:text="Mention Legales"
+            android:textAlignment="viewStart" />
     </LinearLayout>
 
     <View
@@ -162,7 +166,8 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            android:text="Contacts" />
+            android:text="Contacts"
+            android:textAlignment="viewStart" />
     </LinearLayout>
 
 </LinearLayout>

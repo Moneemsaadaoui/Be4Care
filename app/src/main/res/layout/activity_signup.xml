@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -13,6 +13,16 @@
     tools:context=".Views.Activities.SignUpActivity">
 
     <!-- Login progress -->
+    <Button
+        android:id="@+id/backbtn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="left"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_chevron_left_black_24dp"
+        android:text="Retour" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
