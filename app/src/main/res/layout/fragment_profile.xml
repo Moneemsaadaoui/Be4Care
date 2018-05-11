@@ -27,16 +27,16 @@
 
         <rrdl.be4care.Utils.RoundedImageView
             android:id="@+id/profilepic"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_margin="0dp" />
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp" />
 
 
         <Button
-            android:layout_gravity="center_vertical"
             android:id="@+id/profilebtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_chevron_right_black_24dp"
@@ -50,14 +50,28 @@
         android:layout_marginRight="5dp"
         android:background="@android:color/darker_gray" />
 
-    <Button
-        android:id="@+id/Répertoire"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/phonebook"
-        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-        android:text="Repertoire" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/phonebook" />
+
+        <Button
+            android:id="@+id/Répertoire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:text="Repertoire" />
+
+    </LinearLayout>
 
     <View
         android:id="@+id/view11"
@@ -67,14 +81,27 @@
         android:layout_marginRight="5dp"
         android:background="@android:color/darker_gray" />
 
-    <Button
-        android:id="@+id/apropos"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/hand"
-        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-        android:text="A Propos" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/hand" />
+
+        <Button
+            android:id="@+id/apropos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:text="A Propos" />
+    </LinearLayout>
 
     <View
         android:id="@+id/view12"
@@ -84,14 +111,28 @@
         android:layout_marginRight="5dp"
         android:background="@android:color/darker_gray" />
 
-    <Button
-        android:id="@+id/mentionlegal"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/file"
-        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-        android:text="Mention Legales" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/file" />
+
+        <Button
+            android:id="@+id/mentionlegal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:text="Mention Legales" />
+    </LinearLayout>
 
     <View
         android:id="@+id/view13"
@@ -101,13 +142,27 @@
         android:layout_marginRight="5dp"
         android:background="@android:color/darker_gray" />
 
-    <Button
-        android:id="@+id/contact"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:drawableLeft="@drawable/bubble"
-        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-        android:text="Contacts" />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="5dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/bubble" />
+
+        <Button
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            android:text="Contacts" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -93,9 +93,9 @@ public class DocumentsFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (mSwipeRefreshLayout.isRefreshing()) {
+               loadDocuments.Load_Docs();
                     mSwipeRefreshLayout.setRefreshing(false);
-                }
+
 
             }
         });

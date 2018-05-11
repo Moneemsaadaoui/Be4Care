@@ -42,6 +42,7 @@ dependencies {
     api 'com.mindorks:paracamera:0.2.2'
     api 'id.zelory:compressor:2.1.0'
     api 'com.google.firebase:firebase-core:15.0.0'
+
 }
 
 
