@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -149,7 +150,7 @@ public class PersonalProfileFragment extends Fragment {
             }
         });
         final User mUser;
-        final RoundedImageView profilepic = view.findViewById(R.id.profilepic);
+        final ImageView profilepic = view.findViewById(R.id.profilepic);
         //
 
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
@@ -162,7 +163,8 @@ public class PersonalProfileFragment extends Fragment {
             public void onResponse(Call<User> call, Response<User> response) {
                 FillPersonalInfo fillPersonalInfo = new FillPersonalInfo(getContext(), response.body(), id, name
                         , lastname, numtel, birth, sex);
-                //Glide.with(getContext()).load(response.body().getPUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(profilepic);
+                fillPersonalInfo.fillinfo();
+                Glide.with(getContext()).load(response.body().getPUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(profilepic);
 
             }
 

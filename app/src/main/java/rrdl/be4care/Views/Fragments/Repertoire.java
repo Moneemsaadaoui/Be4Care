@@ -73,14 +73,16 @@ public class Repertoire extends Fragment {
         View view=inflater.inflate(R.layout.fragment_repertoire, container, false);
         SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         Button back=view.findViewById(R.id.back);
+        RecyclerView recyclerView=view.findViewById(R.id.replist);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getFragmentManager().beginTransaction().replace(R.id.MainContainer,new ProfileFragment()).commit();
             }
         });
-        //  GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),repertoirelist);
-        //getMyDoctors.getDoctors();
+         GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),recyclerView);
+        getMyDoctors.getDoctors();
         return view;
     }
 

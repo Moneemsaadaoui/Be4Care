@@ -91,7 +91,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="Photo de Profil" />
 
-                    <rrdl.be4care.Utils.RoundedImageView
+                    <ImageView
                         android:id="@+id/profilepic"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
@@ -128,8 +128,7 @@
                     android:layout_margin="5dp"
                     android:ems="10"
                     android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:inputType="textPersonName" />
 
                 <TextView
                     android:id="@+id/textview2"
@@ -145,8 +144,7 @@
                     android:layout_margin="5dp"
                     android:ems="10"
                     android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:inputType="textPersonName" />
 
                 <TextView
                     android:id="@+id/textview3"
@@ -162,8 +160,7 @@
                     android:layout_margin="5dp"
                     android:ems="10"
                     android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:inputType="textPersonName" />
 
                 <TextView
                     android:id="@+id/textview4"
@@ -179,8 +176,7 @@
                     android:layout_margin="5dp"
                     android:ems="10"
                     android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:inputType="textPersonName" />
 
                 <TextView
                     android:id="@+id/textview6"
@@ -196,8 +192,7 @@
                     android:layout_margin="5dp"
                     android:ems="10"
                     android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:inputType="textPersonName" />
 
                 <TextView
                     android:id="@+id/textview7"
@@ -213,8 +208,7 @@
                     android:layout_margin="5dp"
                     android:ems="10"
                     android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Name" />
+                    android:inputType="textPersonName" />
 
                 <Button
                     android:id="@+id/validate"

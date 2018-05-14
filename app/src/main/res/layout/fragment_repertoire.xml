@@ -55,11 +55,10 @@
 
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/repertoirelist"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/replist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:isScrollContainer="true" />
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

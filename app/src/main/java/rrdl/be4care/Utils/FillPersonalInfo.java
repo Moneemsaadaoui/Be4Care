@@ -30,16 +30,13 @@ public class FillPersonalInfo {
         RoundedImageView profilepic;
 
 
-        Toast.makeText(context, user.getEmail() + user.getName() + user.getLastName()
-                + user.getBDate() + user.getPhNumber(), Toast.LENGTH_SHORT).show();
-
         try {
 
             data[0] = user.getEmail();
             data[1] = user.getName();
             data[2] = user.getLastName();
             data[3] = user.getPhNumber();
-            data[4] = user.getBDate();
+            data[4] = user.getBDate().substring(0,Math.min(user.getBDate().length(),10));
 
         } catch (Exception e) {
 
