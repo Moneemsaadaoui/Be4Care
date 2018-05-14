@@ -29,6 +29,7 @@ import rrdl.be4care.Utils.RoundedImageView;
 
 import rrdl.be4care.R;
 import rrdl.be4care.Views.Activities.LoginActivity;
+import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,6 +98,13 @@ public class PersonalProfileFragment extends Fragment {
         Button editbutton = view.findViewById(R.id.edit);
         final Button Validate=view.findViewById(R.id.validate);
         Validate.setVisibility(View.GONE);
+        Button back=view.findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.MainContainer,new ProfileFragment()).commit();
+            }
+        });
         editbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,7 +174,19 @@ public class PersonalProfileFragment extends Fragment {
         // ListView profile_list = view.findViewById(R.id.ProfileElements);
        /* GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
         userservice.getUser();*/
-
+       Validate.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               //do a call here
+               id.setEnabled(false);
+               name.setEnabled(false);
+               lastname.setEnabled(false);
+               numtel.setEnabled(false);
+               birth.setEnabled(false);
+               sex.setEnabled(false);
+               Validate.setVisibility(View.GONE);
+           }
+       });
         // Inflate the layout for this fragment
         return view;
     }

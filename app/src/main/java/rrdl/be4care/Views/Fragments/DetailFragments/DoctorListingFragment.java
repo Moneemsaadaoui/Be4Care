@@ -74,8 +74,8 @@ public class DoctorListingFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_doctor_detail, container, false);
         RecyclerView recyclerView=view.findViewById(R.id.doctorlist);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),recyclerView);
-        getMyDoctors.getDoctors();
+     //   GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),recyclerView);
+       // getMyDoctors.getDoctors();
         return view;
     }
 

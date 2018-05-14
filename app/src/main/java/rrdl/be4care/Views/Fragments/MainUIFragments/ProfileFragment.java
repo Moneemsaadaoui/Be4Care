@@ -18,6 +18,7 @@ import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.R;
 import rrdl.be4care.Utils.RoundedImageView;
 import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
+import rrdl.be4care.Views.Fragments.Repertoire;
 import rrdl.be4care.Views.Fragments.profile.PersonalProfileFragment;
 
 /**
@@ -82,6 +83,17 @@ public class ProfileFragment extends Fragment {
         RoundedImageView riv=view.findViewById(R.id.profilepic);
         Bitmap bmp= BitmapFactory.decodeResource(getContext().getResources(),R.drawable.stephane);
         riv.setImageBitmap(bmp);
+       Button repertoire=view.findViewById(R.id.Répertoire);
+       repertoire.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               getFragmentManager().beginTransaction().replace(R.id.MainContainer,
+                       new Repertoire()).commit();
+           }
+       });
+
+
+
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

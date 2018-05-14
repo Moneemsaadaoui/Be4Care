@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/rounded_button"
-                    android:text="Editer Votre Profil"
+                    android:text="Editez Votre Profil"
                     android:textColor="@color/cardview_dark_background" />
 
                 <View

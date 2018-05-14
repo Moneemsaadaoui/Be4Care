@@ -9,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.R;
+import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,9 +72,15 @@ public class Repertoire extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_repertoire, container, false);
         SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
-        RecyclerView repertoirelist=view.findViewById(R.id.repertoirelist);
-        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),repertoirelist);
-        getMyDoctors.getDoctors();
+        Button back=view.findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.MainContainer,new ProfileFragment()).commit();
+            }
+        });
+        //  GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),repertoirelist);
+        //getMyDoctors.getDoctors();
         return view;
     }
 

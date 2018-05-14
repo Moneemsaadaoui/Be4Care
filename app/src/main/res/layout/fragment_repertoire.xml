@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/backbtn6"
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -34,21 +34,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:text="Repertoire"
                 android:textColor="@color/textHue"
                 android:textSize="45dp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/edit"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:background="@drawable/circularbutton"
-                android:hapticFeedbackEnabled="true" />
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/gradientrounded"
+                android:padding="10dp"
+                android:src="@drawable/ic_add"
+                android:tint="@android:color/white" />
 
         </LinearLayout>
 

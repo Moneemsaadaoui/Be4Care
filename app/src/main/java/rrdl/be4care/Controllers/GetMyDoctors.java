@@ -21,10 +21,10 @@ import rrdl.be4care.Utils.RepertoireAdapter;
 
 public class GetMyDoctors {
     private Context mContext;
-    private RecyclerView list;
+    private ListView list;
     private String Token;
     private SharedPreferences prefs;
-    public GetMyDoctors(Context context, RecyclerView list){
+    public GetMyDoctors(Context context, ListView list){
         mContext=context;
         this.list=list;
         prefs=context.getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
@@ -40,7 +40,7 @@ public class GetMyDoctors {
             public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
                 Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
                 RepertoireAdapter repertoireAdapter=new RepertoireAdapter(mContext,response.body());
-                list.setAdapter(repertoireAdapter);
+              //  list.setAdapter(repertoireAdapter);
                 repertoireAdapter.notifyDataSetChanged();
             }
 

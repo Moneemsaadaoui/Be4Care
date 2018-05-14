@@ -27,6 +27,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Views.Activities.MainActivity"
+            android:noHistory="true"
+
             android:taskAffinity="" />
         <activity android:name=".Views.Activities.WelcomeActivity" />
         <activity android:name=".Views.Activities.AddDocumentActivity" />
