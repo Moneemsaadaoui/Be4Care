@@ -21,7 +21,7 @@ import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.SearchFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ShortcutFragment;
-import rrdl.be4care.Views.Fragments.DetailFragments.PersonalProfileFragment;
+import rrdl.be4care.Views.Fragments.profile.PersonalProfileFragment;
 
 public class MainActivity extends AppCompatActivity implements DoctorListingFragment.OnFragmentInteractionListener,PersonalProfileFragment.OnFragmentInteractionListener,ProfileFragment.OnFragmentInteractionListener,
         SearchFragment.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {

@@ -36,11 +36,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public LoadDocuments load;
     private Context mContext;
     private callback mCallback;
+    private ArrayList<Document> doctor;
+    private ArrayList<Document> type;
+    private ArrayList<Document> date;
+
     private ArrayList<Document>responsecopy;
-    public ListAdapter(Context context, List<Document> response) {
+    public ListAdapter(Context context, List<Document> body) {
         mContext = context;
-        this.response = response;
-        responsecopy=new ArrayList<Document>(response);
+        this.response = body;
+
     }
 
     @Override
@@ -71,56 +75,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         });
     }
 
-
     @Override
     public int getItemCount() {
         return response.size();
-    }
-    public Document removeItem(int position) {
-        final Document model = responsecopy.remove(position);
-        notifyItemRemoved(position);
-        return model;
-    }
-    public void animateTo(List<Document> models) {
-        applyAndAnimateRemovals(models);
-        applyAndAnimateAdditions(models);
-        applyAndAnimateMovedItems(models);
-    }
-    private void applyAndAnimateRemovals(List<Document> newModels) {
-        for (int i = responsecopy.size() - 1; i >= 0; i--) {
-            final Document model = responsecopy.get(i);
-            if (!newModels.contains(model)) {
-                removeItem(i);
-            }
-        }
-    }
-    private void applyAndAnimateAdditions(List<Document> newModels) {
-        for (int i = 0, count = newModels.size(); i < count; i++) {
-            final Document model = newModels.get(i);
-            if (!responsecopy.contains(model)) {
-                addItem(i, model);
-            }
-        }
-    }
-    private void applyAndAnimateMovedItems(List<Document> newModels) {
-        for (int toPosition = newModels.size() - 1; toPosition >= 0; toPosition--) {
-            final Document model = newModels.get(toPosition);
-            final int fromPosition = responsecopy.indexOf(model);
-            if (fromPosition >= 0 && fromPosition != toPosition) {
-                moveItem(fromPosition, toPosition);
-            }
-        }
-    }
-
-    public void addItem(int position, Document model) {
-        responsecopy.add(position, model);
-        notifyItemInserted(position);
-    }
-
-    public void moveItem(int fromPosition, int toPosition) {
-        final Document model = responsecopy.remove(fromPosition);
-        responsecopy.add(toPosition, model);
-        notifyItemMoved(fromPosition, toPosition);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

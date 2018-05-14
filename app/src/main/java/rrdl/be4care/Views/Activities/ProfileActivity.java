@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import rrdl.be4care.R;
-import rrdl.be4care.Views.Fragments.DetailFragments.PersonalProfileFragment;
+import rrdl.be4care.Views.Fragments.profile.PersonalProfileFragment;
 
 public class ProfileActivity extends AppCompatActivity implements PersonalProfileFragment.OnFragmentInteractionListener{
 

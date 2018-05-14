@@ -23,7 +23,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.25"
+                android:layout_weight="0.03"
                 app:cardBackgroundColor="@color/textHue">
 
                 <LinearLayout
@@ -60,7 +60,7 @@
                 android:layout_weight="0.5"
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/first" />
 
             <android.support.v7.widget.CardView

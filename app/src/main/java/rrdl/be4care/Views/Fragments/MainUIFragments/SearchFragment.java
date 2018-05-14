@@ -11,9 +11,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SearchView;
+
+import java.util.List;
 
 import rrdl.be4care.Controllers.LoadDocuments;
+import rrdl.be4care.Models.Doctor;
+import rrdl.be4care.Models.Document;
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.Getdoctorlist;
+import rrdl.be4care.Utils.Getdocumentlist;
+import rrdl.be4care.Utils.searchadapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,13 +89,28 @@ public class SearchFragment extends Fragment {
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         collapsingToolbarLayout.setTitle("Recherche");*/
-        RecyclerView rv = view.findViewById(R.id.SearchRecycler);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
-        LoadDocuments loadDocuments = new LoadDocuments(getContext(), prefs.getString("AUTH",""),
-                rv );
-        
-        loadDocuments.Load_Docs();
+        List<Document> doclist;
+        List<Doctor> doctors;
+        doclist= new Getdocumentlist(getContext()).getdocuments();
+        doctors= new Getdoctorlist(getContext()).getdocuments();
+
+        final ListView list = view.findViewById(R.id.listsearch);
+        searchadapter searchadapter = new searchadapter(getContext(),doctors,doclist);
+        list.setAdapter(searchadapter);
+        SearchView search=view.findViewById(R.id.search);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                list.setFilterText(s);
+
+                return false;
+            }
+        });
         return view;
     }
 

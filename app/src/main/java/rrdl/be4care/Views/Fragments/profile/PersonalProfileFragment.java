@@ -1,4 +1,4 @@
-package rrdl.be4care.Views.Fragments.DetailFragments;
+package rrdl.be4care.Views.Fragments.profile;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import rrdl.be4care.Utils.RoundedImageView;
 
-import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.R;
 
 /**

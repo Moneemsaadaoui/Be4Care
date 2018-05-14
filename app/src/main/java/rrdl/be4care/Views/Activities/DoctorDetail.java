@@ -2,6 +2,9 @@ package rrdl.be4care.Views.Activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +30,13 @@ public class DoctorDetail extends AppCompatActivity {
         numtel=findViewById(R.id.numtel);
         email=findViewById(R.id.email);
         sturct=findViewById(R.id.hstruct);
+        ImageButton more=findViewById(R.id.morebutton);
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         title=findViewById(R.id.drname);
         Gson gson=new Gson();
         doc=gson.fromJson(getIntent().getStringExtra("DOCTOR"),Doctor.class);

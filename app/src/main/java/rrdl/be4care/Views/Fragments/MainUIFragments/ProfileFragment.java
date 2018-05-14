@@ -18,6 +18,7 @@ import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.R;
 import rrdl.be4care.Utils.RoundedImageView;
 import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
+import rrdl.be4care.Views.Fragments.profile.PersonalProfileFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -86,7 +87,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Gson gson=new Gson();
 
-                  getFragmentManager().beginTransaction().replace(R.id.MainContainer, new DoctorListingFragment()).commit();
+                  getFragmentManager().beginTransaction().replace(R.id.MainContainer, new PersonalProfileFragment()).commit();
             }
         });
         contacts.setOnClickListener(new View.OnClickListener() {

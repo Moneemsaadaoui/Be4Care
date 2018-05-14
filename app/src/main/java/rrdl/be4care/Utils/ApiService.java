@@ -27,6 +27,9 @@ public interface ApiService {
     @POST("/api/users")
     Call<Login> signup(@Body JsonObject jsonObject);
 
+    @POST("/documents/analyse")
+    Call<JsonObject> analyse(@Body JsonObject jsonObject);
+
 
     //GET METHODS
     @GET("/api/users/me/documents")
