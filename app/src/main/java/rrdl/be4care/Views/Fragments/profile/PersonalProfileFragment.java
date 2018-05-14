@@ -2,6 +2,7 @@ package rrdl.be4care.Views.Fragments.profile;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,10 +11,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rrdl.be4care.Models.User;
+import rrdl.be4care.Utils.ApiService;
+import rrdl.be4care.Utils.FillPersonalInfo;
 import rrdl.be4care.Utils.RoundedImageView;
 
 import rrdl.be4care.R;
+import rrdl.be4care.Views.Activities.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,8 +85,18 @@ public class PersonalProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personalprofile, container, false);
-        SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+        final View popup = inflater.inflate(R.layout.popup_login, container, false);
+        final EditText id, name, lastname, numtel, birth, sex;
+        id = view.findViewById(R.id.identifiant);
+        name = view.findViewById(R.id.name);
+        lastname = view.findViewById(R.id.lastname);
+        numtel = view.findViewById(R.id.numtel);
+        birth = view.findViewById(R.id.birthdate);
+        sex = view.findViewById(R.id.sex);
+        final SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         Button editbutton = view.findViewById(R.id.edit);
+        final Button Validate=view.findViewById(R.id.validate);
+        Validate.setVisibility(View.GONE);
         editbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,10 +106,64 @@ public class PersonalProfileFragment extends Fragment {
                 dialog.setContentView(R.layout.popup_login);
                 dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
                 dialog.show();
+                Button btn = dialog.findViewById(R.id.popup);
+                Button Disconnect=dialog.findViewById(R.id.disconnect);
+                Button Cancel=dialog.findViewById(R.id.cancel);
+                Cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        id.setEnabled(true);
+                        name.setEnabled(true);
+                        lastname.setEnabled(true);
+                        numtel.setEnabled(true);
+                        birth.setEnabled(true);
+                        sex.setEnabled(true);
+                        Validate.setVisibility(View.VISIBLE);
+                        dialog.dismiss();
+                        Toast.makeText(getContext(), "IT WORKSSS", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Disconnect.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        prefs.edit().putString("AUTH","").commit();
+                        Intent intent=new Intent(getContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         });
-        RoundedImageView profilepic=view.findViewById(R.id.profilepic);
-       ListView profile_list = view.findViewById(R.id.ProfileElements);
+        final User mUser;
+        final RoundedImageView profilepic = view.findViewById(R.id.profilepic);
+        //
+
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        ApiService apiservice = retrofit.create(ApiService.class);
+        final Call<User> get = apiservice.load_user(prefs.getString("AUTH", ""));
+        get.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                FillPersonalInfo fillPersonalInfo = new FillPersonalInfo(getContext(), response.body(), id, name
+                        , lastname, numtel, birth, sex);
+                //Glide.with(getContext()).load(response.body().getPUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(profilepic);
+
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+            }
+        });
+
+        // ListView profile_list = view.findViewById(R.id.ProfileElements);
        /* GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
         userservice.getUser();*/
 

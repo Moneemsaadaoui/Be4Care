@@ -114,14 +114,120 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <EditText
-                    android:id="@+id/editText"
+                <TextView
+                    android:id="@+id/textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Identifiant" />
+
+                <EditText
+                    android:id="@+id/identifiant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:ems="10"
                     android:enabled="false"
                     android:inputType="textPersonName"
                     android:text="Name" />
+
+                <TextView
+                    android:id="@+id/textview2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Nom" />
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+
+                <TextView
+                    android:id="@+id/textview3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Prénom" />
+
+                <EditText
+                    android:id="@+id/lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+
+                <TextView
+                    android:id="@+id/textview4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Numero telephone" />
+
+                <EditText
+                    android:id="@+id/numtel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+
+                <TextView
+                    android:id="@+id/textview6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Date de Naissance" />
+
+                <EditText
+                    android:id="@+id/birthdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+
+                <TextView
+                    android:id="@+id/textview7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Sexe" />
+
+                <EditText
+                    android:id="@+id/sex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    android:text="Name" />
+
+                <Button
+                    android:id="@+id/validate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/circularbutton"
+                    android:text="Valider"
+                    android:textColor="@android:color/white" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="96dp" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
