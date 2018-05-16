@@ -14,21 +14,22 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Doctor;
+import rrdl.be4care.Models.Structure;
 import rrdl.be4care.Utils.AllDoctorsAdapter;
 import rrdl.be4care.Utils.AllStrcukAdapter;
 import rrdl.be4care.Utils.ApiService;
 
-public class GetallDocs {
+public class GetallStruck {
     private Context mContext;
     private RecyclerView rv;
     private android.widget.SearchView sv;
-    private AllDoctorsAdapter ada;
-    public GetallDocs(Context context, RecyclerView rv, android.widget.SearchView sv) {
+    private AllStrcukAdapter ada;
+    public GetallStruck(Context context, RecyclerView rv, android.widget.SearchView sv) {
         mContext = context;
         this.rv = rv;
         this.sv = sv;
     }
-    public AllDoctorsAdapter getadapter(){
+    public AllStrcukAdapter getadapter(){
         return ada;
     }
     public void getall() {
@@ -39,11 +40,11 @@ public class GetallDocs {
 
         Retrofit retrofit = builder.build();
         ApiService apiservice = retrofit.create(ApiService.class);
-        Call<List<Doctor>> get = apiservice.getalldoctors(prefs.getString("AUTH", ""));
-        get.enqueue(new Callback<List<Doctor>>() {
+        Call<List<Structure>> get = apiservice.getalldstruck(prefs.getString("AUTH", ""));
+        get.enqueue(new Callback<List<Structure>>() {
             @Override
-            public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
-              final AllDoctorsAdapter ada = new AllDoctorsAdapter(mContext, response.body(),sv);
+            public void onResponse(Call<List<Structure>> call, Response<List<Structure>> response) {
+                final AllStrcukAdapter ada = new AllStrcukAdapter(mContext, response.body(),sv);
                 Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
                 ada.getFilter();
                 rv.setAdapter(ada);
@@ -63,9 +64,10 @@ public class GetallDocs {
             }
 
             @Override
-            public void onFailure(Call<List<Doctor>> call, Throwable t) {
+            public void onFailure(Call<List<Structure>> call, Throwable t) {
 
             }
         });
+
     }
 }

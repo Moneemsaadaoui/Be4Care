@@ -3,14 +3,7 @@ package rrdl.be4care.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import io.realm.RealmObject;
-
-class MhealthStruck {
-
-
-    public MhealthStruck() {
-    }
-
+public class Structure {
     @SerializedName("fullName")
     @Expose
     private String fullName;
@@ -77,5 +70,6 @@ class MhealthStruck {
     public void setId(String id) {
         this.id = id;
     }
+
 
 }

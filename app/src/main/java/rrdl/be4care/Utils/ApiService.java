@@ -13,6 +13,7 @@ import retrofit2.http.POST;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Login;
+import rrdl.be4care.Models.Structure;
 import rrdl.be4care.Models.Token;
 import rrdl.be4care.Models.User;
 
@@ -28,9 +29,11 @@ public interface ApiService {
     @POST("/api/users")
     Call<Login> signup(@Body JsonObject jsonObject);
 
-    @POST("/documents/analyse")
-    Call<JsonObject> analyse(@Body JsonObject jsonObject);
+    @POST("/api/documents/analyse")
+    Call<JsonObject> analyse( @Header("Authorization") String AuthToken,@Body JsonObject jsonObject);
 
+    @POST("/api/users/me/doctors")
+    Call<JsonObject>adddoctor( @Header("Authorization") String AuthToken,@Body Doctor doc);
 
     //GET METHODS
     @GET("/api/users/me/documents")
@@ -49,7 +52,7 @@ public interface ApiService {
     Call<List<Doctor>>getalldoctors(@Header("Authorization") String AuthToken);
 
     @GET("/api/healthStructs")
-    Call<List<Doctor>>getalldstruck(@Header("Authorization") String AuthToken);
+    Call<List<Structure>>getalldstruck(@Header("Authorization") String AuthToken);
     //PATCH METHODS
 
     @PATCH("/api/users/me")

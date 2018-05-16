@@ -44,7 +44,10 @@
         <activity android:name=".Views.Activities.DocumentDetails" />
         <activity android:name=".Views.Activities.SplashActivity"
             android:theme="@style/Theme.Splash"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:taskAffinity=""
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

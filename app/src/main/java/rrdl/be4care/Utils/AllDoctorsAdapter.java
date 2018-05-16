@@ -1,7 +1,9 @@
 package rrdl.be4care.Utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
+import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,20 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Doctor;
+import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
 
 public class AllDoctorsAdapter extends RecyclerView.Adapter<AllDoctorsAdapter.ViewHolder>
@@ -50,13 +61,13 @@ implements Filterable{
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.name.setText(mDoctorsfiltered.get(position).getFullName());
         if(mDoctorsfiltered.get(position).getStar()){holder.star.setVisibility(View.VISIBLE);}
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            adddoc(mDoctorsfiltered.get(position));
             }
         });
     }
@@ -98,6 +109,29 @@ implements Filterable{
                 notifyDataSetChanged();
             }
         };
+
+    }
+    public void adddoc(Doctor doc)
+    {
+        SharedPreferences prefs = mContext.getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("https://peaceful-forest-76384.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+        ApiService apiservice = retrofit.create(ApiService.class);
+        Call<JsonObject>adddoctor=apiservice.adddoctor(prefs.getString("AUTH",""),doc);
+        adddoctor.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

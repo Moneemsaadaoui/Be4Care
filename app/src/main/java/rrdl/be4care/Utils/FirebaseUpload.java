@@ -2,6 +2,7 @@ package rrdl.be4care.Utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -43,6 +44,7 @@ public class FirebaseUpload {
     }
 
     public void upload() {
+        final SharedPreferences prefs=mContext.getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
         byte[] compressedimage = baos.toByteArray();
@@ -60,11 +62,16 @@ public class FirebaseUpload {
                 Toast.makeText(mContext, "Upload successful", Toast.LENGTH_SHORT).show();
                 Log.i("TAG", downloadUrl.toString());
                     link.addProperty("url", downloadUrl.toString());
-                retrofit2.Call<JsonObject> analyse = apiservice.analyse(link);
+                retrofit2.Call<JsonObject> analyse = apiservice.analyse(prefs.getString("AUTH",""),link);
                 analyse.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(retrofit2.Call<JsonObject> call, Response<JsonObject> response) {
-                        Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, response.body().toString() + " as result", Toast.LENGTH_SHORT).show();
+                        if (response.isSuccessful()){
+                        Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show(); }
+                        else{
+                            Toast.makeText(mContext, "error analysing", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override

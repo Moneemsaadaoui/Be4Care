@@ -5,8 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import io.realm.RealmObject;
-
 public class User  {
     @SerializedName("name")
     @Expose
@@ -43,7 +41,7 @@ public class User  {
     private List<Doctor> mydoctor = null;
     @SerializedName("MhealthStruck")
     @Expose
-    private List<MhealthStruck> mhealthStruck = null;
+    private List<Structure> mhealthStruck = null;
 
     public String getName() {
         return name;
@@ -130,11 +128,11 @@ public class User  {
         this.mydoctor = mydoctor;
     }
 
-    public List<MhealthStruck> getMhealthStruck() {
+    public List<Structure> getMhealthStruck() {
         return mhealthStruck;
     }
 
-    public void setMhealthStruck(List<MhealthStruck> mhealthStruck) {
+    public void setMhealthStruck(List<Structure> mhealthStruck) {
         this.mhealthStruck = mhealthStruck;
     }
 
