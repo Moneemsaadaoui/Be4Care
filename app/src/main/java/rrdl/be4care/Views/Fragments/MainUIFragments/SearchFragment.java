@@ -17,11 +17,13 @@ import android.widget.SearchView;
 import java.util.List;
 
 import rrdl.be4care.Controllers.LoadDocuments;
+import rrdl.be4care.Controllers.SearchDocument;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.R;
 import rrdl.be4care.Utils.Getdoctorlist;
 import rrdl.be4care.Utils.Getdocumentlist;
+import rrdl.be4care.Utils.ListAdapter;
 import rrdl.be4care.Utils.searchadapter;
 
 /**
@@ -93,24 +95,15 @@ public class SearchFragment extends Fragment {
         List<Doctor> doctors;
         doclist= new Getdocumentlist(getContext()).getdocuments();
         doctors= new Getdoctorlist(getContext()).getdocuments();
-
-        final ListView list = view.findViewById(R.id.listsearch);
+        SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
+       /* final ListView list = view.findViewById(R.id.listsearch);
         searchadapter searchadapter = new searchadapter(getContext(),doctors,doclist);
-        list.setAdapter(searchadapter);
+        list.setAdapter(searchadapter);*/
         SearchView search=view.findViewById(R.id.search);
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                list.setFilterText(s);
-
-                return false;
-            }
-        });
+        RecyclerView rv=view.findViewById(R.id.recyclersearch);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        
+        SearchDocument sd=new SearchDocument(getContext(),rv,search);
         return view;
     }
 

@@ -1,5 +1,6 @@
 package rrdl.be4care.Views.Fragments.MainUIFragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import rrdl.be4care.Controllers.LoadDocuments;
 import rrdl.be4care.R;
@@ -81,9 +83,21 @@ public class DocumentsFragment extends Fragment {
         toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
         collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);
         mSwipeRefreshLayout=view.findViewById(R.id.swiperefresh);
+        Button sort=view.findViewById(R.id.sort);
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
+                dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
+                dialog.setCancelable(true);
+                dialog.setContentView(R.layout.popupsort);
+                dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
+                dialog.show();
+            }
+        });
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        collapsingToolbarLayout.setTitle("Documents");
+        collapsingToolbarLayout.setTitle("");
         RecyclerView rv = view.findViewById(R.id.documentRecycler);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);

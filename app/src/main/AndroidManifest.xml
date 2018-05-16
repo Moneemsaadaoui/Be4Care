@@ -13,6 +13,7 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -27,8 +28,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Views.Activities.MainActivity"
-            android:noHistory="true"
-
             android:taskAffinity="" />
         <activity android:name=".Views.Activities.WelcomeActivity" />
         <activity android:name=".Views.Activities.AddDocumentActivity" />
@@ -36,17 +35,22 @@
             android:name=".Views.Activities.LoginActivity"
             android:label="Be4Care"
             android:noHistory="true"
-            android:taskAffinity="">
+            android:taskAffinity=""
+            >
+
+        </activity>
+        <activity android:name=".Views.Activities.ProfileActivity" />
+        <activity android:name=".Views.Fragments.CompleteProfileActivity" />
+        <activity android:name=".Views.Activities.DocumentDetails" />
+        <activity android:name=".Views.Activities.SplashActivity"
+            android:theme="@style/Theme.Splash"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.Activities.ProfileActivity" />
-        <activity android:name=".Views.Fragments.CompleteProfileActivity" />
-        <activity android:name=".Views.Activities.DocumentDetails" />
-        <activity android:name=".Views.Activities.DoctorDetail"></activity>
     </application>
 
 </manifest>

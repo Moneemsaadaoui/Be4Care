@@ -1,32 +1,33 @@
 package rrdl.be4care.Views.Fragments;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
 
-import rrdl.be4care.Controllers.GetMyDoctors;
+import java.util.List;
+
+import rrdl.be4care.Controllers.GetallDocs;
+import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.R;
-import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
+import rrdl.be4care.Utils.AllDoctorsAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Repertoire.OnFragmentInteractionListener} interface
+ * {@link allDoctors.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Repertoire#newInstance} factory method to
+ * Use the {@link allDoctors#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Repertoire extends Fragment {
+public class allDoctors extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,7 +39,7 @@ public class Repertoire extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Repertoire() {
+    public allDoctors() {
         // Required empty public constructor
     }
 
@@ -48,11 +49,11 @@ public class Repertoire extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Repertoire.
+     * @return A new instance of fragment allDoctors.
      */
     // TODO: Rename and change types and number of parameters
-    public static Repertoire newInstance(String param1, String param2) {
-        Repertoire fragment = new Repertoire();
+    public static allDoctors newInstance(String param1, String param2) {
+        allDoctors fragment = new allDoctors();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -72,37 +73,29 @@ public class Repertoire extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_repertoire, container, false);
-        SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
-        Button back=view.findViewById(R.id.back);
-        RecyclerView recyclerView=view.findViewById(R.id.replist);
-        Button addbtn=view.findViewById(R.id.addbutton);
-        addbtn.setOnClickListener(new View.OnClickListener() {
+        View view = inflater.inflate(R.layout.fragment_all_doctors, container, false);
+
+        android.widget.SearchView searchView=view.findViewById(R.id.alldocsearch);
+        RecyclerView alldoclist=view.findViewById(R.id.alldoclist);
+        alldoclist.setItemAnimator(new DefaultItemAnimator());
+        searchView.setIconified(false);
+        alldoclist.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        GetallDocs getallDocs=new GetallDocs(getContext(),alldoclist,searchView);
+        getallDocs.getall();
+        final AllDoctorsAdapter ada=getallDocs.getadapter();
+        searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
 
-                final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
-                dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
-                dialog.setCancelable(true);
-                dialog.setContentView(R.layout.repertoire_popup);
-                dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
-                dialog.show();
-                Button listmed=dialog.findViewById(R.id.listmed);
-
-                Button addmed=dialog.findViewById(R.id.addmed);
-                Button liststruck=dialog.findViewById(R.id.liststruct);
-                Button addstruck=dialog.findViewById(R.id.addstruct);
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ada.getFilter().filter(s);
+                return false;
             }
         });
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.MainContainer,new ProfileFragment()).commit();
-            }
-        });
-         GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),recyclerView);
-        getMyDoctors.getDoctors();
         return view;
     }
 

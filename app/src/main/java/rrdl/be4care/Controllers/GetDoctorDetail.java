@@ -18,20 +18,22 @@ public class GetDoctorDetail {
     private Doctor mDoctor;
     private TextView title;
     private ListView mListView;
-    private TextView address,numtel,email,sturct;
+    private TextView address,numtel,email,sturct,spec;
     public GetDoctorDetail(Context context, Doctor document, TextView title,
-    TextView adress,TextView numtel,TextView email,TextView sturct) {
+    TextView adress,TextView numtel,TextView email,TextView sturct,TextView spec) {
         this.address=adress;
         this.numtel=numtel;
         this.email=email;
         this.sturct=sturct;
+        this.spec=spec;
         mDoctor = document;
         mContext = context;
         this.title = title;
     }
 
     public void getDetails() {
-        title.setText("Dr " + mDoctor.getFullName());
+        spec.setText(mDoctor.getSpecialite());
+        title.setText(mDoctor.getFullName());
         address.setText(mDoctor.getAdress());
         numtel.setText(mDoctor.getPhNumber());
         email.setText(mDoctor.getEmail());

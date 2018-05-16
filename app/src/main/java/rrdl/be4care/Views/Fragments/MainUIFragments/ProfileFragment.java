@@ -19,6 +19,7 @@ import rrdl.be4care.R;
 import rrdl.be4care.Utils.RoundedImageView;
 import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
 import rrdl.be4care.Views.Fragments.Repertoire;
+import rrdl.be4care.Views.Fragments.allDoctors;
 import rrdl.be4care.Views.Fragments.profile.PersonalProfileFragment;
 
 /**
@@ -83,6 +84,7 @@ public class ProfileFragment extends Fragment {
         RoundedImageView riv=view.findViewById(R.id.profilepic);
         Bitmap bmp= BitmapFactory.decodeResource(getContext().getResources(),R.drawable.stephane);
         riv.setImageBitmap(bmp);
+        Button apropos=view.findViewById(R.id.apropos);
        Button repertoire=view.findViewById(R.id.Répertoire);
        repertoire.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -108,6 +110,12 @@ public class ProfileFragment extends Fragment {
                 SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
                 prefs.edit().putString("AUTH","").commit();
 
+            }
+        });
+        apropos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.MainContainer,new allDoctors()).commit();
             }
         });
         return view;

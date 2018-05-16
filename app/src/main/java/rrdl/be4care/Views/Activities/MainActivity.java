@@ -22,10 +22,11 @@ import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.SearchFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ShortcutFragment;
 import rrdl.be4care.Views.Fragments.Repertoire;
+import rrdl.be4care.Views.Fragments.allDoctors;
 import rrdl.be4care.Views.Fragments.profile.PersonalProfileFragment;
 
 public class MainActivity extends AppCompatActivity implements DoctorListingFragment.OnFragmentInteractionListener,PersonalProfileFragment.OnFragmentInteractionListener,ProfileFragment.OnFragmentInteractionListener,
-        SearchFragment.OnFragmentInteractionListener,Repertoire.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
+        allDoctors.OnFragmentInteractionListener,SearchFragment.OnFragmentInteractionListener,Repertoire.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

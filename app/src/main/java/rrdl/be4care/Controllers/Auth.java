@@ -49,13 +49,18 @@ public class Auth {
         call.enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, Response<Login> response) {
+                if(response.code()==200){
                 String authtoken=response.body().getId();
                 prefs.edit().putString("AUTH",authtoken).apply();
                 Intent intent = new Intent(mContext, MainActivity.class);
                 intent.putExtra("TOKEN",authtoken);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 mContext.startActivity(intent);
+                button.revertAnimation();}
+                else {
                 button.revertAnimation();
+                    Toast.makeText(mContext, "Wrong credz", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

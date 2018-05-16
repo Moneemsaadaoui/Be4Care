@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Views.Fragments.allDoctors">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/goback2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_chevron_left_black_24dp"
+            android:text="Retour" />
+
+        <SearchView
+            android:id="@+id/alldocsearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </SearchView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/alldoclist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

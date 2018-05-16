@@ -41,7 +41,12 @@ public interface ApiService {
     @GET("/api/users/me")
     Call<User> load_user(@Header("Authorization") String AuthToken);
 
-    @GET("/users/me/exists")
+    @GET("/api/users/me/exists")
     Call<Token> exist(@Header("Authorization") String AuthToken);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+    @GET("/api/doctors")
+    Call<List<Doctor>>getalldoctors(@Header("Authorization") String AuthToken);
 
+    @GET("/api/healthStructs")
+    Call<List<Doctor>>getalldstruck(@Header("Authorization") String AuthToken);
 }

@@ -52,7 +52,7 @@ public class searchadapter extends BaseAdapter {
         TextView date=row.findViewById(R.id.date);
         TextView type=row.findViewById(R.id.type);
         TextView source=row.findViewById(R.id.source);
-        date.setText("Test");
         return row;
     }
+
 }

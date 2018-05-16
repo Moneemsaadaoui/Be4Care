@@ -36,6 +36,14 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+                <Button
+                    android:id="@+id/sort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@android:color/transparent"
+                    android:text="Trier" />
+
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>

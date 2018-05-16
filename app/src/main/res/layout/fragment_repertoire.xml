@@ -43,7 +43,7 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/addbutton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="5dp"

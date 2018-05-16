@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,21 +33,36 @@ import rrdl.be4care.Views.Activities.DocumentDetails;
  * Created by moneem on 18/04/18.
  */
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Filterable{
     private List<Document> response;
+    private List<Document> responsefiltered;
     public LoadDocuments load;
     private Context mContext;
     private callback mCallback;
-    private ArrayList<Document> doctor;
-    private ArrayList<Document> type;
-    private ArrayList<Document> date;
-
     private ArrayList<Document>responsecopy;
     public ListAdapter(Context context, List<Document> body) {
         mContext = context;
         this.response = body;
+        responsefiltered=this.response;
 
     }
+    public ListAdapter(Context context, List<Document> body, SearchView sv) {
+            mContext = context;
+            this.response = body;
+            responsefiltered=this.response;
+            sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    getFilter().filter(s);
+                    return false;
+                }
+            });
+        }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -57,10 +74,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder holder, final int position) {
-        holder._date.setText(response.get(position).getDate().substring(0, Math.min(response.get(position).getDate().length(), 10)));
-        holder._type.setText(response.get(position).getDr());
-        holder._source.setText(response.get(position).getHStructure() + " , " + response.get(position).getPlace());
-        Glide.with(mContext).load(response.get(position).getUrl()).override(75, 75).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder._thumb);
+        holder._date.setText(responsefiltered.get(position).getDate().substring(0, Math.min(responsefiltered.get(position).getDate().length(), 10)));
+        holder._type.setText(responsefiltered.get(position).getDr());
+        holder._source.setText(responsefiltered.get(position).getHStructure() + " , " + responsefiltered.get(position).getPlace());
+        Glide.with(mContext).load(responsefiltered.get(position).getUrl()).override(75, 75).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder._thumb);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +85,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 Gson gson = new Gson();
 
                 Intent intent = new Intent(mContext, DocumentDetails.class);
-                intent.putExtra("DOC_REF", gson.toJson(response.get(position)));
+                intent.putExtra("DOC_REF", gson.toJson(responsefiltered.get(position)));
                 // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 mContext.startActivity(intent);
             }
@@ -77,7 +94,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return response.size();
+        return responsefiltered.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -91,6 +108,39 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             _source = itemView.findViewById(R.id.source);
             _thumb = itemView.findViewById(R.id.documentthumb);
         }
+    }
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charstring=charSequence.toString();
+                if(charstring.isEmpty()){
+                    responsefiltered.clear();
+                    responsefiltered=response;
+
+                }else{
+                    List<Document> filteredlist=new ArrayList<>();
+                    for(Document row :response){
+                        if(row.getDr().toLowerCase().contains(charstring.toLowerCase()) )
+                        {
+                            filteredlist.add(row);
+                        }
+                    }
+                    responsefiltered=filteredlist;
+
+                }
+                FilterResults filterResults=new FilterResults();
+                filterResults.values=responsefiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                responsefiltered = (ArrayList<Document>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
 
