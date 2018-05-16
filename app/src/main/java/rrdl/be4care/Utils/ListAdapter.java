@@ -77,6 +77,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         holder._date.setText(responsefiltered.get(position).getDate().substring(0, Math.min(responsefiltered.get(position).getDate().length(), 10)));
         holder._type.setText(responsefiltered.get(position).getDr());
         holder._source.setText(responsefiltered.get(position).getHStructure() + " , " + responsefiltered.get(position).getPlace());
+        if(responsefiltered.get(position).getStar()) {
+        holder._star.setVisibility(View.VISIBLE);
+        }
         Glide.with(mContext).load(responsefiltered.get(position).getUrl()).override(75, 75).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(holder._thumb);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +102,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView _date, _type, _source;
-        private ImageView _thumb;
+        private ImageView _thumb,_star;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -107,6 +110,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
             _type = itemView.findViewById(R.id.type);
             _source = itemView.findViewById(R.id.source);
             _thumb = itemView.findViewById(R.id.documentthumb);
+            _star=itemView.findViewById(R.id.star);
         }
     }
     @Override
@@ -122,7 +126,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                 }else{
                     List<Document> filteredlist=new ArrayList<>();
                     for(Document row :response){
-                        if(row.getDr().toLowerCase().contains(charstring.toLowerCase()) )
+                        if(row.getDr().toString().toLowerCase().contains(charstring.toLowerCase()) )
                         {
                             filteredlist.add(row);
                         }

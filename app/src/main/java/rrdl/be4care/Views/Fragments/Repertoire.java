@@ -76,7 +76,7 @@ public class Repertoire extends Fragment {
         SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         Button back=view.findViewById(R.id.back);
         RecyclerView recyclerView=view.findViewById(R.id.replist);
-        Button addbtn=view.findViewById(R.id.addbutton);
+/*        Button addbtn=view.findViewById(R.id.addbutton);
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +93,7 @@ public class Repertoire extends Fragment {
                 Button liststruck=dialog.findViewById(R.id.liststruct);
                 Button addstruck=dialog.findViewById(R.id.addstruct);
             }
-        });
+        });*/
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         back.setOnClickListener(new View.OnClickListener() {
             @Override

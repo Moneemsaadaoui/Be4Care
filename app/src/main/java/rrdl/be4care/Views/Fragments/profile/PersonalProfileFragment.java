@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -127,7 +129,7 @@ public class PersonalProfileFragment extends Fragment {
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        id.setEnabled(true);
+                       // id.setEnabled(true);
                         name.setEnabled(true);
                         lastname.setEnabled(true);
                         numtel.setEnabled(true);
@@ -149,6 +151,7 @@ public class PersonalProfileFragment extends Fragment {
                 });
             }
         });
+
         final User mUser;
         final ImageView profilepic = view.findViewById(R.id.profilepic);
         //
@@ -156,7 +159,7 @@ public class PersonalProfileFragment extends Fragment {
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
-        ApiService apiservice = retrofit.create(ApiService.class);
+        final ApiService apiservice = retrofit.create(ApiService.class);
         final Call<User> get = apiservice.load_user(prefs.getString("AUTH", ""));
         get.enqueue(new Callback<User>() {
             @Override
@@ -179,6 +182,24 @@ public class PersonalProfileFragment extends Fragment {
        Validate.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
+                //patch call
+               JsonObject _user=new JsonObject();
+               _user.addProperty("name",name.getText().toString());
+               _user.addProperty("lastName",lastname.getText().toString());
+               _user.addProperty("phNumber",numtel.getText().toString());
+               _user.addProperty("bDate",birth.getText().toString());
+               final Call<User> update = apiservice.updateuser(prefs.getString("AUTH", ""),_user);
+                update.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+
+                    }
+                });
                //do a call here
                id.setEnabled(false);
                name.setEnabled(false);

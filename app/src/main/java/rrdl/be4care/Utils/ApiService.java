@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
@@ -49,4 +50,8 @@ public interface ApiService {
 
     @GET("/api/healthStructs")
     Call<List<Doctor>>getalldstruck(@Header("Authorization") String AuthToken);
+    //PATCH METHODS
+
+    @PATCH("/api/users/me")
+    Call<User>updateuser(@Header("Authorization") String AuthToken,@Body JsonObject user);
 }

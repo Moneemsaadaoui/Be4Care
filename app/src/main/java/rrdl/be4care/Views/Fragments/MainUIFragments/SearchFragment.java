@@ -104,6 +104,7 @@ public class SearchFragment extends Fragment {
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         
         SearchDocument sd=new SearchDocument(getContext(),rv,search);
+        sd.Load_Docs();
         return view;
     }
 
