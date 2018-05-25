@@ -65,8 +65,13 @@ public class AddDocumentActivity extends AppCompatActivity implements InfoFragme
         uploadbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                final CharSequence[] items = {"Take Photo", "Choose from Library",
+                try {
+                    camera.takePicture();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+              /*  final CharSequence[] items = {"Take Photo", "Choose from Library",
                         "Cancel"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddDocumentActivity.this);
                 builder.setTitle("Add Photo!");
@@ -77,11 +82,7 @@ public class AddDocumentActivity extends AppCompatActivity implements InfoFragme
                         if (items[item].equals("Take Photo")) {
                             userChoosenTask = "Take Photo";
                             if (result)
-                                try {
-                                camera.takePicture();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }                        } else if (items[item].equals("Choose from Library")) {
+                                                  } else if (items[item].equals("Choose from Library")) {
                             userChoosenTask = "Choose from Library";
                             if (result) {
                                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -95,7 +96,7 @@ public class AddDocumentActivity extends AppCompatActivity implements InfoFragme
                     }
                 });
                 builder.show();
-            }
+            }*/
         });
 
       /*      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

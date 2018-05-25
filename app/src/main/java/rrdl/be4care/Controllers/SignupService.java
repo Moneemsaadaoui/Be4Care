@@ -13,10 +13,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Login;
+import rrdl.be4care.Models.SignupResponse;
 import rrdl.be4care.Utils.ApiService;
 
 public class SignupService {
-    JsonObject New_user;
+    JsonObject New_user=new JsonObject();
     Context mContext;
     EditText email,password,phone;
     CircularProgressButton mCircularProgressButton;
@@ -32,7 +33,7 @@ public class SignupService {
 
     }
     public void signup(){
-        New_user.addProperty("username",this.email.getText().toString());
+        New_user.addProperty("email",this.email.getText().toString());
         New_user.addProperty("password",this.password.getText().toString());
         New_user.addProperty("phNumber",this.phone.getText().toString());
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -40,18 +41,22 @@ public class SignupService {
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
         final ApiService apiservice = retrofit.create(ApiService.class);
-        Call<Login> call = apiservice.signup(New_user);
-        call.enqueue(new Callback<Login>() {
+        Call<SignupResponse> call = apiservice.signup(New_user);
+        call.enqueue(new Callback<SignupResponse>() {
             @Override
-            public void onResponse(Call<Login> call, Response<Login> response) {
+            public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
+                Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
             Auth auth=new Auth(mContext);
             auth.Login(mCircularProgressButton,email,password);
             }
 
             @Override
-            public void onFailure(Call<Login> call, Throwable t) {
+            public void onFailure(Call<SignupResponse> call, Throwable t) {
                 Toast.makeText(mContext, "Error 0x5", Toast.LENGTH_SHORT).show();
+                mCircularProgressButton.revertAnimation();
             }
+
+
         });
     }
 

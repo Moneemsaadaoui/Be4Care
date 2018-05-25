@@ -15,12 +15,12 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="fill_parent"
-            android:layout_height="230dp">
+            android:layout_height="155dp">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/CollapsingToolbarLayout1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="155dp"
                 android:background="@color/cardview_light_background"
                 app:collapsedTitleTextAppearance="@color/badge_background_color"
                 app:expandedTitleTextAppearance="@color/bg_screen2"
@@ -55,6 +55,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
                         android:gravity="bottom"
                         android:orientation="horizontal">
 
@@ -84,19 +85,6 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:text="Photo de Profil" />
-
-                    <ImageView
-                        android:id="@+id/profilepic"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_margin="15dp" />
-
                 </LinearLayout>
 
             </android.support.design.widget.CollapsingToolbarLayout>
@@ -106,13 +94,28 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/white"
             android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Photo de Profil" />
+
+                <ImageView
+                    android:id="@+id/profilepic"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_margin="15dp" />
 
                 <TextView
                     android:id="@+id/textview"

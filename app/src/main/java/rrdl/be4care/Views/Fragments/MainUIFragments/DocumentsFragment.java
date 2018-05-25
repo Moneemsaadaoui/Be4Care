@@ -3,6 +3,7 @@ package rrdl.be4care.Views.Fragments.MainUIFragments;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -97,7 +98,9 @@ public class DocumentsFragment extends Fragment {
             }
         });
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        collapsingToolbarLayout.setTitle("");
+        collapsingToolbarLayout.setTitle("Documents");
+        collapsingToolbarLayout.setExpandedTitleMargin(40,0,0,150);
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
         RecyclerView rv = view.findViewById(R.id.documentRecycler);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);

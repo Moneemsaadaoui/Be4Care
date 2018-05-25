@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -31,6 +33,7 @@ import rrdl.be4care.Utils.FillPersonalInfo;
 import rrdl.be4care.Utils.RoundedImageView;
 
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.UIUtils;
 import rrdl.be4care.Views.Activities.LoginActivity;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
 
@@ -167,9 +170,9 @@ public class PersonalProfileFragment extends Fragment {
                 FillPersonalInfo fillPersonalInfo = new FillPersonalInfo(getContext(), response.body(), id, name
                         , lastname, numtel, birth, sex);
                 fillPersonalInfo.fillinfo();
-                Glide.with(getContext()).load(response.body().getPUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(profilepic);
-
-            }
+                Glide.with(getContext()).load(response.body().getPUrl())
+                        .asBitmap().centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .into(UIUtils.getRoundedImageTarget(getContext(), profilepic, 70));}
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {

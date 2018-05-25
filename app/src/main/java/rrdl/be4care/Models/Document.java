@@ -3,9 +3,15 @@ package rrdl.be4care.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.Date;
+
 import io.realm.RealmObject;
 
-public class Document  {
+public class Document {
 
     @SerializedName("url")
     @Expose
@@ -106,5 +112,21 @@ public class Document  {
     public void setUsersId(String usersId) {
         this.usersId = usersId;
     }
+   /* @Override
+    public int compare(Document document, Document t1) {
+        SimpleDateFormat format=new SimpleDateFormat("YYYY-MM-DD");
+        try {
+            Date datedoc=format.parse(document.getDate());
+            Date datedoc2=format.parse(t1.getDate());
 
+
+        if(datedoc.compareTo(datedoc2)<=0){return }
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+
+    @Override
+    public Comparator<Document> reversed() {
+        return null;
+    }*/
 }

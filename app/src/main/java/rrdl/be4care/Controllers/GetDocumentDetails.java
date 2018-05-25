@@ -35,13 +35,14 @@ public class GetDocumentDetails {
 
     public void getDetails() {
         Glide.with(mContext).load(mDocument.getUrl()).diskCacheStrategy(DiskCacheStrategy.SOURCE).into(mImageView);
-        title.setText("Dr " + mDocument.getDr());
+        title.setText( mDocument.getDr());
         date.setText(mDocument.getDate().substring(0, Math.min(mDocument.getDate().length(), 10)));
         profs.setText(mDocument.getDr());
         type.setText(mDocument.getType());
         structs.setText(mDocument.getHStructure());
         lieu.setText(mDocument.getPlace());
         note.setText(mDocument.getNote());
+
 
     }
 }

@@ -1,6 +1,7 @@
 package rrdl.be4care.Views.Fragments.MainUIFragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,12 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rrdl.be4care.Models.Doctor;
+import rrdl.be4care.Models.Document;
+import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.ApiService;
 import rrdl.be4care.Utils.ExpandableAdapter;
 
 /**
@@ -29,7 +40,7 @@ public class ShortcutFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private List<String>top250,comingSoon,nowShowing;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -73,8 +84,8 @@ public class ShortcutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View view= inflater.inflate(R.layout.fragment_shortcut, container, false);
-
+        prepareListData();
+        View view= inflater.inflate(R.layout.fragment_shortcut, container, false);
         expListView = (ExpandableListView) view.findViewById(R.id.expandable);
         // preparing list data
         prepareListData();
@@ -88,38 +99,98 @@ public class ShortcutFragment extends Fragment {
     }
 
     private void prepareListData() {
+        SharedPreferences prefs = getContext().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl("https://peaceful-forest-76384.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+        ApiService apiservice = retrofit.create(ApiService.class);
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
-        listDataHeader.add("compte rendu");
-        listDataHeader.add("imagerie");
-        listDataHeader.add("Ordonnance");
+        listDataHeader.add("Documents");
+        listDataHeader.add("Medecins");
+        listDataHeader.add("Structure de santé");
 
         // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+      /*  Call<List<Document>>loaddocs=apiservice.load_documents(prefs.getString("AUTH",""));
+        loaddocs.enqueue(new Callback<List<Document>>() {
+            @Override
+            public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
+                List<String> top250 = new ArrayList<String>();
+                for(Document row:response.body())
+                {
+                    if(row.getStar()){
+                        top250.add(row.getDr().toString());
+                    }
+                }
 
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+            }
 
+            @Override
+            public void onFailure(Call<List<Document>> call, Throwable t) {
+
+            }
+        });
+
+       Call<List<Doctor>>getdocs=apiservice.getalldoctors(prefs.getString("AUTH",""));
+       getdocs.enqueue(new Callback<List<Doctor>>() {
+           @Override
+           public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
+               List<String> nowShowing = new ArrayList<String>();
+               Toast.makeText(getContext(), response.body().size() + "Second", Toast.LENGTH_SHORT).show();
+
+               for(Doctor row:response.body())
+               {
+                   if(row.getStar()){
+                       nowShowing.add(row.getFullName().toString());
+                   }
+               }
+
+
+           }
+
+           @Override
+           public void onFailure(Call<List<Doctor>> call, Throwable t) {
+
+           }
+       });
+
+      Call<List<Structure>>getstruck=apiservice.getalldstruck(prefs.getString("AUTH",""));
+      getstruck.enqueue(new Callback<List<Structure>>() {
+          @Override
+          public void onResponse(Call<List<Structure>> call, Response<List<Structure>> response) {
+              List<String> comingSoon = new ArrayList<String>();
+              for(Structure row:response.body())
+              {
+                  if(row.getStar()){
+                      comingSoon.add(row.getFullName().toString());
+                  }
+              }
+
+          }
+
+          @Override
+          public void onFailure(Call<List<Structure>> call, Throwable t) {
+
+          }
+      });*/
         List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+        List<String> nowShowing = new ArrayList<String>();
+        List<String> top250 = new ArrayList<String>();
+
+        top250.add("Ordenance");
+        top250.add("Visite medicale");
+        nowShowing.add("Dr quesnot");
+        nowShowing.add("Dr Mahmoudi");
+        nowShowing.add("Dr Saadaoui");
+        nowShowing.add("Dr Zaidoune");
+        nowShowing.add("Dr Baccouche");
+        comingSoon.add("Hopital Militaire tunis");
+        comingSoon.add("Hopital Sahloul");
+        comingSoon.add("Hopital Bouficha");
 
         listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
         listDataChild.put(listDataHeader.get(1), nowShowing);

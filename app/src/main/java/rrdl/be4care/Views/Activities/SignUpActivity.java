@@ -88,6 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
                 {
                     circularProgressButton.startAnimation();
                     SignupService signupService=new SignupService(mEmailView,mPasswordView,mPhone,circularProgressButton,getBaseContext());
+                    signupService.signup();
                 }
             }
         });

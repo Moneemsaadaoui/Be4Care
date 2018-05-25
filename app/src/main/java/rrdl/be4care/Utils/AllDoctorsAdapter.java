@@ -67,6 +67,7 @@ implements Filterable{
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                JsonObject jsonObject=new JsonObject();
             adddoc(mDoctorsfiltered.get(position));
             }
         });

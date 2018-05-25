@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="@android:color/transparent"
-                    android:text="Trier" />
+                    android:text="V    Trier" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -63,7 +63,11 @@
                     android:id="@+id/documentRecycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white" />
+                    android:background="@android:color/white"
+                    android:paddingBottom="56dp">
+
+                </android.support.v7.widget.RecyclerView>
+
             </android.support.v4.widget.SwipeRefreshLayout>
         </android.support.v4.widget.NestedScrollView>
 

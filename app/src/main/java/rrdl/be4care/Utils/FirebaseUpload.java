@@ -2,6 +2,7 @@ package rrdl.be4care.Utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Doctor;
+import rrdl.be4care.Views.Activities.DocInfoActivity;
 
 public class FirebaseUpload {
     private Bitmap bitmap;
@@ -58,7 +60,7 @@ public class FirebaseUpload {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // Get a URL to the uploaded content
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                final Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Toast.makeText(mContext, "Upload successful", Toast.LENGTH_SHORT).show();
                 Log.i("TAG", downloadUrl.toString());
                     link.addProperty("url", downloadUrl.toString());
@@ -68,6 +70,10 @@ public class FirebaseUpload {
                     public void onResponse(retrofit2.Call<JsonObject> call, Response<JsonObject> response) {
                         Toast.makeText(mContext, response.body().toString() + " as result", Toast.LENGTH_SHORT).show();
                         if (response.isSuccessful()){
+                            Intent intent=new Intent(mContext, DocInfoActivity.class);
+                            intent.putExtra("ocr",response.body().toString());
+                            intent.putExtra("url",downloadUrl.toString());
+                            mContext.startActivity(intent);
                         Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show(); }
                         else{
                             Toast.makeText(mContext, "error analysing", Toast.LENGTH_SHORT).show();

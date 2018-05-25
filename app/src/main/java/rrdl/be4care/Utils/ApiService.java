@@ -13,6 +13,7 @@ import retrofit2.http.POST;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Login;
+import rrdl.be4care.Models.SignupResponse;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.Models.Token;
 import rrdl.be4care.Models.User;
@@ -27,7 +28,7 @@ public interface ApiService {
     Call<Login> logout();
 
     @POST("/api/users")
-    Call<Login> signup(@Body JsonObject jsonObject);
+    Call<SignupResponse> signup(@Body JsonObject jsonObject);
 
     @POST("/api/documents/analyse")
     Call<JsonObject> analyse( @Header("Authorization") String AuthToken,@Body JsonObject jsonObject);

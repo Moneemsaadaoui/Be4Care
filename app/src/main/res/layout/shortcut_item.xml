@@ -13,11 +13,13 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:layout_margin="5dp"
-             />
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/star" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +38,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="03/03/2018"
-                    android:textColor="@color/textHue" />
+                    android:textColor="@color/textHue"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/type"
@@ -46,6 +49,7 @@
                     android:text="Ordennance."
                     android:textColor="@color/textHue"
                     android:textSize="18sp"
+                    android:visibility="invisible"
                     android:textStyle="bold" />
 
                 <TextView
@@ -53,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Dr Quintin tarantino  RRDL"
+                    android:text="Dr Paul Gilbert"
                     android:textColor="@color/textHue" />
 
             </LinearLayout>

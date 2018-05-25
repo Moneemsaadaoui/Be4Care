@@ -12,7 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="471dp"
         android:gravity="center_vertical"
         android:orientation="vertical">
 
@@ -37,7 +37,7 @@
             android:ems="10"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:text="moneem"
+            android:text="moneem@gmail.com"
             android:textAlignment="center"
             android:textColor="@color/cardview_light_background" />
 
@@ -63,18 +63,17 @@
             android:text="Connecter"
             app:spinning_bar_width="4dp" />
 
-        <Button
-            android:id="@+id/signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="15dp"
-            android:layout_marginTop="30dp"
-            android:background="@color/space_transparent"
-            android:text="Creer un Compte ?"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="12sp" />
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="30dp"
+        android:background="@color/space_transparent"
+        android:text="je n'ai pas un compte"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="12sp" />
 
 </LinearLayout>

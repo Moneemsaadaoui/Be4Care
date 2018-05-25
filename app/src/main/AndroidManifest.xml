@@ -15,7 +15,6 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,32 +27,31 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Views.Activities.MainActivity"
-            android:taskAffinity="" />
+            android:taskAffinity=""
+            android:noHistory="true"
+            />
         <activity android:name=".Views.Activities.WelcomeActivity" />
         <activity android:name=".Views.Activities.AddDocumentActivity" />
         <activity
             android:name=".Views.Activities.LoginActivity"
             android:label="Be4Care"
             android:noHistory="true"
-            android:taskAffinity=""
-            >
-
-        </activity>
+            android:taskAffinity=""></activity>
         <activity android:name=".Views.Activities.ProfileActivity" />
         <activity android:name=".Views.Fragments.CompleteProfileActivity" />
         <activity android:name=".Views.Activities.DocumentDetails" />
-        <activity android:name=".Views.Activities.SplashActivity"
-            android:theme="@style/Theme.Splash"
+        <activity
+            android:name=".Views.Activities.SplashActivity"
             android:noHistory="true"
             android:taskAffinity=""
-
-            >
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Views.Activities.DocInfoActivity"></activity>
     </application>
 
 </manifest>

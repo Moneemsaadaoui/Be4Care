@@ -3,8 +3,10 @@ package rrdl.be4care.Views.Fragments.MainUIFragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toolbar;
 
 import java.util.List;
 
@@ -83,7 +86,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
       /*  ListAdapter la = new ListAdapter(;
-        //insert collapsed logic here !
+        //insert collapsed logic here !*
         Toolbar toolbar;
         CollapsingToolbarLayout collapsingToolbarLayout;
         toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
@@ -102,7 +105,13 @@ public class SearchFragment extends Fragment {
         SearchView search=view.findViewById(R.id.search);
         RecyclerView rv=view.findViewById(R.id.recyclersearch);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        
+
+        CollapsingToolbarLayout collapsingToolbarLayout;
+        android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar1);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);
+        collapsingToolbarLayout.setTitle("Recherche");
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
+        collapsingToolbarLayout.setExpandedTitleMargin(40,0,0,150);
         SearchDocument sd=new SearchDocument(getContext(),rv,search);
         sd.Load_Docs();
         return view;

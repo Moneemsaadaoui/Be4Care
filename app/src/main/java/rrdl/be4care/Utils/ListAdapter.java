@@ -1,5 +1,6 @@
 package rrdl.be4care.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,9 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import rrdl.be4care.Controllers.LoadDocuments;
@@ -40,12 +44,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private Context mContext;
     private callback mCallback;
     private ArrayList<Document>responsecopy;
+
+    private List<String>datelist;
+    private List<String>doclist;
+    private List<String>strucklist;
+
+
     public ListAdapter(Context context, List<Document> body) {
         mContext = context;
         this.response = body;
         responsefiltered=this.response;
 
     }
+    @SuppressLint("NewApi")
     public ListAdapter(Context context, List<Document> body, SearchView sv) {
             mContext = context;
             this.response = body;
@@ -62,6 +73,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                     return false;
                 }
             });
+
+
         }
 
     @Override
@@ -93,6 +106,72 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                 mContext.startActivity(intent);
             }
         });
+    }
+    public void Sortbyname()
+    {
+        datelist.clear();
+        strucklist.clear();
+        doclist.clear();
+        Collections.sort(response,new Comparator<Document>() {
+            @Override
+            public int compare(Document document, Document t1) {
+                return document.getDr().compareTo(t1.getDr());
+            }
+        });
+        Collections.sort(responsefiltered,new Comparator<Document>() {
+            @Override
+            public int compare(Document document, Document t1) {
+                return document.getDr().compareTo(t1.getDr());
+            }
+        });
+        datelist.add(response.get(0).getDate());
+        strucklist.add(response.get(0).getHStructure());
+        doclist.add(response.get(0).getDr());
+
+        for(Document doc:response) {
+            boolean test=false;
+            for(String curr:doclist)
+            {
+                if(doc.getDr().equals(curr)){test=true;}
+
+            }
+            doclist.add(doc.getDr());
+        notifyDataSetChanged();
+
+        }
+    }
+    public void SortBydate()
+    {
+        datelist.clear();
+        strucklist.clear();
+        doclist.clear();
+        Collections.sort(response,new Comparator<Document>() {
+            @Override
+            public int compare(Document document, Document t1) {
+                return document.getDate().compareTo(t1.getDate());
+            }
+        });
+        Collections.sort(responsefiltered,new Comparator<Document>() {
+            @Override
+            public int compare(Document document, Document t1) {
+                return document.getDate().compareTo(t1.getDate());
+            }
+        });
+
+        datelist.add(response.get(0).getDate());
+        strucklist.add(response.get(0).getHStructure());
+        doclist.add(response.get(0).getDr());
+        for(Document doc:response) {
+            boolean test = false;
+            for (String curr : datelist) {
+                if (doc.getDate().equals(curr)) {
+                    test = true;
+                }
+
+            }
+            doclist.add(doc.getDate());
+        }
+        notifyDataSetChanged();
     }
 
     @Override
