@@ -45,10 +45,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
     private callback mCallback;
     private ArrayList<Document>responsecopy;
 
-    private List<String>datelist;
-    private List<String>doclist;
-    private List<String>strucklist;
-
+    private List<String>datelist=new ArrayList<String>();
+    private List<String>doclist=new ArrayList<String>();
+    private List<String>strucklist=new ArrayList<String>();
+    private List<String>typelist=new ArrayList<String>();
 
     public ListAdapter(Context context, List<Document> body) {
         mContext = context;
@@ -135,10 +135,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
                 if(doc.getDr().equals(curr)){test=true;}
 
             }
-            doclist.add(doc.getDr());
-        notifyDataSetChanged();
+            if(test==false)doclist.add(doc.getDr());
 
         }
+        notifyDataSetChanged();
+        Toast.makeText(mContext, doclist.size()+" doctors", Toast.LENGTH_SHORT).show();
     }
     public void SortBydate()
     {
@@ -162,18 +163,55 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         strucklist.add(response.get(0).getHStructure());
         doclist.add(response.get(0).getDr());
         for(Document doc:response) {
-            boolean test = false;
-            for (String curr : datelist) {
-                if (doc.getDate().equals(curr)) {
-                    test = true;
-                }
+            boolean test=false;
+            for(String curr:datelist)
+            {
+                if(doc.getDate().equals(curr)){test=true;}
 
             }
-            doclist.add(doc.getDate());
+            if(test==false)datelist.add(doc.getDate());
+
         }
         notifyDataSetChanged();
-    }
+        Toast.makeText(mContext, datelist.size()+" dates", Toast.LENGTH_SHORT).show();
 
+    }
+    public void SortBytype()
+    {
+        datelist.clear();
+        strucklist.clear();
+        doclist.clear();
+        Collections.sort(response,new Comparator<Document>() {
+            @Override
+            public int compare(Document document, Document t1) {
+                return document.getType().compareTo(t1.getType());
+            }
+        });
+        Collections.sort(responsefiltered,new Comparator<Document>() {
+            @Override
+            public int compare(Document document, Document t1) {
+                return document.getType().compareTo(t1.getType());
+            }
+        });
+
+        datelist.add(response.get(0).getDate());
+        strucklist.add(response.get(0).getHStructure());
+        doclist.add(response.get(0).getDr());
+        typelist.add(response.get(0).getType());
+        for(Document doc:response) {
+            boolean test=false;
+            for(String curr:typelist)
+            {
+                if(doc.getType().equals(curr)){test=true;}
+
+            }
+            if(test==false)datelist.add(doc.getType());
+
+        }
+        notifyDataSetChanged();
+        Toast.makeText(mContext, datelist.size()+" Types", Toast.LENGTH_SHORT).show();
+
+    }
     @Override
     public int getItemCount() {
         return responsefiltered.size();

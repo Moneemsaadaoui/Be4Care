@@ -55,7 +55,7 @@ public class LoadDocuments {
                     (Call<List<Document>> call, Response<List<Document>> response) {
                 ListAdapter la = new ListAdapter(mContext, response.body());
                 mRecyclerView.setAdapter(la);
-                la.SortBydate();
+                la.SortBytype();
 
 
                 /*
