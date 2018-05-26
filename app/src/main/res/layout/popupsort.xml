@@ -41,7 +41,7 @@
                     android:background="@android:color/darker_gray" />
 
                 <Button
-                    android:id="@+id/liststruct"
+                    android:id="@+id/docsort"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -57,7 +57,7 @@
                     android:background="@android:color/darker_gray" />
 
                 <Button
-                    android:id="@+id/addmed"
+                    android:id="@+id/typesort"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -72,7 +72,7 @@
                     android:background="@android:color/darker_gray" />
 
                 <Button
-                    android:id="@+id/addstruct"
+                    android:id="@+id/strucksort"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

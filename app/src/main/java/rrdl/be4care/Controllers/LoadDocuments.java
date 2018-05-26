@@ -29,7 +29,7 @@ public class LoadDocuments {
     private Context mContext;
     private RecyclerView mRecyclerView;
     private String TOKEN;
-
+    private  ListAdapter la;
     public static final String BASE_URL = "https://peaceful-forest-76384.herokuapp.com/";
     public static final String HEADER_CACHE_CONTROL = "Cache-Control";
     public static final String HEADER_PRAGMA = "Pragma";
@@ -53,9 +53,8 @@ public class LoadDocuments {
             @Override
             public void onResponse
                     (Call<List<Document>> call, Response<List<Document>> response) {
-                ListAdapter la = new ListAdapter(mContext, response.body());
-                mRecyclerView.setAdapter(la);
-                la.SortBytype();
+                 la = new ListAdapter(mContext, response.body());
+                    mRecyclerView.setAdapter(la);
 
 
                 /*
@@ -64,12 +63,15 @@ public class LoadDocuments {
               mCallback.getDocument(doc_list);
                 Toast.makeText(mContext,""+ doc_list.size(), Toast.LENGTH_SHORT).show();*/
             }
-
             @Override
             public void onFailure(Call<List<Document>> call, Throwable t) {
                 Toast.makeText(mContext, "Erreur", Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+    public ListAdapter getDocadapter()
+    {
+        return la;
     }
 }

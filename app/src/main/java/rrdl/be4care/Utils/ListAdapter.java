@@ -212,6 +212,42 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> im
         Toast.makeText(mContext, datelist.size()+" Types", Toast.LENGTH_SHORT).show();
 
     }
+    public void SortByHstruck()
+    {
+        datelist.clear();
+        strucklist.clear();
+        doclist.clear();
+        Collections.sort(response,new Comparator<Document>() {
+            @Override
+            public int compare(Document document, Document t1) {
+                return document.getHStructure().compareTo(t1.getHStructure());
+            }
+        });
+        Collections.sort(responsefiltered,new Comparator<Document>() {
+            @Override
+            public int compare(Document document, Document t1) {
+                return document.getHStructure().compareTo(t1.getHStructure());
+            }
+        });
+
+        datelist.add(response.get(0).getDate());
+        strucklist.add(response.get(0).getHStructure());
+        doclist.add(response.get(0).getDr());
+        typelist.add(response.get(0).getType());
+        for(Document doc:response) {
+            boolean test=false;
+            for(String curr:strucklist)
+            {
+                if(doc.getHStructure().equals(curr)){test=true;}
+
+            }
+            if(test==false)strucklist.add(doc.getHStructure());
+
+        }
+        notifyDataSetChanged();
+        Toast.makeText(mContext, datelist.size()+" Strucks", Toast.LENGTH_SHORT).show();
+
+    }
     @Override
     public int getItemCount() {
         return responsefiltered.size();

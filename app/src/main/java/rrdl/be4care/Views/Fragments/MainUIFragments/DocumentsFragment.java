@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListAdapter;
 
 import rrdl.be4care.Controllers.LoadDocuments;
 import rrdl.be4care.R;
@@ -75,45 +76,82 @@ public class DocumentsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_documents, container, false);
-      // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_documents, container, false);
+        // Inflate the layout for this fragment
 
 
         Toolbar toolbar;
         CollapsingToolbarLayout collapsingToolbarLayout;
         toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
         collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);
-        mSwipeRefreshLayout=view.findViewById(R.id.swiperefresh);
-        Button sort=view.findViewById(R.id.sort);
+        mSwipeRefreshLayout = view.findViewById(R.id.swiperefresh);
+        Button sort = view.findViewById(R.id.sort);
+
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        collapsingToolbarLayout.setTitle("Documents");
+        collapsingToolbarLayout.setExpandedTitleMargin(40, 0, 0, 150);
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
+        RecyclerView rv = view.findViewById(R.id.documentRecycler);
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+        SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+        final LoadDocuments loadDocuments = new LoadDocuments(getContext(), prefs.getString("AUTH", ""),
+                rv);
+        loadDocuments.Load_Docs();
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadDocuments.Load_Docs();
+                mSwipeRefreshLayout.setRefreshing(false);
+
+
+            }
+        });
         sort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
-                dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
+                rrdl.be4care.Utils.ListAdapter listAdapter= loadDocuments.getDocadapter();
+                        dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
                 dialog.setCancelable(true);
                 dialog.setContentView(R.layout.popupsort);
                 dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
                 dialog.show();
-            }
-        });
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        collapsingToolbarLayout.setTitle("Documents");
-        collapsingToolbarLayout.setExpandedTitleMargin(40,0,0,150);
-        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.TRANSPARENT);
-        RecyclerView rv = view.findViewById(R.id.documentRecycler);
-        rv.setLayoutManager(new LinearLayoutManager(getContext()));
-        SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
-        final LoadDocuments loadDocuments = new LoadDocuments(getContext(), prefs.getString("AUTH",""),
-               rv );
-        loadDocuments.Load_Docs();
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-               loadDocuments.Load_Docs();
-                    mSwipeRefreshLayout.setRefreshing(false);
+                Button sortDate = dialog.findViewById(R.id.datesort);
+                sortDate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listAdapter.SortBydate();
+                        dialog.dismiss();
 
+                    }
+                });
 
+                Button docsort = dialog.findViewById(R.id.docsort);
+                docsort.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listAdapter.Sortbyname();
+                        dialog.dismiss();
+                    }
+                });
+                Button strucksort = dialog.findViewById(R.id.strucksort);
+                strucksort.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listAdapter.SortByHstruck();
+                        dialog.dismiss();
+
+                    }
+                });
+                Button typesort = dialog.findViewById(R.id.typesort);
+                typesort.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listAdapter.SortBytype();
+                        dialog.dismiss();
+                    }
+                });
             }
         });
         return view;
