@@ -25,7 +25,7 @@ import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
 import rrdl.be4care.Utils.ApiService;
-import rrdl.be4care.Utils.ExpandableAdapter;
+//import rrdl.be4care.Utils.ExpandableAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +44,7 @@ public class ShortcutFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    ExpandableAdapter listAdapter;
+   // ExpandableAdapter listAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
@@ -84,9 +84,9 @@ public class ShortcutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        prepareListData();
+     // prepareListData();
         View view= inflater.inflate(R.layout.fragment_shortcut, container, false);
-        expListView = (ExpandableListView) view.findViewById(R.id.expandable);
+       /* expListView = (ExpandableListView) view.findViewById(R.id.expandable);
         // preparing list data
         prepareListData();
 
@@ -94,7 +94,7 @@ public class ShortcutFragment extends Fragment {
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragment*/
         return view;
     }
 

@@ -1,4 +1,4 @@
-package rrdl.be4care.Utils;
+/*package rrdl.be4care.Utils;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -16,7 +16,7 @@ import rrdl.be4care.R;
 /**
  * Created by moneem on 24/04/18.
  */
-
+/*
 public class ExpandableAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
@@ -110,3 +110,4 @@ public class ExpandableAdapter extends BaseExpandableListAdapter {
         return true;
     }
 }
+*/
