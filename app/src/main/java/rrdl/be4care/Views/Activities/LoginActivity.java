@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 mLoginBtn.startAnimation();
-                Auth auth = new Auth(getApplicationContext());
+                Auth auth = new Auth(getApplicationContext(),LoginActivity.this);
                 auth.Login(mLoginBtn, Email, Password);
             }
         });

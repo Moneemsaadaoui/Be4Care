@@ -28,7 +28,6 @@
         <activity
             android:name=".Views.Activities.MainActivity"
             android:taskAffinity=""
-            android:noHistory="true"
             />
         <activity android:name=".Views.Activities.WelcomeActivity" />
         <activity android:name=".Views.Activities.AddDocumentActivity" />

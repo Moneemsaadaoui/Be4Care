@@ -149,6 +149,7 @@ public class PersonalProfileFragment extends Fragment {
                         dialog.dismiss();
                         prefs.edit().putString("AUTH","").commit();
                         Intent intent=new Intent(getContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 });

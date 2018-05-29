@@ -1,5 +1,6 @@
 package rrdl.be4care.Controllers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,10 +26,11 @@ public class Auth {
     private SharedPreferences prefs;
     private JsonObject user = new JsonObject();
     private Context mContext;
-
+    private Activity loginact;
     //constructor
-    public Auth(Context context) {
+    public Auth(Context context, Activity activity) {
         this.mContext = context;
+        loginact=activity;
 
     }
 
@@ -55,8 +57,9 @@ public class Auth {
                 Intent intent = new Intent(mContext, MainActivity.class);
                 intent.putExtra("TOKEN",authtoken);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                mContext.startActivity(intent);
-                button.revertAnimation();}
+                    mContext.startActivity(intent);
+                button.revertAnimation();
+                loginact.finish();}
                 else {
                 button.revertAnimation();
                     Toast.makeText(mContext, "Wrong credz", Toast.LENGTH_SHORT).show();

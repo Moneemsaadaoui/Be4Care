@@ -1,5 +1,6 @@
 package rrdl.be4care.Controllers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,10 +22,11 @@ public class SignupService {
     Context mContext;
     EditText email,password,phone;
     CircularProgressButton mCircularProgressButton;
-    public SignupService(EditText email,EditText passEdit ,EditText phone,
+    private Activity signupactivity;
+    public SignupService(EditText email, EditText passEdit , EditText phone,
                          CircularProgressButton button,
-                          Context context){
-
+                         Context context, Activity activity){
+    signupactivity=activity;
     mContext=context;
     this.email=email;
     this.password=passEdit;
@@ -46,7 +48,7 @@ public class SignupService {
             @Override
             public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
                 Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
-            Auth auth=new Auth(mContext);
+            Auth auth=new Auth(mContext,signupactivity);
             auth.Login(mCircularProgressButton,email,password);
             }
 

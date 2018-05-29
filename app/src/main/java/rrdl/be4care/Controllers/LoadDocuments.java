@@ -24,12 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Utils.ApiService;
 import rrdl.be4care.Utils.ListAdapter;
+import rrdl.be4care.Utils.SectionedRV;
 
 public class LoadDocuments {
     private Context mContext;
     private RecyclerView mRecyclerView;
     private String TOKEN;
-    private  ListAdapter la;
+    private SectionedRV la;
     public static final String BASE_URL = "https://peaceful-forest-76384.herokuapp.com/";
     public static final String HEADER_CACHE_CONTROL = "Cache-Control";
     public static final String HEADER_PRAGMA = "Pragma";
@@ -53,7 +54,7 @@ public class LoadDocuments {
             @Override
             public void onResponse
                     (Call<List<Document>> call, Response<List<Document>> response) {
-                 la = new ListAdapter(mContext, response.body());
+                 la = new SectionedRV(mContext, response.body());
                     mRecyclerView.setAdapter(la);
 
 
@@ -70,7 +71,7 @@ public class LoadDocuments {
         });
 
     }
-    public ListAdapter getDocadapter()
+    public SectionedRV getDocadapter()
     {
         return la;
     }

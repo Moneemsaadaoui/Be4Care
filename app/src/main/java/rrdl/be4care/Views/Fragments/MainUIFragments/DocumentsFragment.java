@@ -21,6 +21,7 @@ import android.widget.ListAdapter;
 
 import rrdl.be4care.Controllers.LoadDocuments;
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.SectionedRV;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +37,7 @@ public class DocumentsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private SectionedRV listAdapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -97,6 +99,7 @@ public class DocumentsFragment extends Fragment {
         final LoadDocuments loadDocuments = new LoadDocuments(getContext(), prefs.getString("AUTH", ""),
                 rv);
         loadDocuments.Load_Docs();
+
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -111,8 +114,8 @@ public class DocumentsFragment extends Fragment {
             public void onClick(View view) {
 
                 final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
-                rrdl.be4care.Utils.ListAdapter listAdapter= loadDocuments.getDocadapter();
-                        dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
+                listAdapter = loadDocuments.getDocadapter();
+                dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
                 dialog.setCancelable(true);
                 dialog.setContentView(R.layout.popupsort);
                 dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
@@ -121,6 +124,8 @@ public class DocumentsFragment extends Fragment {
                 sortDate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        listAdapter = loadDocuments.getDocadapter();
+
                         listAdapter.SortBydate();
                         dialog.dismiss();
 
@@ -131,6 +136,8 @@ public class DocumentsFragment extends Fragment {
                 docsort.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        listAdapter = loadDocuments.getDocadapter();
+
                         listAdapter.Sortbyname();
                         dialog.dismiss();
                     }
@@ -139,6 +146,8 @@ public class DocumentsFragment extends Fragment {
                 strucksort.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        listAdapter = loadDocuments.getDocadapter();
+
                         listAdapter.SortByHstruck();
                         dialog.dismiss();
 
@@ -148,12 +157,15 @@ public class DocumentsFragment extends Fragment {
                 typesort.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        listAdapter = loadDocuments.getDocadapter();
+
                         listAdapter.SortBytype();
                         dialog.dismiss();
                     }
                 });
             }
         });
+
         return view;
     }
 
