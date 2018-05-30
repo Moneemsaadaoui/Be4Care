@@ -75,7 +75,7 @@ public class DoctorDetail extends AppCompatActivity {
         });
         title=findViewById(R.id.drname);
         Gson gson=new Gson();
-        doc=gson.fromJson(getIntent().getStringExtra("DOCTOR"),Doctor.class);
+        doc=gson.fromJson(getIntent().getStringExtra("REF"),Doctor.class);
         Toast.makeText(this, doc.getFullName()+" from details", Toast.LENGTH_SHORT).show();
         GetDoctorDetail getDoctorDetail=new GetDoctorDetail(this,doc,title,address,numtel,email,sturct,spec);
         getDoctorDetail.getDetails();

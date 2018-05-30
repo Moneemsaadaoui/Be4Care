@@ -37,6 +37,8 @@
             android:noHistory="true"
             android:taskAffinity=""></activity>
         <activity android:name=".Views.Activities.ProfileActivity" />
+        <activity android:name=".Views.Activities.DoctorDetail" />
+
         <activity android:name=".Views.Fragments.CompleteProfileActivity" />
         <activity android:name=".Views.Activities.DocumentDetails" />
         <activity

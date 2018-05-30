@@ -49,7 +49,7 @@ public class GetMyDoctors {
                     @Override
                     public void onResponse(Call<List<Structure>> call, Response<List<Structure>> response) {
                         mStructureList=response.body();
-                        RepertoireListAdapter repertoireAdapter=new RepertoireListAdapter(mDoctorList,mStructureList);
+                        RepertoireListAdapter repertoireAdapter=new RepertoireListAdapter(mContext,mDoctorList,mStructureList);
                         list.setAdapter(repertoireAdapter);
                     }
 

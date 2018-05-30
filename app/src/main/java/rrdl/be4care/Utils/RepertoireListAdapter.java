@@ -1,6 +1,7 @@
 package rrdl.be4care.Utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.truizlop.sectionedrecyclerview.SimpleSectionedAdapter;
 
 import java.util.List;
@@ -17,14 +19,17 @@ import java.util.List;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
+import rrdl.be4care.Views.Activities.DoctorDetail;
+import rrdl.be4care.Views.Activities.DocumentDetails;
 
 public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireListAdapter.ViewHolder> {
     private List<Doctor>mDoctorList;
     private List<Structure>mStructureList;
     private Context mContext;
 
-    public RepertoireListAdapter(List<Doctor> doctor, List<Structure>struck)
+    public RepertoireListAdapter(Context context,List<Doctor> doctor, List<Structure>struck)
     {
+        mContext=context;
     mDoctorList=doctor;
     mStructureList=struck;
     }
@@ -64,12 +69,29 @@ public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireList
 
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gson gson = new Gson();
+
+                Intent intent = new Intent(mContext, DoctorDetail.class);
+                intent.putExtra("REF", gson.toJson(mDoctorList.get(position)));
+                // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                mContext.startActivity(intent);
+            }
+        });
     }else if(section==1){
         if(mStructureList.get(position).getStar()){
             holder.star.setVisibility(View.VISIBLE);
         }
         holder.name.setText(mStructureList.get(position).getFullName());
         holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
