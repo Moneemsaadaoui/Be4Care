@@ -50,6 +50,7 @@ public class LoadDocuments {
     }
 
     public void Load_Docs() {
+        db=RoomDB.getINSTANCE(mContext);
      /*   db = Room.databaseBuilder(mContext,
                 RoomDB.class, DATABASE_NAME).fallbackToDestructiveMigration()
                 .build();
@@ -64,6 +65,12 @@ public class LoadDocuments {
             la.notifyDataSetChanged();
             mRecyclerView.setAdapter(la);
         }*/
+        List<Document> cacheddocs=db.Dao().getdocu();
+
+        if(cacheddocs!=null) {
+            SectionedRV cacheload = new SectionedRV(mContext, cacheddocs);
+            mRecyclerView.setAdapter(cacheload);
+        }
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
@@ -75,14 +82,8 @@ public class LoadDocuments {
             @Override
             public void onResponse
                     (Call<List<Document>> call, Response<List<Document>> response) {
-            /*    new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        db.Dao().insertdocuments(response.body());
-                    }
-                }).start();
-                docl=response.body();
-*/
+                 db.Dao().insertdocuments(response.body());
+
                 la=new SectionedRV(mContext,response.body());
 
                 mRecyclerView.setAdapter(la);

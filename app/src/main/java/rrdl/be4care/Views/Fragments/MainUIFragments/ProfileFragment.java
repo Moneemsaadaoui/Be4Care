@@ -11,11 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.List;
+
 import rrdl.be4care.Models.Doctor;
+import rrdl.be4care.Models.Document;
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.RoomDB;
 import rrdl.be4care.Utils.RoundedImageView;
 import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
 import rrdl.be4care.Views.Fragments.Repertoire;
@@ -107,9 +112,11 @@ public class ProfileFragment extends Fragment {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
-                prefs.edit().putString("AUTH","").commit();
-
+              /*  SharedPreferences prefs=getActivity().getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
+                prefs.edit().putString("AUTH","").commit();*/
+               RoomDB db= RoomDB.getINSTANCE(getContext());
+               List<Document> docs=db.Dao().getdocu();
+                Toast.makeText(getContext(), "from dao"+docs.size(), Toast.LENGTH_SHORT).show();
             }
         });
         apropos.setOnClickListener(new View.OnClickListener() {
