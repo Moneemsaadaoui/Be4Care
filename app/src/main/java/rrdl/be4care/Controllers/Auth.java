@@ -56,8 +56,8 @@ public class Auth {
                 prefs.edit().putString("AUTH",authtoken).apply();
                 Intent intent = new Intent(mContext, MainActivity.class);
                 intent.putExtra("TOKEN",authtoken);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    mContext.startActivity(intent);
+         //       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    loginact.startActivity(intent);
                 button.revertAnimation();
                 loginact.finish();}
                 else {

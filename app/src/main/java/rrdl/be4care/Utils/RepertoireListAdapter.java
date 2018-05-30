@@ -10,18 +10,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.truizlop.sectionedrecyclerview.SimpleSectionedAdapter;
 
 import java.util.List;
 
-import rrdl.be4care.Controllers.AddDoctor;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
 import rrdl.be4care.Views.Activities.DoctorDetail;
-import rrdl.be4care.Views.Activities.DocumentDetails;
 
 public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireListAdapter.ViewHolder> {
     private List<Doctor>mDoctorList;
@@ -65,16 +62,13 @@ public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireList
         }
         holder.name.setText(mDoctorList.get(position).getFullName());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Gson gson = new Gson();
+        holder.itemView.setOnClickListener(view -> {
+            Gson gson = new Gson();
 
-                Intent intent = new Intent(mContext, DoctorDetail.class);
-                intent.putExtra("REF", gson.toJson(mDoctorList.get(position)));
-                // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                mContext.startActivity(intent);
-            }
+            Intent intent = new Intent(mContext, DoctorDetail.class);
+            intent.putExtra("REF", gson.toJson(mDoctorList.get(position)));
+            // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            mContext.startActivity(intent);
         });
     }else if(section==1){
         if(mStructureList.get(position).getStar()){
@@ -82,11 +76,8 @@ public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireList
         }
         holder.name.setText(mStructureList.get(position).getFullName());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.itemView.setOnClickListener(view -> {
 
-            }
         });
     }
     }

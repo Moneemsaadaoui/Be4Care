@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
+
 
 import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.R;
@@ -75,50 +75,38 @@ public class Repertoire extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repertoire, container, false);
-        SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         Button back = view.findViewById(R.id.back);
         RecyclerView recyclerView = view.findViewById(R.id.replist);
         ImageButton addbtn = view.findViewById(R.id.addbtnrep);
         GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),recyclerView);
         getMyDoctors.getDoctors();
-        addbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        addbtn.setOnClickListener(view1 -> {
 
-                final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
-                dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
-                dialog.setCancelable(true);
-                dialog.setContentView(R.layout.repertoire_popup);
-                dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
-                dialog.show();
-                Button listmed = dialog.findViewById(R.id.listmed);
-                Button addmed = dialog.findViewById(R.id.addmed);
-                Button liststruck = dialog.findViewById(R.id.liststruct);
-                Button addstruck = dialog.findViewById(R.id.addstruct);
-                addmed.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        getFragmentManager().beginTransaction().replace(R.id.MainContainer,new allDoctors()).commit();
-                        dialog.dismiss();
-                    }
-                });
-                addstruck.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        getFragmentManager().beginTransaction().replace(R.id.MainContainer,new AllStruck()).commit();
-                        dialog.dismiss();
-                    }
-                });
+            final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
+            dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
+            dialog.setCancelable(true);
+            dialog.setContentView(R.layout.repertoire_popup);
+            dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
+            dialog.show();
+            Button listmed = dialog.findViewById(R.id.listmed);
+            Button addmed = dialog.findViewById(R.id.addmed);
+            Button liststruck = dialog.findViewById(R.id.liststruct);
+            Button addstruck = dialog.findViewById(R.id.addstruct);
+            addmed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view1) {
+                    getFragmentManager().beginTransaction().replace(R.id.MainContainer,new allDoctors()).commit();
+                    dialog.dismiss();
+                }
+            });
+            addstruck.setOnClickListener(view11 -> {
+                getFragmentManager().beginTransaction().replace(R.id.MainContainer,new AllStruck()).commit();
+                dialog.dismiss();
+            });
 
-            }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.MainContainer, new ProfileFragment()).commit();
-            }
-        });
+        back.setOnClickListener(view12 -> getFragmentManager().beginTransaction().replace(R.id.MainContainer, new ProfileFragment()).commit());
      //   GetMyDoctors getMyDoctors = new GetMyDoctors(getContext(), recyclerView);
        // getMyDoctors.getDoctors();
         return view;

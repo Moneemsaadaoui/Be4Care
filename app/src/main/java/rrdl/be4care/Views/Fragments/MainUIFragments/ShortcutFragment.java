@@ -2,9 +2,14 @@ package rrdl.be4care.Views.Fragments.MainUIFragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rrdl.be4care.Controllers.Getshortcuts;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Structure;
@@ -86,6 +92,23 @@ public class ShortcutFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_shortcut, container, false);
+        RecyclerView shortcutrecycler=view.findViewById(R.id.shortcutRecycler);
+        shortcutrecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        Toolbar toolbar;
+        CollapsingToolbarLayout collapsingToolbarLayout;
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);
+        collapsingToolbarLayout.setTitle("Mes Raccourcis");
+        Getshortcuts getshortcuts=new Getshortcuts(getContext(),shortcutrecycler);
+        getshortcuts.get();
+
+
+
+
+
+
+
+
 
         return view;
     }
