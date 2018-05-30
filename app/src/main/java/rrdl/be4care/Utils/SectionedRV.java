@@ -101,9 +101,9 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
 
     @Override
     protected void onBindItemViewHolder(ViewHolder holder, int section, int position) {
-        holder._date.setText(responsefiltered.get(position).getDate()
+        if(section==0){holder._date.setText(responsefiltered.get(position).getDate()
                 .substring(0, Math.min(responsefiltered.get(position).getDate().length(), 10)));
-        holder._type.setText("test");
+        holder._type.setText(responsefiltered.get(position).getType());
         // responsefiltered.get(positi ).getDr()
         holder._source.setText(responsefiltered
                 .get(position).getHStructure() + " , " + responsefiltered.get(position).getPlace());
@@ -123,7 +123,32 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
                 // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 mContext.startActivity(intent);
             }
-        });
+        });}
+        else{
+            holder._date.setText(responsefiltered.get(getItemCountForSection(section-1)+position).getDate()
+                    .substring(0, Math.min(responsefiltered.get(getItemCountForSection(section-1)+position).getDate().length(), 10)));
+            holder._type.setText(responsefiltered.get(getItemCountForSection(section-1)+position).getType());
+            // responsefiltered.get(positi ).getDr()
+            holder._source.setText(responsefiltered
+                    .get(getItemCountForSection(section-1)+position).getHStructure() + " , " + responsefiltered.get(getItemCountForSection(section-1)+position).getPlace());
+            if (responsefiltered.get(getItemCountForSection(section-1)+position).getStar()) {
+                holder._star.setVisibility(View.VISIBLE);
+            }
+            Glide.with(mContext).load(responsefiltered.get(getItemCountForSection(section-1)+position).getUrl())
+                    .override(75, 75).diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(holder._thumb);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Gson gson = new Gson();
+
+                    Intent intent = new Intent(mContext, DocumentDetails.class);
+                    intent.putExtra("DOC_REF", gson.toJson(responsefiltered.get(getItemCountForSection(section-1)+position)));
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    mContext.startActivity(intent);
+                }
+            });
+        }
     }
 
 
