@@ -12,8 +12,6 @@ public class DocInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doc_info);
-        String result=getIntent().getStringExtra("ocr");
-        EditText notes=findViewById(R.id.Notes);
-        if(result!=null){notes.setText(result);}
+
     }
 }

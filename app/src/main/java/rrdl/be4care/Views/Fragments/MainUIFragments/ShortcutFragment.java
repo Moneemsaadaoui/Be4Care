@@ -84,17 +84,9 @@ public class ShortcutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-     // prepareListData();
+
         View view= inflater.inflate(R.layout.fragment_shortcut, container, false);
-       /* expListView = (ExpandableListView) view.findViewById(R.id.expandable);
-        // preparing list data
-        prepareListData();
 
-        listAdapter = new ExpandableAdapter(getContext(), listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-        // Inflate the layout for this fragment*/
         return view;
     }
 
@@ -106,95 +98,7 @@ public class ShortcutFragment extends Fragment {
 
         Retrofit retrofit = builder.build();
         ApiService apiservice = retrofit.create(ApiService.class);
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
 
-        // Adding child data
-        listDataHeader.add("Documents");
-        listDataHeader.add("Medecins");
-        listDataHeader.add("Structure de santé");
-
-        // Adding child data
-      /*  Call<List<Document>>loaddocs=apiservice.load_documents(prefs.getString("AUTH",""));
-        loaddocs.enqueue(new Callback<List<Document>>() {
-            @Override
-            public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
-                List<String> top250 = new ArrayList<String>();
-                for(Document row:response.body())
-                {
-                    if(row.getStar()){
-                        top250.add(row.getDr().toString());
-                    }
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Document>> call, Throwable t) {
-
-            }
-        });
-
-       Call<List<Doctor>>getdocs=apiservice.getalldoctors(prefs.getString("AUTH",""));
-       getdocs.enqueue(new Callback<List<Doctor>>() {
-           @Override
-           public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
-               List<String> nowShowing = new ArrayList<String>();
-               Toast.makeText(getContext(), response.body().size() + "Second", Toast.LENGTH_SHORT).show();
-
-               for(Doctor row:response.body())
-               {
-                   if(row.getStar()){
-                       nowShowing.add(row.getFullName().toString());
-                   }
-               }
-
-
-           }
-
-           @Override
-           public void onFailure(Call<List<Doctor>> call, Throwable t) {
-
-           }
-       });
-
-      Call<List<Structure>>getstruck=apiservice.getalldstruck(prefs.getString("AUTH",""));
-      getstruck.enqueue(new Callback<List<Structure>>() {
-          @Override
-          public void onResponse(Call<List<Structure>> call, Response<List<Structure>> response) {
-              List<String> comingSoon = new ArrayList<String>();
-              for(Structure row:response.body())
-              {
-                  if(row.getStar()){
-                      comingSoon.add(row.getFullName().toString());
-                  }
-              }
-
-          }
-
-          @Override
-          public void onFailure(Call<List<Structure>> call, Throwable t) {
-
-          }
-      });*/
-        List<String> comingSoon = new ArrayList<String>();
-        List<String> nowShowing = new ArrayList<String>();
-        List<String> top250 = new ArrayList<String>();
-
-        top250.add("Ordenance");
-        top250.add("Visite medicale");
-        nowShowing.add("Dr quesnot");
-        nowShowing.add("Dr Mahmoudi");
-        nowShowing.add("Dr Saadaoui");
-        nowShowing.add("Dr Zaidoune");
-        nowShowing.add("Dr Baccouche");
-        comingSoon.add("Hopital Militaire tunis");
-        comingSoon.add("Hopital Sahloul");
-        comingSoon.add("Hopital Bouficha");
-
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

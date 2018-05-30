@@ -79,6 +79,8 @@ public class Repertoire extends Fragment {
         Button back = view.findViewById(R.id.back);
         RecyclerView recyclerView = view.findViewById(R.id.replist);
         ImageButton addbtn = view.findViewById(R.id.addbtnrep);
+        GetMyDoctors getMyDoctors=new GetMyDoctors(getContext(),recyclerView);
+        getMyDoctors.getDoctors();
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

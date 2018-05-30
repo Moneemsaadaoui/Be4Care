@@ -36,24 +36,22 @@ public class FirebaseUpload {
     private Context mContext;
     private ImageView imageView;
     private ProgressDialog mProgressDialog;
-    private JsonObject link=new JsonObject();
-    public FirebaseUpload(Context context, StorageReference ref, Bitmap bitmap, ImageView imageView,ProgressDialog dial) {
+    private JsonObject link = new JsonObject();
+
+    public FirebaseUpload(Context context, StorageReference ref, Bitmap bitmap, ImageView imageView, ProgressDialog dial) {
         mReference = ref;
-        mProgressDialog=dial;
+        mProgressDialog = dial;
         this.bitmap = bitmap;
         mContext = context;
         this.imageView = imageView;
     }
 
     public void upload() {
-        final SharedPreferences prefs=mContext.getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
+        final SharedPreferences prefs = mContext.getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
         byte[] compressedimage = baos.toByteArray();
-        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
-        final ApiService apiservice = retrofit.create(ApiService.class);
+
         StorageReference path = mReference.child("images/" + UUID.randomUUID().toString());
 
         path.putBytes(compressedimage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -63,19 +61,23 @@ public class FirebaseUpload {
                 final Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Toast.makeText(mContext, "Upload successful", Toast.LENGTH_SHORT).show();
                 Log.i("TAG", downloadUrl.toString());
-                    link.addProperty("url", downloadUrl.toString());
-                retrofit2.Call<JsonObject> analyse = apiservice.analyse(prefs.getString("AUTH",""),link);
+                link.addProperty("url", downloadUrl.toString());
+                Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
+                        .addConverterFactory(GsonConverterFactory.create());
+                Retrofit retrofit = builder.build();
+                ApiService apiservice = retrofit.create(ApiService.class);
+                retrofit2.Call<JsonObject> analyse = apiservice.analyse(prefs.getString("AUTH", ""), link);
                 analyse.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(retrofit2.Call<JsonObject> call, Response<JsonObject> response) {
                         Toast.makeText(mContext, response.body().toString() + " as result", Toast.LENGTH_SHORT).show();
-                        if (response.isSuccessful()){
-                            Intent intent=new Intent(mContext, DocInfoActivity.class);
-                            intent.putExtra("ocr",response.body().toString());
-                            intent.putExtra("url",downloadUrl.toString());
+                        if (response.isSuccessful()) {
+                            Intent intent = new Intent(mContext, DocInfoActivity.class);
+                            intent.putExtra("ocr", response.body().toString());
+                            intent.putExtra("url", downloadUrl.toString());
                             mContext.startActivity(intent);
-                        Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show(); }
-                        else{
+                            Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
+                        } else {
                             Toast.makeText(mContext, "error analysing", Toast.LENGTH_SHORT).show();
                         }
                     }

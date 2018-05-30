@@ -43,6 +43,12 @@ public interface ApiService {
     @GET("/api/users/me/doctors")
     Call<List<Doctor>> load_doctors(@Header("Authorization") String AuthToken);
 
+    @GET("/api/users/me/healthStructs")
+    Call<List<Structure>> load_my_struck(@Header("Authorization") String AuthToken);
+
+    @GET("/api/users/me/doctors")
+    Call<List<Doctor>> load_my_doctors(@Header("Authorization") String AuthToken);
+
     @GET("/api/users/me")
     Call<User> load_user(@Header("Authorization") String AuthToken);
 

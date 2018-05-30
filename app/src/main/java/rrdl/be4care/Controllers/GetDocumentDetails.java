@@ -41,7 +41,9 @@ public class GetDocumentDetails {
         type.setText(mDocument.getType());
         structs.setText(mDocument.getHStructure());
         lieu.setText(mDocument.getPlace());
-        note.setText(mDocument.getNote());
+        String notebuffer=mDocument.getNote().replaceAll("\\\n","")
+                .replaceAll("\\{","").replaceAll("\\}","").replaceAll("\\\r","");
+        note.setText(notebuffer);
 
 
     }
