@@ -16,6 +16,7 @@ import com.truizlop.sectionedrecyclerview.SimpleSectionedAdapter;
 
 import java.util.List;
 
+import rrdl.be4care.Controllers.AddDoctor;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
@@ -63,12 +64,7 @@ public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireList
             holder.star.setVisibility(View.VISIBLE);
         }
         holder.name.setText(mDoctorList.get(position).getFullName());
-        holder.add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,12 +81,7 @@ public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireList
             holder.star.setVisibility(View.VISIBLE);
         }
         holder.name.setText(mStructureList.get(position).getFullName());
-        holder.add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +99,7 @@ public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireList
             super(itemView);
             star=itemView.findViewById(R.id.fav);
             name=itemView.findViewById(R.id.doclistTitle);
-            add=itemView.findViewById(R.id.add);
+
         }
     }
 }

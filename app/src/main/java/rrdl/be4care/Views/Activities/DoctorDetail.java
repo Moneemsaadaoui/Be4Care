@@ -3,6 +3,7 @@ package rrdl.be4care.Views.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -39,6 +40,19 @@ public class DoctorDetail extends AppCompatActivity {
         ImageButton more = findViewById(R.id.morebutton);
         ImageButton dial = findViewById(R.id.tophone);
         Button retour=findViewById(R.id.goback);
+        ImageButton map=findViewById(R.id.map);
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              if(address.getText().equals("") ||address.getText().equals(null)){
+                  Toast.makeText(DoctorDetail.this, "Adresse non disponible", Toast.LENGTH_SHORT).show();
+              }else{
+                Intent mapIntent=new Intent(DoctorDetail.this,MapActivity.class);
+                mapIntent.putExtra("ADR",address.getText());
+                startActivity(mapIntent);
+            }
+            }
+        });
         retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

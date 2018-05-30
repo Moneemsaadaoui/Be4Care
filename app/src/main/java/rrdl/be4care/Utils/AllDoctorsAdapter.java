@@ -56,7 +56,7 @@ implements Filterable{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.repertoire_item, parent, false);
+                .inflate(R.layout.repertoire_item_addable, parent, false);
         return new AllDoctorsAdapter.ViewHolder(itemView);
     }
 
@@ -121,15 +121,15 @@ implements Filterable{
 
         Retrofit retrofit = builder.build();
         ApiService apiservice = retrofit.create(ApiService.class);
-        Call<JsonObject>adddoctor=apiservice.adddoctor(prefs.getString("AUTH",""),doc);
-        adddoctor.enqueue(new Callback<JsonObject>() {
+        Call<Doctor>adddoctor=apiservice.adddoctor(prefs.getString("AUTH",""),doc);
+        adddoctor.enqueue(new Callback<Doctor>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(Call<Doctor> call, Response<Doctor> response) {
                 Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<Doctor> call, Throwable t) {
 
             }
         });

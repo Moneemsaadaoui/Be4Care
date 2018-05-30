@@ -34,7 +34,10 @@ public interface ApiService {
     Call<JsonObject> analyse( @Header("Authorization") String AuthToken,@Body JsonObject jsonObject);
 
     @POST("/api/users/me/doctors")
-    Call<JsonObject>adddoctor( @Header("Authorization") String AuthToken,@Body Doctor doc);
+    Call<Doctor>adddoctor( @Header("Authorization") String AuthToken,@Body Doctor doc);
+
+    @POST("/api/users/me/healthStructs")
+    Call<JsonObject> addStruck(@Header("Authorization") String AuthToken, @Body Structure doc);
 
     //GET METHODS
     @GET("/api/users/me/documents")
