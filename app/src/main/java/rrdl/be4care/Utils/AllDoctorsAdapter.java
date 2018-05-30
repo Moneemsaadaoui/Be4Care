@@ -67,7 +67,6 @@ implements Filterable{
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JsonObject jsonObject=new JsonObject();
             adddoc(mDoctorsfiltered.get(position));
             }
         });
@@ -125,7 +124,9 @@ implements Filterable{
         adddoctor.enqueue(new Callback<Doctor>() {
             @Override
             public void onResponse(Call<Doctor> call, Response<Doctor> response) {
-                Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
+            if(response.isSuccessful()){
+                Toast.makeText(mContext, "Success adding doc", Toast.LENGTH_SHORT).show();
+            }
             }
 
             @Override
