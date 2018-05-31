@@ -11,6 +11,7 @@ import java.util.List;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Structure;
+import rrdl.be4care.Models.User;
 
 @Dao
 public interface RoomDAO {
@@ -22,6 +23,9 @@ public interface RoomDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertStruck(List<Structure> structureList);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertUser(User user);
 
     /*  @Update
       void updatedocuments(List<Document> documents);
@@ -49,5 +53,11 @@ public interface RoomDAO {
 
     @Query("DELETE FROM Structure")
     public void nukeStruck();
+
+    @Query("SELECT * FROM User")
+    User getuser();
+
+    @Query("DELETE FROM Structure")
+    public void nukeUser();
 
 }

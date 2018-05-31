@@ -1,13 +1,20 @@
 package rrdl.be4care.Models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-
+@Entity
 public class User  {
     @SerializedName("name")
     @Expose
+    @PrimaryKey
+    @NonNull
     private String name;
     @SerializedName("lastName")
     @Expose
@@ -26,6 +33,8 @@ public class User  {
     private String pUrl;
     @SerializedName("realm")
     @Expose
+    @Ignore
+
     private String realm;
     @SerializedName("username")
     @Expose
@@ -38,9 +47,12 @@ public class User  {
     private Boolean emailVerified;
     @SerializedName("Mydoctor")
     @Expose
+    @Ignore
+
     private List<Doctor> mydoctor = null;
     @SerializedName("MhealthStruck")
     @Expose
+    @Ignore
     private List<Structure> mhealthStruck = null;
 
     public String getName() {

@@ -14,6 +14,7 @@ import rrdl.be4care.R;
 public class PersonalProfileListAdapter extends BaseAdapter {
     private Context mContext;
     private User user;
+
     String[] titles = {"Identifiant", "Nom", "Prénom", "Numero Telephone", "Date de naissance"};
     String[] data = {"Identifiant", "Nom", "Prénom", "Numero Telephone", "Date de naissance", "Sexe"};
     public PersonalProfileListAdapter(Context context, User user) {

@@ -41,7 +41,7 @@ public class DocumentsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private int SORTCODE;
     private OnFragmentInteractionListener mListener;
 
     public DocumentsFragment() {
@@ -112,7 +112,6 @@ public class DocumentsFragment extends Fragment {
         sort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 final Dialog dialog = new Dialog(getContext(), R.style.NewDialog);
                 listAdapter = loadDocuments.getDocadapter();
                 dialog.requestWindowFeature(getActivity().getWindow().FEATURE_NO_TITLE);
@@ -120,49 +119,56 @@ public class DocumentsFragment extends Fragment {
                 dialog.setContentView(R.layout.popupsort);
                 dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
                 dialog.show();
+                Button docsort = dialog.findViewById(R.id.docsort);
+                Button strucksort = dialog.findViewById(R.id.strucksort);
+                Button typesort = dialog.findViewById(R.id.typesort);
                 Button sortDate = dialog.findViewById(R.id.datesort);
+                colorize(sortDate, docsort, typesort, strucksort, SORTCODE);
+
                 sortDate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         listAdapter = loadDocuments.getDocadapter();
-
                         listAdapter.SortBydate();
+                        sort.setText("Tri Par Date");
+                        SORTCODE=0;
                         dialog.dismiss();
 
                     }
                 });
 
-                Button docsort = dialog.findViewById(R.id.docsort);
                 docsort.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         listAdapter = loadDocuments.getDocadapter();
-
+                        sort.setText("Tri Par Docteur");
                         listAdapter.Sortbyname();
+                        SORTCODE=1;
                         dialog.dismiss();
                     }
                 });
-                Button strucksort = dialog.findViewById(R.id.strucksort);
                 strucksort.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         listAdapter = loadDocuments.getDocadapter();
-
+                        sort.setText("Tri Par Structure de Santé");
                         listAdapter.SortByHstruck();
+                        SORTCODE=3;
                         dialog.dismiss();
 
                     }
                 });
-                Button typesort = dialog.findViewById(R.id.typesort);
                 typesort.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         listAdapter = loadDocuments.getDocadapter();
-
+                        sort.setText("Tri Par Type");
                         listAdapter.SortBytype();
+                        SORTCODE=2;
                         dialog.dismiss();
                     }
                 });
+
             }
         });
 
@@ -191,6 +197,28 @@ public class DocumentsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void colorize(Button date, Button doc, Button type, Button Struck, int pos) {
+        date.setTextColor(Color.BLACK);
+        doc.setTextColor(Color.BLACK);
+        type.setTextColor(Color.BLACK);
+        Struck.setTextColor(Color.BLACK);
+        switch (pos) {
+            case 0:
+                date.setTextColor(Color.RED);
+                break;
+            case 1:
+                doc.setTextColor(Color.RED);
+                break;
+            case 2:
+                type.setTextColor(Color.RED);
+                break;
+            case 3:
+                Struck.setTextColor(Color.RED);
+                break;
+        }
+
     }
 
     /**

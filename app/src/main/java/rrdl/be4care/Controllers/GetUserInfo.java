@@ -17,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.User;
 import rrdl.be4care.Utils.ApiService;
 import rrdl.be4care.Utils.PersonalProfileListAdapter;
+import rrdl.be4care.Utils.RoomDB;
 import rrdl.be4care.Utils.RoundedImageView;
 
 public class GetUserInfo {
@@ -25,14 +26,22 @@ public class GetUserInfo {
     private String Token;
     private SharedPreferences prefs;
     private RoundedImageView mRoundedImageView;
+    private RoomDB db;
+
     public GetUserInfo(Context context, ListView list, String token, RoundedImageView roundedImageView){
         Token=token;
         mContext=context;
         mRoundedImageView=roundedImageView;
         mListView=list;
         prefs=context.getSharedPreferences("AUTH",Context.MODE_PRIVATE);
+        db=RoomDB.getINSTANCE(mContext);
     }
     public void getUser() {
+        User user=db.Dao().getuser();
+        if(user!=null && !user.getEmail().equals("")) {
+            PersonalProfileListAdapter personalProfileListAdapter=new PersonalProfileListAdapter(mContext,user);
+            mListView.setAdapter(personalProfileListAdapter);
+        }
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();

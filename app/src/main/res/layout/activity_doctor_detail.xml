@@ -114,7 +114,7 @@
                     android:layout_margin="5dp"
                     android:text="Adresse" />
 
-                <TextView
+                <EditText
                     android:id="@+id/adress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -124,13 +124,6 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <View
-                    android:id="@+id/view9"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_margin="5dp"
-                    android:background="#b1b1b1" />
-
                 <TextView
                     android:id="@+id/title8"
                     android:layout_width="match_parent"
@@ -138,7 +131,7 @@
                     android:layout_margin="5dp"
                     android:text="Numéro de telephone" />
 
-                <TextView
+                <EditText
                     android:id="@+id/numtel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -148,13 +141,6 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <View
-                    android:id="@+id/view10"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_margin="5dp"
-                    android:background="#b1b1b1" />
-
                 <TextView
                     android:id="@+id/title9"
                     android:layout_width="match_parent"
@@ -162,7 +148,7 @@
                     android:layout_margin="5dp"
                     android:text="Adresse Email" />
 
-                <TextView
+                <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -172,13 +158,6 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <View
-                    android:id="@+id/view14"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_margin="5dp"
-                    android:background="#b1b1b1" />
-
                 <TextView
                     android:id="@+id/title10"
                     android:layout_width="match_parent"
@@ -186,7 +165,7 @@
                     android:layout_margin="5dp"
                     android:text="Structure de santé" />
 
-                <TextView
+                <EditText
                     android:id="@+id/hstruct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
