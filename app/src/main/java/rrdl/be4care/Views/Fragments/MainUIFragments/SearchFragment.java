@@ -105,7 +105,7 @@ public class SearchFragment extends Fragment {
         SearchView search=view.findViewById(R.id.search);
         RecyclerView rv=view.findViewById(R.id.recyclersearch);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        search.setIconifiedByDefault(false);
         CollapsingToolbarLayout collapsingToolbarLayout;
         android.support.v7.widget.Toolbar toolbar = view.findViewById(R.id.toolbar1);
         collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);

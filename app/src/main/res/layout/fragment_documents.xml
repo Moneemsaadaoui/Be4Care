@@ -64,7 +64,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:paddingBottom="70dp">
+                    android:paddingBottom="70dp"
+                    android:paddingEnd="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingStart="20dp"
+                    android:paddingTop="20dp">
 
                 </android.support.v7.widget.RecyclerView>
 
