@@ -53,7 +53,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Views.Activities.DocInfoActivity" />
-        <activity android:name=".Views.Activities.MapActivity"></activity>
+        <activity android:name=".Views.Activities.MapActivity" />
+        <activity android:name=".Views.Activities.StruckDetailActivity"></activity>
     </application>
 
 </manifest>

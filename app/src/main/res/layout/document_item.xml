@@ -13,76 +13,95 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/star"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/star" />
-
-            <ImageView
-                android:id="@+id/documentthumb"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="5dp" />
+            <Space
+                android:visibility="gone"
+                android:id="@+id/toppad"
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/star"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/star" />
+
+                <Space
+                    android:id="@+id/pad"
+                    android:layout_width="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:orientation="vertical">
+                    android:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/documentthumb"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="03/03/2018"
-                        android:textColor="@color/textHue" />
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/type"
-                        android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="03/03/2018"
+                            android:textColor="@color/textHue" />
+
+                        <TextView
+                            android:id="@+id/type"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="2dp"
+                            android:text="Ordennance."
+                            android:textColor="@color/textHue"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/source"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Dr Quintin tarantino  RRDL"
+                            android:textColor="@color/textHue" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="2dp"
-                        android:text="Ordennance."
-                        android:textColor="@color/textHue"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/source"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:text="Dr Quintin tarantino  RRDL"
-                        android:textColor="@color/textHue" />
+                        android:layout_gravity="right"
+                        app:srcCompat="@drawable/ic_chevron_right_black_24dp"
+                        tools:ignore="VectorDrawableCompat" />
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    app:srcCompat="@drawable/ic_chevron_right_black_24dp"
-                    tools:ignore="VectorDrawableCompat" />
-
             </LinearLayout>
-
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
 
 </LinearLayout>

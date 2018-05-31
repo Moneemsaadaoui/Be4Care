@@ -19,6 +19,7 @@ import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
 import rrdl.be4care.Views.Activities.DoctorDetail;
+import rrdl.be4care.Views.Activities.StruckDetailActivity;
 
 public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireListAdapter.ViewHolder> {
     private List<Doctor>mDoctorList;
@@ -76,8 +77,16 @@ public class RepertoireListAdapter extends SimpleSectionedAdapter<RepertoireList
         }
         holder.name.setText(mStructureList.get(position).getFullName());
 
-        holder.itemView.setOnClickListener(view -> {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Gson gson = new Gson();
 
+                Intent intent = new Intent(mContext, StruckDetailActivity.class);
+                intent.putExtra("STRREF", gson.toJson(mStructureList.get(position)));
+                // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                mContext.startActivity(intent);
+            }
         });
     }
     }

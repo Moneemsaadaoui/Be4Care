@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,13 +26,14 @@ import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
 import rrdl.be4care.Views.Activities.DoctorDetail;
 import rrdl.be4care.Views.Activities.DocumentDetails;
+import rrdl.be4care.Views.Activities.StruckDetailActivity;
 
 public class ShortcutAdapter extends SimpleSectionedAdapter<ShortcutAdapter.ViewHolder> {
     private List<Document> mDocuments=new ArrayList<Document>();
     private List<Doctor> mDoctorList=new ArrayList<Doctor>();
     private List<Structure> mStructureList=new ArrayList<Structure>();
     private Context mContext;
-
+    private Space pad;
     public ShortcutAdapter(Context context,List<Document> docs, List<Doctor> doctors, List<Structure> struck) {
         mContext=context;
         for (Document doc : docs) {
@@ -120,6 +122,8 @@ public class ShortcutAdapter extends SimpleSectionedAdapter<ShortcutAdapter.View
             });
 
         } else if (section == 1) {
+            holder.toppad.setVisibility(View.VISIBLE);
+            holder.pad.setVisibility(View.VISIBLE);
             holder._date.setVisibility(View.GONE);
             holder._thumb.setVisibility(View.GONE);
             holder._source.setVisibility(View.GONE);
@@ -137,20 +141,35 @@ public class ShortcutAdapter extends SimpleSectionedAdapter<ShortcutAdapter.View
                 }
             });
         } else if (section == 2) {
+            holder.pad.setVisibility(View.VISIBLE);
+            holder.toppad.setVisibility(View.VISIBLE);
             holder._star.setVisibility(View.VISIBLE);
             holder._date.setVisibility(View.GONE);
             holder._thumb.setVisibility(View.GONE);
             holder._source.setVisibility(View.GONE);
             holder._type.setText(mStructureList.get(position).getFullName());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Gson gson = new Gson();
+
+                    Intent intent = new Intent(mContext, StruckDetailActivity.class);
+                    intent.putExtra("STRREF", gson.toJson(mStructureList.get(position)));
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView _date, _type, _source;
         private ImageView _thumb, _star;
-
+        private Space pad,toppad;
         public ViewHolder(final View itemView) {
             super(itemView);
+            toppad=itemView.findViewById(R.id.toppad);
+            pad=itemView.findViewById(R.id.pad);
             _date = itemView.findViewById(R.id.date);
             _type = itemView.findViewById(R.id.type);
             _source = itemView.findViewById(R.id.source);
