@@ -1,15 +1,18 @@
 package rrdl.be4care.Utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
 import com.truizlop.sectionedrecyclerview.SimpleSectionedAdapter;
 
 import java.sql.Struct;
@@ -20,6 +23,8 @@ import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
+import rrdl.be4care.Views.Activities.DoctorDetail;
+import rrdl.be4care.Views.Activities.DocumentDetails;
 
 public class ShortcutAdapter extends SimpleSectionedAdapter<ShortcutAdapter.ViewHolder> {
     private List<Document> mDocuments=new ArrayList<Document>();
@@ -44,6 +49,7 @@ public class ShortcutAdapter extends SimpleSectionedAdapter<ShortcutAdapter.View
                 mStructureList.add(struc);
             }
         }
+        Toast.makeText(context, "mDoc size"+mDocuments.size(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -101,6 +107,17 @@ public class ShortcutAdapter extends SimpleSectionedAdapter<ShortcutAdapter.View
             if (mDocuments.get(position).getStar()) {
                 holder._star.setVisibility(View.VISIBLE);
             }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Gson gson = new Gson();
+
+                    Intent intent = new Intent(mContext, DocumentDetails.class);
+                    intent.putExtra("DOC_REF", gson.toJson(mDocuments.get(position)));
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    mContext.startActivity(intent);
+                }
+            });
 
         } else if (section == 1) {
             holder._date.setVisibility(View.GONE);
@@ -108,6 +125,17 @@ public class ShortcutAdapter extends SimpleSectionedAdapter<ShortcutAdapter.View
             holder._source.setVisibility(View.GONE);
             holder._star.setVisibility(View.VISIBLE);
             holder._type.setText(mDoctorList.get(position).getFullName());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Gson gson = new Gson();
+
+                    Intent intent = new Intent(mContext, DoctorDetail.class);
+                    intent.putExtra("REF", gson.toJson(mDoctorList.get(position)));
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    mContext.startActivity(intent);
+                }
+            });
         } else if (section == 2) {
             holder._star.setVisibility(View.VISIBLE);
             holder._date.setVisibility(View.GONE);

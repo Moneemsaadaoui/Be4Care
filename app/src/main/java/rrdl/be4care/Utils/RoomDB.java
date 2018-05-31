@@ -5,9 +5,11 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
+import rrdl.be4care.Models.Structure;
 
-@Database(entities = {Document.class}, version = 1, exportSchema = false)
+@Database(entities = {Document.class, Doctor.class, Structure.class}, version = 2, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
 
     private static RoomDB INSTANCE;
@@ -18,7 +20,7 @@ public abstract class RoomDB extends RoomDatabase {
         if (INSTANCE == null) {
             INSTANCE =
                     Room.databaseBuilder(context.getApplicationContext(), RoomDB.class, "Document")
-                            .allowMainThreadQueries().build();
+                            .fallbackToDestructiveMigration().allowMainThreadQueries().build();
 
         }
         return INSTANCE;

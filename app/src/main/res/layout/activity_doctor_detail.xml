@@ -195,6 +195,17 @@
                     android:textColor="@color/textHue"
                     android:textSize="24sp"
                     android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/validation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:background="@drawable/gradientrounded"
+                    android:text="Valider"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 

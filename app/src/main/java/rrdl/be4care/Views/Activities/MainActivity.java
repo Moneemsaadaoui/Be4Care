@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import org.w3c.dom.DocumentFragment;
+
 import rrdl.be4care.R;
 import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
@@ -49,25 +51,29 @@ public class MainActivity extends AppCompatActivity implements DoctorListingFrag
 
         BottomBar mBottomBar;
         mBottomBar = findViewById(R.id.bottomBar);
+        DocumentsFragment docfrag=new DocumentsFragment();
+        SearchFragment searchFragment=new SearchFragment();
+        ShortcutFragment shortcutFragment=new ShortcutFragment();
+        ProfileFragment profileFragment=new ProfileFragment();
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(int tabId) {
                 switch (tabId) {
                     case R.id.tab_document:
-                        fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
+                        fm.beginTransaction().replace(R.id.MainContainer, docfrag).commit();
                         break;
                     case R.id.tab_search:
-                        fm.beginTransaction().replace(R.id.MainContainer, new SearchFragment()).commit();
+                        fm.beginTransaction().replace(R.id.MainContainer, searchFragment).commit();
                         break;
                     case R.id.tab_add:
                         Intent intent = new Intent(MainActivity.this, AddDocumentActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.tab_shortcut:
-                        fm.beginTransaction().replace(R.id.MainContainer, new ShortcutFragment()).commit();
+                        fm.beginTransaction().replace(R.id.MainContainer, shortcutFragment).commit();
                         break;
                     case R.id.tab_profile:
-                        fm.beginTransaction().replace(R.id.MainContainer, new ProfileFragment()).commit();
+                        fm.beginTransaction().replace(R.id.MainContainer, profileFragment).commit();
                         break;
                 }
             }

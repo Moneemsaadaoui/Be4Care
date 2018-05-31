@@ -15,6 +15,7 @@ import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.Utils.ApiService;
+import rrdl.be4care.Utils.RoomDB;
 import rrdl.be4care.Utils.ShortcutAdapter;
 
 public class Getshortcuts {
@@ -29,6 +30,19 @@ public class Getshortcuts {
     }
 
     public void get() {
+        RoomDB db= RoomDB.getINSTANCE(mContext);
+        List<Doctor> cacheddocs=db.Dao().getdoctors();
+
+        mDoctorList=db.Dao().getdoctors();
+        mDocuments=db.Dao().getdocu();
+        mStructureList=db.Dao().getStruck();
+
+        if(mDocuments!=null && mDoctorList!=null && mStructureList!=null && mDoctorList.size()>0
+                && mDocuments.size()>0 && mStructureList.size()>0)
+        {
+            ShortcutAdapter shortcutAdapter=new ShortcutAdapter(mContext,mDocuments,mDoctorList,mStructureList);
+            rv.setAdapter(shortcutAdapter);
+        }
         SharedPreferences prefs = mContext.getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://peaceful-forest-76384.herokuapp.com/")
@@ -41,37 +55,57 @@ public class Getshortcuts {
             @Override
             public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                 mDocuments = response.body();
+                if(response.isSuccessful())db.Dao().insertdocuments(response.body());
                 Call<List<Doctor>> getdoctors = apiservice.load_my_doctors(prefs.getString("AUTH", ""));
                 getdoctors.enqueue(new Callback<List<Doctor>>() {
                     @Override
                     public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
                         mDoctorList = response.body();
+
+                      if(response.isSuccessful())db.Dao().insertDoctors(response.body());
+
                         Call<List<Structure>> getstruck = apiservice.load_my_struck(prefs.getString("AUTH", ""));
                         getstruck.enqueue(new Callback<List<Structure>>() {
                             @Override
                             public void onResponse(Call<List<Structure>> call, Response<List<Structure>> response) {
                                 mStructureList=response.body();
+                                if(response.isSuccessful()) db.Dao().insertStruck(response.body());
                                 ShortcutAdapter shortcutAdapter=new ShortcutAdapter(mContext,mDocuments,mDoctorList,mStructureList);
                                 rv.setAdapter(shortcutAdapter);
                             }
 
                             @Override
                             public void onFailure(Call<List<Structure>> call, Throwable t) {
-
+                                if(mDocuments!=null && mDoctorList!=null && mStructureList!=null && mDoctorList.size()>0
+                                        && mDocuments.size()>0 && mStructureList.size()>0)
+                                {
+                                    ShortcutAdapter shortcutAdapter=new ShortcutAdapter(mContext,mDocuments,mDoctorList,mStructureList);
+                                    rv.setAdapter(shortcutAdapter);
+                                }
                             }
                         });
                     }
 
                     @Override
                     public void onFailure(Call<List<Doctor>> call, Throwable t) {
-
+                        if(mDocuments!=null && mDoctorList!=null && mStructureList!=null && mDoctorList.size()>0
+                                && mDocuments.size()>0 && mStructureList.size()>0)
+                        {
+                            ShortcutAdapter shortcutAdapter=new ShortcutAdapter(mContext,mDocuments,mDoctorList,mStructureList);
+                            rv.setAdapter(shortcutAdapter);
+                        }
                     }
                 });
             }
 
             @Override
             public void onFailure(Call<List<Document>> call, Throwable t) {
-
+                if(mDocuments!=null && mDoctorList!=null && mStructureList!=null && mDoctorList.size()>0
+                        && mDocuments.size()>0 && mStructureList.size()>0)
+                {
+                    ShortcutAdapter shortcutAdapter=new ShortcutAdapter(mContext,mDocuments,mDoctorList,mStructureList);
+                    rv.setAdapter(shortcutAdapter);
+                }
             }
         });
     }

@@ -16,6 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Utils.ApiService;
 import rrdl.be4care.Utils.ListAdapter;
+import rrdl.be4care.Utils.RoomDB;
+import rrdl.be4care.Utils.SectionedRV;
 
 public class SearchDocument {
     private Context mContext;
@@ -29,6 +31,14 @@ public class SearchDocument {
     }
 
     public  void Load_Docs() {
+        RoomDB db= RoomDB.getINSTANCE(mContext);
+
+        List<Document> cacheddocs=db.Dao().getdocu();
+
+        if(cacheddocs!=null && cacheddocs.size()!=0) {
+            SectionedRV cacheload = new SectionedRV(mContext, cacheddocs);
+            mRecyclerView.setAdapter(cacheload);
+        }
         SharedPreferences prefs=mContext.getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
         TOKEN=prefs.getString("AUTH","");
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
@@ -66,7 +76,10 @@ public class SearchDocument {
             @Override
             public void onFailure(Call<List<Document>> call, Throwable t) {
                 Toast.makeText(mContext,"Erreur", Toast.LENGTH_SHORT).show();
-
+                if(cacheddocs!=null && cacheddocs.size()!=0) {
+                    ListAdapter cacheload = new ListAdapter(mContext, cacheddocs,sv);
+                    mRecyclerView.setAdapter(cacheload);
+                }
             }
         });
 

@@ -30,6 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.User;
 import rrdl.be4care.Utils.ApiService;
 import rrdl.be4care.Utils.FillPersonalInfo;
+import rrdl.be4care.Utils.RoomDB;
 import rrdl.be4care.Utils.RoundedImageView;
 
 import rrdl.be4care.R;
@@ -147,6 +148,10 @@ public class PersonalProfileFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
+                        RoomDB db= RoomDB.getINSTANCE(getContext());
+                        db.Dao().nukeDoctor();
+                        db.Dao().nukeDocument();
+                        db.Dao().nukeStruck();
                         prefs.edit().putString("AUTH","").commit();
                         Intent intent=new Intent(getContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

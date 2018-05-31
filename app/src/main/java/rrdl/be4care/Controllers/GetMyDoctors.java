@@ -16,10 +16,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Doctor;
+import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.Utils.ApiService;
 import rrdl.be4care.Utils.RepertoireAdapter;
 import rrdl.be4care.Utils.RepertoireListAdapter;
+import rrdl.be4care.Utils.RoomDB;
+import rrdl.be4care.Utils.SectionedRV;
 
 public class GetMyDoctors {
     private Context mContext;
@@ -34,6 +37,14 @@ public class GetMyDoctors {
         prefs=context.getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
     }
     public void getDoctors() {
+        RoomDB db= RoomDB.getINSTANCE(mContext);
+
+        List<Doctor> cacheddocs=db.Dao().getdoctors();
+/*
+        if(cacheddocs!=null) {
+            SectionedRV cacheload = new SectionedRV(mContext, cacheddocs);
+            mRecyclerView.setAdapter(cacheload);
+        }*/
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();

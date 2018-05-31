@@ -67,7 +67,7 @@ public class LoadDocuments {
         }*/
         List<Document> cacheddocs=db.Dao().getdocu();
 
-        if(cacheddocs!=null) {
+        if(cacheddocs!=null && cacheddocs.size()>0) {
             SectionedRV cacheload = new SectionedRV(mContext, cacheddocs);
             mRecyclerView.setAdapter(cacheload);
         }
@@ -82,8 +82,9 @@ public class LoadDocuments {
             @Override
             public void onResponse
                     (Call<List<Document>> call, Response<List<Document>> response) {
-                 db.Dao().insertdocuments(response.body());
-
+              //
+                // db.Dao().insertdocuments(response.body());
+                if(response.isSuccessful())db.Dao().insertdocuments(response.body());
                 la=new SectionedRV(mContext,response.body());
 
                 mRecyclerView.setAdapter(la);
@@ -100,12 +101,16 @@ public class LoadDocuments {
             @Override
             public void onFailure(Call<List<Document>> call, Throwable t) {
                 Toast.makeText(mContext, "Erreur", Toast.LENGTH_SHORT).show();
+                if(cacheddocs!=null && cacheddocs.size()>0) {
+                    SectionedRV cacheload = new SectionedRV(mContext, cacheddocs);
+                    mRecyclerView.setAdapter(cacheload);
+                }
             }
         });
 
     }
 
     public SectionedRV getDocadapter() {
-        return la;
+        return (SectionedRV) mRecyclerView.getAdapter();
     }
 }

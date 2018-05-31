@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
@@ -17,8 +18,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Login;
 import rrdl.be4care.Utils.ApiService;
+import rrdl.be4care.Utils.RoomDB;
 import rrdl.be4care.Views.Activities.MainActivity;
 
 public class Auth {
@@ -37,6 +40,7 @@ public class Auth {
 
     public void Login(final CircularProgressButton button, EditText email, EditText password) {
         final SharedPreferences prefs = mContext.getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+        RoomDB db= RoomDB.getINSTANCE(mContext);
 
         user.addProperty("username", email.getText().toString().trim());
         user.addProperty("password", password.getText().toString().trim());
