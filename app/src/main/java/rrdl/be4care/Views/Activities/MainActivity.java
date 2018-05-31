@@ -17,6 +17,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import org.w3c.dom.DocumentFragment;
 
+import es.dmoral.toasty.Toasty;
 import rrdl.be4care.R;
 import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements DoctorListingFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Toasty.info(this,"YOU ARE OFFLINE").show();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

@@ -198,6 +198,7 @@ public class PersonalProfileFragment extends Fragment {
         // ListView profile_list = view.findViewById(R.id.ProfileElements);
        /* GetUserInfo userservice = new GetUserInfo(getContext(), profile_list, prefs.getString("TOKEN", "ERROR"));
         userservice.getUser();*/
+
         Validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
