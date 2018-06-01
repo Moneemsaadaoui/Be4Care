@@ -225,6 +225,8 @@ public class PersonalProfileFragment extends Fragment {
                 _user.addProperty("lastName", lastname.getText().toString());
                 _user.addProperty("phNumber", numtel.getText().toString());
                 _user.addProperty("bDate", birth.getText().toString());
+                if(sex.getText().toString().toLowerCase().equals("homme")){_user.addProperty("sex",true);}
+                else if(sex.getText().toString().toLowerCase().equals("femme")){_user.addProperty("sex",false);}
                 final Call<User> update = apiservice.updateuser(prefs.getString("AUTH", ""), _user);
                 update.enqueue(new Callback<User>() {
                     @Override
@@ -248,6 +250,8 @@ public class PersonalProfileFragment extends Fragment {
             }
         });
         // Inflate the layout for this fragment
+
+
         return view;
     }
 

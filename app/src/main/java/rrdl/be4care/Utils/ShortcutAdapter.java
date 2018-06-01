@@ -51,7 +51,6 @@ public class ShortcutAdapter extends SimpleSectionedAdapter<ShortcutAdapter.View
                 mStructureList.add(struc);
             }
         }
-        Toast.makeText(context, "mDoc size"+mDocuments.size(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

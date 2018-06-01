@@ -100,7 +100,6 @@ public class LoadDocuments {
 
             @Override
             public void onFailure(Call<List<Document>> call, Throwable t) {
-                Toast.makeText(mContext, "Erreur", Toast.LENGTH_SHORT).show();
                 if(cacheddocs!=null && cacheddocs.size()>0) {
                     SectionedRV cacheload = new SectionedRV(mContext, cacheddocs);
                     mRecyclerView.setAdapter(cacheload);

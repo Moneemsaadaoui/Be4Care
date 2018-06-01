@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/drname"
-            android:layout_width="wrap_content"
+            android:layout_width="316dp"
             android:layout_height="wrap_content"
             android:padding="20dp"
             android:text="Dr Maw"
@@ -33,12 +33,11 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/favicon"
+            android:id="@+id/favicondocu"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
             android:background="@android:color/transparent"
-            android:visibility="invisible"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/star" />
     </LinearLayout>
@@ -46,7 +45,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp">
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,6 +56,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:text="Votre document scané" />
 
             <ImageView

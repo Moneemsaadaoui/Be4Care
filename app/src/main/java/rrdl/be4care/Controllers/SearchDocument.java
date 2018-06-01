@@ -36,7 +36,7 @@ public class SearchDocument {
         List<Document> cacheddocs=db.Dao().getdocu();
 
         if(cacheddocs!=null && cacheddocs.size()!=0) {
-            SectionedRV cacheload = new SectionedRV(mContext, cacheddocs);
+            ListAdapter cacheload = new ListAdapter(mContext, cacheddocs,sv);
             mRecyclerView.setAdapter(cacheload);
         }
         SharedPreferences prefs=mContext.getSharedPreferences("GLOBAL",Context.MODE_PRIVATE);
@@ -50,7 +50,6 @@ public class SearchDocument {
             @Override
             public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                 final ListAdapter la=new ListAdapter(mContext,response.body(),sv);
-                Toast.makeText(mContext, response.body().size()+" siize", Toast.LENGTH_SHORT).show();
                 sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String s) {
@@ -66,16 +65,10 @@ public class SearchDocument {
                 mRecyclerView.setAdapter(la);
 
 
-                /*
-              List<Document>doc_list=new ArrayList<Document>();
-              doc_list=response.body();
-              mCallback.getDocument(doc_list);
-                Toast.makeText(mContext,""+ doc_list.size(), Toast.LENGTH_SHORT).show();*/
             }
 
             @Override
             public void onFailure(Call<List<Document>> call, Throwable t) {
-                Toast.makeText(mContext,"Erreur", Toast.LENGTH_SHORT).show();
                 if(cacheddocs!=null && cacheddocs.size()!=0) {
                     ListAdapter cacheload = new ListAdapter(mContext, cacheddocs,sv);
                     mRecyclerView.setAdapter(cacheload);

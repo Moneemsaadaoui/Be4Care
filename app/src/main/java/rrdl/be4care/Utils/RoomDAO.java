@@ -45,7 +45,7 @@ public interface RoomDAO {
     @Query("SELECT * FROM Doctor")
     List<Doctor> getdoctors();
 
-    @Query("DELETE FROM Doctor")
+    @Query("DELETE  FROM Doctor")
     public void nukeDoctor();
 
     @Query("DELETE FROM Document")

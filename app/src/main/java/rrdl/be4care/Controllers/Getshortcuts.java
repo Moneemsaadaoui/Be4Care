@@ -55,21 +55,32 @@ public class Getshortcuts {
             @Override
             public void onResponse(Call<List<Document>> call, Response<List<Document>> response) {
                 mDocuments = response.body();
-                if(response.isSuccessful())db.Dao().insertdocuments(response.body());
+                if(response.isSuccessful()){
+                    db.Dao().nukeDocument();
+                    db.Dao().insertdocuments(response.body());
+
+                }
                 Call<List<Doctor>> getdoctors = apiservice.load_my_doctors(prefs.getString("AUTH", ""));
                 getdoctors.enqueue(new Callback<List<Doctor>>() {
                     @Override
                     public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
                         mDoctorList = response.body();
 
-                      if(response.isSuccessful())db.Dao().insertDoctors(response.body());
+                      if(response.isSuccessful()) {
 
+                          db.Dao().nukeDoctor();
+                          db.Dao().insertDoctors(response.body());
+                      }
                         Call<List<Structure>> getstruck = apiservice.load_my_struck(prefs.getString("AUTH", ""));
                         getstruck.enqueue(new Callback<List<Structure>>() {
                             @Override
                             public void onResponse(Call<List<Structure>> call, Response<List<Structure>> response) {
                                 mStructureList=response.body();
-                                if(response.isSuccessful()) db.Dao().insertStruck(response.body());
+                                if(response.isSuccessful()) {
+                                    db.Dao().nukeStruck();
+
+                                    db.Dao().insertStruck(response.body());
+                                }
                                 ShortcutAdapter shortcutAdapter=new ShortcutAdapter(mContext,mDocuments,mDoctorList,mStructureList);
                                 rv.setAdapter(shortcutAdapter);
                             }

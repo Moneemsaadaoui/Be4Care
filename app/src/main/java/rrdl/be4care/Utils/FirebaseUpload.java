@@ -23,6 +23,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.UUID;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -39,6 +40,7 @@ public class FirebaseUpload {
     private ProgressDialog mProgressDialog;
     private JsonObject link = new JsonObject();
     private Activity mActivity;
+    ProgressDialog dialogan;
     public FirebaseUpload(Activity act,Context context, StorageReference ref, Bitmap bitmap, ImageView imageView, ProgressDialog dial) {
         mReference = ref;
         mProgressDialog = dial;
@@ -64,7 +66,6 @@ public class FirebaseUpload {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // Get a URL to the uploaded content
                 final Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                Toast.makeText(mContext, "Upload successful", Toast.LENGTH_SHORT).show();
                 Log.i("TAG", downloadUrl.toString());
                 link.addProperty("url", downloadUrl.toString());
 
@@ -72,15 +73,14 @@ public class FirebaseUpload {
                 analyse.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(retrofit2.Call<JsonObject> call, Response<JsonObject> response) {
-                        Toast.makeText(mContext, response.body().toString() + " as result", Toast.LENGTH_SHORT).show();
                         if (response.isSuccessful()) {
+
                             Intent intent = new Intent(mContext, DocInfoActivity.class);
                             intent.putExtra("ocr", response.body().toString());
                             intent.putExtra("url", downloadUrl.toString());
                             mActivity.startActivity(intent);
-                            Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(mContext, "error analysing", Toast.LENGTH_SHORT).show();
+                            Toasty.error(mContext,"Erreur de l'analyse").show();
                         }
                     }
 
@@ -94,6 +94,7 @@ public class FirebaseUpload {
                 });
                 Toast.makeText(mContext, downloadUrl.toString(), Toast.LENGTH_SHORT).show();
                 mProgressDialog.dismiss();
+
 
             }
         }).addOnFailureListener(new OnFailureListener() {
