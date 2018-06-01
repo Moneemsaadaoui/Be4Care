@@ -131,7 +131,7 @@ public class AddDocumentActivity extends AppCompatActivity implements InfoFragme
             if (bitmap != null) {
                 final ProgressDialog dialog = ProgressDialog.show(this, "",
                         "Chargement...", true);
-                mFirebaseUpload=new FirebaseUpload(getApplicationContext(),mStorageRef,bitmap,imageView,dialog);
+                mFirebaseUpload=new FirebaseUpload(AddDocumentActivity.this,getApplicationContext(),mStorageRef,bitmap,imageView,dialog);
                 mFirebaseUpload.upload();
 
             }
@@ -140,7 +140,7 @@ public class AddDocumentActivity extends AppCompatActivity implements InfoFragme
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
                     imageView.setImageBitmap(bitmap);
-                    mFirebaseUpload=new FirebaseUpload(getApplicationContext(),mStorageRef,bitmap,imageView,dialog);
+                    mFirebaseUpload=new FirebaseUpload(AddDocumentActivity.this,getApplicationContext(),mStorageRef,bitmap,imageView,dialog);
                     mFirebaseUpload.upload();
                 } catch (IOException e) {
                     Log.i("TAG", "Some exception " + e);

@@ -179,9 +179,26 @@ public class PersonalProfileFragment extends Fragment {
         get.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
-                    db.Dao().insertUser(response.body());
-                }
+               new Thread(new Runnable() {
+                   @Override
+                   public void run() {
+
+                       if (response.isSuccessful() && !response.body().getName().equals("")
+                               && !response.body().getEmail().equals("") &&
+                               !response.body().getSex().equals("") &&
+                               !response.body().getLastName().equals("") &&
+                               !response.body().getPhNumber().equals("") &&
+                               !response.body().getBDate().equals("")
+                               && !response.body().getPUrl().equals("")) {
+                           try {
+                               db.Dao().insertUser(response.body());
+                           } catch (Exception e) {
+                               e.printStackTrace();
+                           }
+                       }
+                   }
+               }).start();
+
                 FillPersonalInfo fillPersonalInfo = new FillPersonalInfo(getContext(), response.body(), id, name
                         , lastname, numtel, birth, sex);
                 fillPersonalInfo.fillinfo();

@@ -158,7 +158,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Professionel de Santé" />
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/ProfSnt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
                         android:layout_marginTop="8dp"
                         android:text="Structure de Santé" />
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/StructSnt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -284,7 +284,7 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/validateinfo"
                         android:layout_width="match_parent"
                         android:layout_height="55dp"
                         android:layout_margin="15dp"

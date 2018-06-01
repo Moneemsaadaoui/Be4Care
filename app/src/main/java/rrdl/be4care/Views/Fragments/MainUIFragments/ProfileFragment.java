@@ -11,8 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -22,6 +25,7 @@ import rrdl.be4care.Models.Document;
 import rrdl.be4care.R;
 import rrdl.be4care.Utils.RoomDB;
 import rrdl.be4care.Utils.RoundedImageView;
+import rrdl.be4care.Utils.UIUtils;
 import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
 import rrdl.be4care.Views.Fragments.Repertoire;
 import rrdl.be4care.Views.Fragments.allDoctors;
@@ -86,9 +90,15 @@ public class ProfileFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
         Button contacts=view.findViewById(R.id.contact);
         Button profile=view.findViewById(R.id.profilebtn);
-        RoundedImageView riv=view.findViewById(R.id.profilepic);
+        ImageView riv=view.findViewById(R.id.profilepic);
+        RoomDB db=RoomDB.getINSTANCE(getContext());
+        String url=db.Dao().getuser().getPUrl();
+        if(db.Dao().getuser()!=null && !url.equals("")){
+            Glide.with(getContext()).load(db.Dao().getuser().getPUrl()).asBitmap().centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(UIUtils.getRoundedImageTarget(getContext(), riv, 70));}else{
+        }{
         Bitmap bmp= BitmapFactory.decodeResource(getContext().getResources(),R.drawable.stephane);
-        riv.setImageBitmap(bmp);
+        riv.setImageBitmap(bmp);}
         Button apropos=view.findViewById(R.id.apropos);
        Button repertoire=view.findViewById(R.id.Répertoire);
        repertoire.setOnClickListener(new View.OnClickListener() {

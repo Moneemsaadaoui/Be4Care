@@ -44,6 +44,7 @@ public class User  {
     private String email;
     @SerializedName("emailVerified")
     @Expose
+
     private Boolean emailVerified;
     @SerializedName("Mydoctor")
     @Expose

@@ -29,20 +29,20 @@ import rrdl.be4care.Models.Document;
 import rrdl.be4care.R;
 import rrdl.be4care.Views.Activities.DocumentDetails;
 
-public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> implements Filterable{
+public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> implements Filterable {
     private List<Document> response;
     private List<Document> responsefiltered;
     public LoadDocuments load;
     private Context mContext;
     private callback mCallback;
     private ArrayList<Document> responsecopy;
-    int section,secpos;
+    int section, secpos;
 
     private List<String> datelist = new ArrayList<String>();
     private List<String> doclist = new ArrayList<String>();
     private List<String> strucklist = new ArrayList<String>();
     private List<String> typelist = new ArrayList<String>();
-    private List<String> TitleList=new ArrayList<String>();
+    private List<String> TitleList = new ArrayList<String>();
     private List<Integer> countlist = new ArrayList<Integer>();
     private int offset = 0;
 
@@ -50,7 +50,9 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
         mContext = context;
         this.response = body;
         responsefiltered = this.response;
-        SortBytype();
+        if (responsefiltered.size() != 0) {
+            SortBytype();
+        }
 
 
     }
@@ -77,9 +79,10 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
 
 
     }
+
     @Override
     protected String getSectionHeaderTitle(int section) {
-            return TitleList.get(section);
+        return TitleList.get(section);
     }
 
     @Override
@@ -101,40 +104,17 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
 
     @Override
     protected void onBindItemViewHolder(ViewHolder holder, int section, int position) {
-        if(section==0){holder._date.setText(responsefiltered.get(position).getDate()
-                .substring(0, Math.min(responsefiltered.get(position).getDate().length(), 10)));
-        holder._type.setText(responsefiltered.get(position).getType());
-        // responsefiltered.get(positi ).getDr()
-        holder._source.setText(responsefiltered
-                .get(position).getHStructure() + " , " + responsefiltered.get(position).getPlace());
-        if (responsefiltered.get(position).getStar()) {
-            holder._star.setVisibility(View.VISIBLE);
-        }
-        Glide.with(mContext).load(responsefiltered.get(position).getUrl())
-                .override(75, 75).diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .into(holder._thumb);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Gson gson = new Gson();
-
-                Intent intent = new Intent(mContext, DocumentDetails.class);
-                intent.putExtra("DOC_REF", gson.toJson(responsefiltered.get(position)));
-                // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                mContext.startActivity(intent);
-            }
-        });}
-        else{
-            holder._date.setText(responsefiltered.get(getItemCountForSection(section-1)+position).getDate()
-                    .substring(0, Math.min(responsefiltered.get(getItemCountForSection(section-1)+position).getDate().length(), 10)));
-            holder._type.setText(responsefiltered.get(getItemCountForSection(section-1)+position).getType());
+        if (section == 0) {
+            holder._date.setText(responsefiltered.get(position).getDate()
+                    .substring(0, Math.min(responsefiltered.get(position).getDate().length(), 10)));
+            holder._type.setText(responsefiltered.get(position).getType());
             // responsefiltered.get(positi ).getDr()
             holder._source.setText(responsefiltered
-                    .get(getItemCountForSection(section-1)+position).getHStructure() + " , " + responsefiltered.get(getItemCountForSection(section-1)+position).getPlace());
-            if (responsefiltered.get(getItemCountForSection(section-1)+position).getStar()) {
+                    .get(position).getHStructure() + " , " + responsefiltered.get(position).getPlace());
+            if (responsefiltered.get(position).getStar()) {
                 holder._star.setVisibility(View.VISIBLE);
             }
-            Glide.with(mContext).load(responsefiltered.get(getItemCountForSection(section-1)+position).getUrl())
+            Glide.with(mContext).load(responsefiltered.get(position).getUrl())
                     .override(75, 75).diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .into(holder._thumb);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -143,17 +123,37 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
                     Gson gson = new Gson();
 
                     Intent intent = new Intent(mContext, DocumentDetails.class);
-                    intent.putExtra("DOC_REF", gson.toJson(responsefiltered.get(getItemCountForSection(section-1)+position)));
+                    intent.putExtra("DOC_REF", gson.toJson(responsefiltered.get(position)));
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    mContext.startActivity(intent);
+                }
+            });
+        } else {
+            holder._date.setText(responsefiltered.get(getItemCountForSection(section - 1) + position).getDate()
+                    .substring(0, Math.min(responsefiltered.get(getItemCountForSection(section - 1) + position).getDate().length(), 10)));
+            holder._type.setText(responsefiltered.get(getItemCountForSection(section - 1) + position).getType());
+            // responsefiltered.get(positi ).getDr()
+            holder._source.setText(responsefiltered
+                    .get(getItemCountForSection(section - 1) + position).getHStructure() + " , " + responsefiltered.get(getItemCountForSection(section - 1) + position).getPlace());
+            if (responsefiltered.get(getItemCountForSection(section - 1) + position).getStar()) {
+                holder._star.setVisibility(View.VISIBLE);
+            }
+            Glide.with(mContext).load(responsefiltered.get(getItemCountForSection(section - 1) + position).getUrl())
+                    .override(75, 75).diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .into(holder._thumb);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Gson gson = new Gson();
+
+                    Intent intent = new Intent(mContext, DocumentDetails.class);
+                    intent.putExtra("DOC_REF", gson.toJson(responsefiltered.get(getItemCountForSection(section - 1) + position)));
                     // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     mContext.startActivity(intent);
                 }
             });
         }
     }
-
-
-
-
 
 
     public void Sortbyname() {
@@ -199,8 +199,7 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
             countlist.add(count);
         }
         notifyDataSetChanged();
-        Toast.makeText(mContext, doclist.size() + " doctors", Toast.LENGTH_SHORT).show();
-        TitleList=doclist;
+        TitleList = doclist;
         notifyDataSetChanged();
 
     }
@@ -249,8 +248,7 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
             countlist.add(count);
         }
         notifyDataSetChanged();
-        Toast.makeText(mContext, datelist.size() + " dates", Toast.LENGTH_SHORT).show();
-        TitleList=datelist;
+        TitleList = datelist;
         notifyDataSetChanged();
 
     }
@@ -301,9 +299,7 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
             countlist.add(count);
         }
         notifyDataSetChanged();
-        Toast.makeText(mContext, typelist.size() + " Types", Toast.LENGTH_SHORT).show();
-        Toast.makeText(mContext, countlist.size() + " ", Toast.LENGTH_SHORT).show();
-        TitleList=typelist;
+        TitleList = typelist;
         notifyDataSetChanged();
 
     }
@@ -354,11 +350,11 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
             countlist.add(count);
         }
         notifyDataSetChanged();
-        Toast.makeText(mContext, datelist.size() + " Strucks", Toast.LENGTH_SHORT).show();
-        TitleList=strucklist;
+        TitleList = strucklist;
         notifyDataSetChanged();
 
     }
+
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -392,6 +388,7 @@ public class SectionedRV extends SimpleSectionedAdapter<SectionedRV.ViewHolder> 
             }
         };
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView _date, _type, _source;
         private ImageView _thumb, _star;

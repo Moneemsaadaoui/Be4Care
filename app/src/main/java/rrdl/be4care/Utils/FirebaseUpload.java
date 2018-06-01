@@ -1,5 +1,6 @@
 package rrdl.be4care.Utils;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -37,12 +38,13 @@ public class FirebaseUpload {
     private ImageView imageView;
     private ProgressDialog mProgressDialog;
     private JsonObject link = new JsonObject();
-
-    public FirebaseUpload(Context context, StorageReference ref, Bitmap bitmap, ImageView imageView, ProgressDialog dial) {
+    private Activity mActivity;
+    public FirebaseUpload(Activity act,Context context, StorageReference ref, Bitmap bitmap, ImageView imageView, ProgressDialog dial) {
         mReference = ref;
         mProgressDialog = dial;
         this.bitmap = bitmap;
         mContext = context;
+        mActivity=act;
         this.imageView = imageView;
     }
 
@@ -51,7 +53,10 @@ public class FirebaseUpload {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         this.bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
         byte[] compressedimage = baos.toByteArray();
-
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        ApiService apiservice = retrofit.create(ApiService.class);
         StorageReference path = mReference.child("images/" + UUID.randomUUID().toString());
 
         path.putBytes(compressedimage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -62,10 +67,7 @@ public class FirebaseUpload {
                 Toast.makeText(mContext, "Upload successful", Toast.LENGTH_SHORT).show();
                 Log.i("TAG", downloadUrl.toString());
                 link.addProperty("url", downloadUrl.toString());
-                Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
-                        .addConverterFactory(GsonConverterFactory.create());
-                Retrofit retrofit = builder.build();
-                ApiService apiservice = retrofit.create(ApiService.class);
+
                 retrofit2.Call<JsonObject> analyse = apiservice.analyse(prefs.getString("AUTH", ""), link);
                 analyse.enqueue(new Callback<JsonObject>() {
                     @Override
@@ -75,7 +77,7 @@ public class FirebaseUpload {
                             Intent intent = new Intent(mContext, DocInfoActivity.class);
                             intent.putExtra("ocr", response.body().toString());
                             intent.putExtra("url", downloadUrl.toString());
-                            mContext.startActivity(intent);
+                            mActivity.startActivity(intent);
                             Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(mContext, "error analysing", Toast.LENGTH_SHORT).show();
@@ -84,7 +86,10 @@ public class FirebaseUpload {
 
                     @Override
                     public void onFailure(retrofit2.Call<JsonObject> call, Throwable t) {
-
+                        Intent infointent=new Intent(mContext,DocInfoActivity.class);
+                        infointent.putExtra("url",downloadUrl.toString());
+                        mActivity.startActivity(infointent);
+                        Toast.makeText(mContext, "Failed analysis", Toast.LENGTH_SHORT).show();
                     }
                 });
                 Toast.makeText(mContext, downloadUrl.toString(), Toast.LENGTH_SHORT).show();

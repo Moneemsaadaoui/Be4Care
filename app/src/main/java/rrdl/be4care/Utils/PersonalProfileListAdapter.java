@@ -17,6 +17,7 @@ public class PersonalProfileListAdapter extends BaseAdapter {
 
     String[] titles = {"Identifiant", "Nom", "Prénom", "Numero Telephone", "Date de naissance"};
     String[] data = {"Identifiant", "Nom", "Prénom", "Numero Telephone", "Date de naissance", "Sexe"};
+
     public PersonalProfileListAdapter(Context context, User user) {
         mContext = context;
         this.user = user;
@@ -66,8 +67,9 @@ public class PersonalProfileListAdapter extends BaseAdapter {
         TextView title = element.findViewById(R.id.InfoTitle);
         TextView content = element.findViewById(R.id.InfoContent);
         title.setText(titles[i]);
-        content.setText(data[i]);
-
+        if (!data[i].equals("") && data[i] != null) {
+            content.setText(data[i]);
+        }else{content.setText("Non Disponible");}
         return element;
     }
 }

@@ -4,6 +4,7 @@ package rrdl.be4care.Views.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import org.w3c.dom.DocumentFragment;
 
 import es.dmoral.toasty.Toasty;
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.OnBackPressedListener;
+import rrdl.be4care.Utils.PrefManager;
 import rrdl.be4care.Views.Fragments.DetailFragments.DoctorListingFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.DocumentsFragment;
 import rrdl.be4care.Views.Fragments.MainUIFragments.ProfileFragment;
@@ -29,13 +32,27 @@ import rrdl.be4care.Views.Fragments.allDoctors;
 import rrdl.be4care.Views.Fragments.profile.AllStruck;
 import rrdl.be4care.Views.Fragments.profile.PersonalProfileFragment;
 
-public class MainActivity extends AppCompatActivity implements DoctorListingFragment.OnFragmentInteractionListener,PersonalProfileFragment.OnFragmentInteractionListener,ProfileFragment.OnFragmentInteractionListener,
-        AllStruck.OnFragmentInteractionListener,allDoctors.OnFragmentInteractionListener,SearchFragment.OnFragmentInteractionListener,Repertoire.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements DoctorListingFragment.OnFragmentInteractionListener, PersonalProfileFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener,
+        AllStruck.OnFragmentInteractionListener, allDoctors.OnFragmentInteractionListener, SearchFragment.OnFragmentInteractionListener, Repertoire.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toasty.info(this,"YOU ARE OFFLINE").show();
+
+
+
+        PrefManager prefManager = new PrefManager(this);
+        if (prefManager.isFirstTimeLaunch()) {
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            startActivity(intent);
+        } else {
+        }
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+        if (cm.getActiveNetworkInfo() == null)
+            Toasty.info(this, "Vous etes Hors Ligne \n Connectez vouz au internet pour obtenir les donnee les plus recentes").show();
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -44,18 +61,17 @@ public class MainActivity extends AppCompatActivity implements DoctorListingFrag
         final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction().replace(R.id.MainContainer, new DocumentsFragment()).commit();
 
-        SharedPreferences prefs=getSharedPreferences("GLOBAL",MODE_PRIVATE);
-        if(prefs==null) {
+        SharedPreferences prefs = getSharedPreferences("GLOBAL", MODE_PRIVATE);
+        if (prefs == null) {
             prefs.edit().putString("TOKEN", getIntent().getExtras().getString("TOKEN")).commit();
         }
-        Toast.makeText(this, prefs.getString("AUTH","") + "from shared prefz", Toast.LENGTH_SHORT).show();
 
         BottomBar mBottomBar;
         mBottomBar = findViewById(R.id.bottomBar);
-        DocumentsFragment docfrag=new DocumentsFragment();
-        SearchFragment searchFragment=new SearchFragment();
-        ShortcutFragment shortcutFragment=new ShortcutFragment();
-        ProfileFragment profileFragment=new ProfileFragment();
+        DocumentsFragment docfrag = new DocumentsFragment();
+        SearchFragment searchFragment = new SearchFragment();
+        ShortcutFragment shortcutFragment = new ShortcutFragment();
+        ProfileFragment profileFragment = new ProfileFragment();
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(int tabId) {
