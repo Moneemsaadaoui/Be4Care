@@ -2,6 +2,8 @@ package rrdl.be4care.Views.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,14 +23,15 @@ public class DocumentDetails extends AppCompatActivity {
     private ListView rv;
     private TextView type,date,profs,structs,lieu,note;
     private ImageButton favicon;
+    private Button morebtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document_details);
+        morebtn=findViewById(R.id.morebtn);
         preview=findViewById(R.id.preview);
         title=findViewById(R.id.drname);
         Gson gson=new Gson();
-        favicon=findViewById(R.id.favicondocu);
         type=findViewById(R.id.type);
         date=findViewById(R.id.date);
         profs=findViewById(R.id.profsante);
@@ -37,7 +40,13 @@ public class DocumentDetails extends AppCompatActivity {
         note=findViewById(R.id.notes);
         Document doc= gson.fromJson(getIntent().getStringExtra("DOC_REF"),Document.class);
         GetDocumentDetails service=new GetDocumentDetails(this,doc,preview,title,
-                type,date,profs,structs,lieu,note,favicon);
+                type,date,profs,structs,lieu,note);
         service.getDetails();
+        morebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DocumentDetails.this, "Is works", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

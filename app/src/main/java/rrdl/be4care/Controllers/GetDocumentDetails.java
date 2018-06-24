@@ -32,7 +32,7 @@ public class GetDocumentDetails {
 
     public GetDocumentDetails(Context context, Document document, ImageView image, TextView title
             , TextView type, TextView date, TextView profs, TextView structs,
-                              TextView lieu, TextView note , ImageButton favicon) {
+                              TextView lieu, TextView note  /*ImageButton favicon*/) {
         mDocument = document;
         mContext = context;
         mImageView = image;
@@ -43,7 +43,7 @@ public class GetDocumentDetails {
         this.structs = structs;
         this.lieu = lieu;
         this.note = note;
-        this.favicon=favicon;
+     //   this.favicon=favicon;
     }
 
     public void getDetails() {
@@ -58,7 +58,7 @@ public class GetDocumentDetails {
         String notebuffer=mDocument.getNote().replaceAll("\\\n","")
                 .replaceAll("\\{","").replaceAll("\\}","").replaceAll("\\\r","");
         note.setText(notebuffer);
-        if(mDocument.getStar()){favicon.setImageDrawable(mContext.getResources().getDrawable(R.drawable.star));}
+      /*  if(mDocument.getStar()){favicon.setImageDrawable(mContext.getResources().getDrawable(R.drawable.star));}
         else{favicon.setImageDrawable(mContext.getResources().getDrawable(R.drawable.unstar));
         favicon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,7 @@ public class GetDocumentDetails {
                     }
                 });
             }
-        });}
+        });}*/
 
 
     }

@@ -41,8 +41,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
                     android:background="@android:color/transparent"
-                    android:text="V    Trier" />
+                    android:drawableLeft="@drawable/ic_expand_more_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:text="Trier" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -64,12 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:paddingBottom="70dp"
-                    android:paddingEnd="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingStart="20dp"
-                    android:paddingTop="20dp">
+                    android:paddingBottom="70dp">
 
                 </android.support.v7.widget.RecyclerView>
 

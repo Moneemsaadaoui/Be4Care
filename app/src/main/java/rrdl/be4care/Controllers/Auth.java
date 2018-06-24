@@ -41,8 +41,13 @@ public class Auth {
     public void Login(final CircularProgressButton button, EditText email, EditText password) {
         final SharedPreferences prefs = mContext.getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         RoomDB db= RoomDB.getINSTANCE(mContext);
+        if(email.getText().toString().contains("@")){
+            user.addProperty("email", email.getText().toString().trim());
 
-        user.addProperty("username", email.getText().toString().trim());
+        }else{
+            user.addProperty("username", email.getText().toString().trim());
+
+        }
         user.addProperty("password", password.getText().toString().trim());
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://peaceful-forest-76384.herokuapp.com/")

@@ -47,7 +47,6 @@ public class SignupService {
         call.enqueue(new Callback<SignupResponse>() {
             @Override
             public void onResponse(Call<SignupResponse> call, Response<SignupResponse> response) {
-                Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
             Auth auth=new Auth(mContext,signupactivity);
             auth.Login(mCircularProgressButton,email,password);
             }

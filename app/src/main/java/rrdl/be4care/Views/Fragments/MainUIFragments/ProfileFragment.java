@@ -91,8 +91,7 @@ public class ProfileFragment extends Fragment {
         Button contacts=view.findViewById(R.id.contact);
         Button profile=view.findViewById(R.id.profilebtn);
         RoundedImageView riv=view.findViewById(R.id.profilepic);
-        RoomDB db=RoomDB.getINSTANCE(getContext());
-        String url=db.Dao().getuser().getPUrl();
+
 
         Bitmap bmp= BitmapFactory.decodeResource(getContext().getResources(),R.drawable.stephane);
         riv.setImageBitmap(bmp);

@@ -42,7 +42,7 @@
                     android:text="Dr maw"
                     android:textColor="@color/textHue"
                     android:textSize="30sp"
-                    android:textStyle="bold" />
+                     />
 
                 <TextView
                     android:id="@+id/speciality"
@@ -122,8 +122,8 @@
                     android:layout_margin="5dp"
                     android:text="Sahloul"
                     android:textColor="@color/textHue"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                     />
 
                 <TextView
                     android:id="@+id/title8"
@@ -139,8 +139,8 @@
                     android:layout_margin="5dp"
                     android:text="23123321"
                     android:textColor="@color/textHue"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                     />
 
                 <TextView
                     android:id="@+id/title9"
@@ -156,8 +156,8 @@
                     android:layout_margin="5dp"
                     android:text="moneem@satoripop.com"
                     android:textColor="@color/textHue"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                     />
 
                 <TextView
                     android:id="@+id/title10"
@@ -173,8 +173,8 @@
                     android:layout_margin="5dp"
                     android:text="Sahloul"
                     android:textColor="@color/textHue"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"
+                     />
 
                 <Button
                     android:id="@+id/validation"
@@ -184,7 +184,7 @@
                     android:background="@drawable/gradientrounded"
                     android:text="Valider"
                     android:textColor="@android:color/white"
-                    android:textStyle="bold"
+
                     android:visibility="gone" />
 
                 <Space
