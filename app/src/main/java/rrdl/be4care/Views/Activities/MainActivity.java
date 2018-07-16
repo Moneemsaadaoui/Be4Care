@@ -34,7 +34,7 @@ import rrdl.be4care.Views.Fragments.profile.PersonalProfileFragment;
 
 public class MainActivity extends AppCompatActivity implements DoctorListingFragment.OnFragmentInteractionListener, PersonalProfileFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener,
         AllStruck.OnFragmentInteractionListener, allDoctors.OnFragmentInteractionListener, SearchFragment.OnFragmentInteractionListener, Repertoire.OnFragmentInteractionListener, ShortcutFragment.OnFragmentInteractionListener, DocumentsFragment.OnFragmentInteractionListener {
-
+    BottomBar mBottomBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements DoctorListingFrag
             public void onTabSelected(int tabId) {
                 switch (tabId) {
                     case R.id.tab_document:
-                        fm.beginTransaction().replace(R.id.MainContainer, docfrag).commit();
+                        fm.beginTransaction().replace(R.id.MainContainer, docfrag).addToBackStack("doc").commit();
                         break;
                     case R.id.tab_search:
                         fm.beginTransaction().replace(R.id.MainContainer, searchFragment).commit();
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements DoctorListingFrag
                         fm.beginTransaction().replace(R.id.MainContainer, shortcutFragment).commit();
                         break;
                     case R.id.tab_profile:
-                        fm.beginTransaction().replace(R.id.MainContainer, profileFragment).commit();
+                        fm.beginTransaction().replace(R.id.MainContainer, profileFragment).addToBackStack("profile").commit();
                         break;
                 }
             }
@@ -157,6 +157,17 @@ public class MainActivity extends AppCompatActivity implements DoctorListingFrag
     }
 
 */
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+            if(getFragmentManager().findFragmentById(R.id.MainContainer).getTag().equals("doc")){
+            mBottomBar.selectTabWithId(R.id.tab_document);
+            }
+        } else {
+        super.onBackPressed();}
     }
 
     @Override

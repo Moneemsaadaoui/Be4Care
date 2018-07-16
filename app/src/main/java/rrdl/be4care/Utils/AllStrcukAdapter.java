@@ -48,7 +48,7 @@ public class AllStrcukAdapter extends RecyclerView.Adapter<AllStrcukAdapter.View
     @Override
     public AllStrcukAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.repertoire_item, parent, false);
+                .inflate(R.layout.repertoire_item_addable, parent, false);
         return new AllStrcukAdapter.ViewHolder(itemView);
     }
 
@@ -115,7 +115,7 @@ public class AllStrcukAdapter extends RecyclerView.Adapter<AllStrcukAdapter.View
             super(itemView);
             name = itemView.findViewById(R.id.doclistTitle);
             star = itemView.findViewById(R.id.fav);
-            add = itemView.findViewById(R.id.add);
+            add = itemView.findViewById(R.id.adddoctor);
 
         }
     }

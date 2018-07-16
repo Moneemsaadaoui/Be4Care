@@ -41,6 +41,15 @@
                     android:layout_height="1dp"
                     android:background="@android:color/darker_gray" />
 
+                <Button
+                    android:id="@+id/favori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:text="Marquer Comme Raccourcis"
+                    android:textColor="@color/cardview_dark_background" />
+
                 <View
                     android:id="@+id/view15"
                     android:layout_width="match_parent"

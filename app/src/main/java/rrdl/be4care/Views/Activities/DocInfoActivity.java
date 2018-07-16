@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
+import java.util.Calendar;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -82,7 +83,7 @@ public class DocInfoActivity extends AppCompatActivity {
                 Toasty.success(getBaseContext(), "Document ajouter avec success").show();
 
                 ProcessableDocument document = new ProcessableDocument();
-                document.setDate(date.getText().toString());
+                document.setDate(Calendar.getInstance().getTime().toString());
                 document.setNote(note.getText().toString());
                 document.setType(type.getText().toString());
                 document.setPlace(local.getText().toString());

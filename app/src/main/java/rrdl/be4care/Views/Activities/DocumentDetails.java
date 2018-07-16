@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -75,32 +76,70 @@ public class DocumentDetails extends AppCompatActivity {
                 dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
                 dialog.show();
                 Button edit = dialog.findViewById(R.id.edit);
+                Button favori = dialog.findViewById(R.id.favori);
                 Button delete = dialog.findViewById(R.id.delete);
                 Button cancel = dialog.findViewById(R.id.cancel);
+                if (doc.getStar()) {
+                    favori.setText("Demarquer comme Raccourcis");
+                }
+                favori.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        JsonObject obj = new JsonObject();
+                        if (doc.getStar()) {
+                            obj.addProperty("star", false);
+                        } else {
+                            obj.addProperty("star", true);
+                        }
+                        Call<Document> favourite = apiservice.favoritedocument(prefs.getString("AUTH", ""), doc.getId(), obj);
+                        favourite.enqueue(new Callback<Document>() {
+                            @Override
+                            public void onResponse(Call<Document> call, Response<Document> response) {
+                                if (response.isSuccessful()) {
+                                    if (doc.getStar())
+                                        favori.setText("Demarquer comme Raccourcis");
+                                } else {
+                                    favori.setText("marquer comme Raccourcis");
+                                }
+                                dialog.dismiss();
+                                Log.e("TAG",response.toString());
+                                Toasty.success(getApplicationContext(), "Operation Terminée").show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Document> call, Throwable t) {
+                                Toasty.error(getApplicationContext(), "Echec de l'operation").show();
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                });
                 delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         final ProgressDialog dialog = ProgressDialog.show(DocumentDetails.this, "",
                                 "Chargement...", true);
-                        Call<JsonObject>delete=apiservice.delete_document(prefs.getString("AUTH",""),
+                        Call<JsonObject> delete = apiservice.delete_document(prefs.getString("AUTH", ""),
                                 gson.fromJson(getIntent().getStringExtra("DOC_REF"), Document.class).getId());
                         delete.enqueue(new Callback<JsonObject>() {
                             @Override
                             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                                if(response.isSuccessful()){
-                                    Toasty.success(DocumentDetails.this,"Document Supprimé avec success").show();
+                                if (response.isSuccessful()) {
+                                    Toasty.success(DocumentDetails.this, "Document Supprimé avec success").show();
                                     dialog.dismiss();
-                                   RoomDB db= RoomDB.getINSTANCE(DocumentDetails.this);
-                                   db.Dao().nukeDocument();
+                                    RoomDB db = RoomDB.getINSTANCE(DocumentDetails.this);
+                                    db.Dao().nukeDocument();
                                     DocumentDetails.this.finish();
-                                }else{                            Toasty.error(DocumentDetails.this,"Echec de l'operation").show();
-                                dialog.dismiss();}
+                                } else {
+                                    Toasty.error(DocumentDetails.this, "Echec de l'operation").show();
+                                    dialog.dismiss();
+                                }
                             }
 
                             @Override
                             public void onFailure(Call<JsonObject> call, Throwable t) {
-                            Toasty.error(DocumentDetails.this,"Echec de l'operation").show();
-                            dialog.dismiss();
+                                Toasty.error(DocumentDetails.this, "Echec de l'operation").show();
+                                dialog.dismiss();
                             }
                         });
                     }

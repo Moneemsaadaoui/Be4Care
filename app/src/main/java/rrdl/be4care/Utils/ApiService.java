@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
@@ -90,4 +91,7 @@ public interface ApiService {
 
     @DELETE("/api/users/me/documents/{id}")
     Call<JsonObject>delete_document(@Header("Authorization") String AuthToken,@Path("id")String id);
+
+    @PUT("/api/users/me/documents/{fk}")
+    Call<Document>favoritedocument(@Header("Authorization") String AuthToken,@Path("fk")String id,@Body JsonObject obj);
 }

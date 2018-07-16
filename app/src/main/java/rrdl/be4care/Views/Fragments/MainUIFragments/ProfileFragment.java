@@ -101,7 +101,7 @@ public class ProfileFragment extends Fragment {
            @Override
            public void onClick(View view) {
                getFragmentManager().beginTransaction().replace(R.id.MainContainer,
-                       new Repertoire()).commit();
+                       new Repertoire()).addToBackStack("rep").commit();
            }
        });
 
@@ -112,7 +112,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 Gson gson=new Gson();
 
-                  getFragmentManager().beginTransaction().replace(R.id.MainContainer, new PersonalProfileFragment()).commit();
+                  getFragmentManager().beginTransaction().replace(R.id.MainContainer, new PersonalProfileFragment()).addToBackStack("personal").commit();
             }
         });
         contacts.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +128,7 @@ public class ProfileFragment extends Fragment {
         apropos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.MainContainer,new allDoctors()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.MainContainer,new allDoctors()).addToBackStack("alldoc").commit();
             }
         });
         return view;
