@@ -141,7 +141,6 @@ public class PersonalProfileFragment extends Fragment {
                         sex.setEnabled(true);
                         Validate.setVisibility(View.VISIBLE);
                         dialog.dismiss();
-                        Toast.makeText(getContext(), "IT WORKSSS", Toast.LENGTH_SHORT).show();
                     }
                 });
                 Disconnect.setOnClickListener(new View.OnClickListener() {
@@ -231,7 +230,6 @@ public class PersonalProfileFragment extends Fragment {
                 update.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

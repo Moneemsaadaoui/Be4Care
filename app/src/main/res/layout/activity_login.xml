@@ -35,11 +35,11 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/edittext_rounded"
             android:ems="10"
-            android:hint="Email"
+            android:hint="Email Ou Nom d'utilisateur"
             android:inputType="textEmailAddress"
-            android:text="moneem@gmail.com"
             android:textAlignment="center"
-            android:textColor="@color/cardview_light_background" />
+            android:textColor="@color/cardview_light_background"
+            android:textColorHint="@android:color/white" />
 
         <EditText
             android:id="@+id/Login_Password_edit"
@@ -48,11 +48,11 @@
             android:layout_marginBottom="15dp"
             android:background="@drawable/edittext_rounded"
             android:ems="10"
-            android:hint="Password"
+            android:hint="Mot de Passe"
             android:inputType="textPassword"
-            android:text="helloworld"
             android:textAlignment="center"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
         <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
             android:id="@+id/LoginBtn"

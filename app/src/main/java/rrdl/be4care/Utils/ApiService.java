@@ -15,6 +15,7 @@ import retrofit2.http.Path;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Login;
+import rrdl.be4care.Models.ProcessableDocument;
 import rrdl.be4care.Models.SignupResponse;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.Models.Token;
@@ -61,7 +62,7 @@ public interface ApiService {
     Call<Doctor> adddoctor(@Header("Authorization") String AuthToken, @Body Doctor doc);
 
     @POST("/api/users/me/documents")
-    Call<JsonObject> postDocument(@Header("Authorization") String AuthToken, @Body JsonObject doc);
+    Call<ProcessableDocument> postDocument(@Header("Authorization") String AuthToken, @Body ProcessableDocument doc);
 
     @GET("/api/users/me/doctors")
     Call<List<Doctor>> load_doctors(@Header("Authorization") String AuthToken);

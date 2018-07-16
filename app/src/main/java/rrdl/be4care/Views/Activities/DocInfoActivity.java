@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -24,6 +25,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
+import rrdl.be4care.Models.ProcessableDocument;
 import rrdl.be4care.R;
 import rrdl.be4care.Utils.ApiService;
 import rrdl.be4care.Utils.RoomDB;
@@ -31,7 +33,7 @@ import rrdl.be4care.Utils.RoomDB;
 public class DocInfoActivity extends AppCompatActivity {
     private EditText date, note, type, local;
     private AutoCompleteTextView structure, doctor;
-    Button Valid,cancel,retour;
+    Button Valid, cancel, retour;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +53,12 @@ public class DocInfoActivity extends AppCompatActivity {
         structure = findViewById(R.id.StructSnt);
         doctor = findViewById(R.id.ProfSnt);
         Valid = findViewById(R.id.validateinfo);
-        cancel=findViewById(R.id.infocancel);
-        retour=findViewById(R.id.infoback);
+        cancel = findViewById(R.id.infocancel);
+        retour = findViewById(R.id.infoback);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(DocInfoActivity.this,MainActivity.class);
+                Intent intent = new Intent(DocInfoActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -77,48 +79,43 @@ public class DocInfoActivity extends AppCompatActivity {
 
                 final ProgressDialog dialog = ProgressDialog.show(DocInfoActivity.this, "",
                         "Enregistrement...", true);
-                JsonObject document=new JsonObject();
-                document.addProperty("date",date.getText().toString());
-                document.addProperty("note",note.getText().toString());
-                document.addProperty("type",type.getText().toString());
-                document.addProperty("place",local.getText().toString());
-                document.addProperty("HStructure",structure.getText().toString());
-                document.addProperty("dr",doctor.getText().toString());
-                document.addProperty("url",getIntent().getStringExtra("url"));
-                document.addProperty("star",false);
-                Call<JsonObject> postdocument = apiservice.postDocument(prefs.getString("AUTH", ""), document);
+                Toasty.success(getBaseContext(), "Document ajouter avec success").show();
 
-                postdocument.enqueue(new Callback<JsonObject>() {
+                ProcessableDocument document = new ProcessableDocument();
+                document.setDate(date.getText().toString());
+                document.setNote(note.getText().toString());
+                document.setType(type.getText().toString());
+                document.setPlace(local.getText().toString());
+                document.setHStructure(structure.getText().toString());
+                document.setDr(doctor.getText().toString());
+                document.setUrl(getIntent().getStringExtra("url"));
+                document.setStar(false);
+                Call<ProcessableDocument> postdocument = apiservice.postDocument(prefs.getString("AUTH", ""), document);
+                postdocument.enqueue(new Callback<ProcessableDocument>() {
                     @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    public void onResponse(Call<ProcessableDocument> call, Response<ProcessableDocument> response) {
+                        Toasty.success(getApplicationContext(), "Document ajouté avec success").show();
                         dialog.dismiss();
-                        Toast.makeText(DocInfoActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                        if (response.isSuccessful()) {
-                            RoomDB db = RoomDB.getINSTANCE(getApplicationContext());
-                            dialog.dismiss();
-                            Toasty.success(getApplicationContext(), "Documents enregistré avec succes").show();
-                            db.Dao().nukeDocument();
-                        }
+                        Log.e("TAG", response.toString());
+
                     }
 
                     @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                    public void onFailure(Call<ProcessableDocument> call, Throwable t) {
+                        Toasty.error(getApplicationContext(), "Echec de l'operation").show();
                         dialog.dismiss();
-                        Toasty.error(getApplicationContext(), "Erreur d'enregistrement").show();
                     }
                 });
             }
 
-
+            public boolean checkfields() {
+                return (date.getText().equals("") ||
+                        note.getText().equals("") ||
+                        type.getText().equals("") ||
+                        local.getText().equals("") ||
+                        structure.getText().equals("") ||
+                        doctor.getText().equals(""));
+            }
         });
-    }
-
-    public boolean checkfields() {
-        return (date.getText().equals("") ||
-                note.getText().equals("") ||
-                type.getText().equals("") ||
-                local.getText().equals("") ||
-                structure.getText().equals("") ||
-                doctor.getText().equals(""));
     }
 }

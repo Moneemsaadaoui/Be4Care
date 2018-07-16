@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".Views.Fragments.Repertoire">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,6 +13,7 @@
         android:id="@+id/drawerlayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
         <Button
@@ -34,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:text="Repertoire"
@@ -46,7 +48,8 @@
                 android:id="@+id/addbtnrep"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_margin="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/gradientrounded"
                 android:padding="10dp"
@@ -58,7 +61,8 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/replist"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="70dp" />
 
     </LinearLayout>
 

@@ -10,7 +10,7 @@ import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.Models.User;
 
-@Database(entities = {Document.class, Doctor.class, Structure.class,User.class}, version = 3, exportSchema = false)
+@Database(entities = {Document.class, Doctor.class, Structure.class,User.class}, version = 4, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
 
     private static RoomDB INSTANCE;

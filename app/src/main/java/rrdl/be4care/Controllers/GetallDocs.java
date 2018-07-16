@@ -44,7 +44,6 @@ public class GetallDocs {
             @Override
             public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
               final AllDoctorsAdapter ada = new AllDoctorsAdapter(mContext, response.body(),sv);
-                Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
                 ada.getFilter();
                 rv.setAdapter(ada);
                 sv.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {

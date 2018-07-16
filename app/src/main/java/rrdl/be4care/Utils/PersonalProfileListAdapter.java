@@ -24,8 +24,6 @@ public class PersonalProfileListAdapter extends BaseAdapter {
         RoundedImageView profilepic;
 
 
-        Toast.makeText(context, user.getEmail() + user.getName() + user.getLastName()
-                + user.getBDate() + user.getPhNumber(), Toast.LENGTH_SHORT).show();
 
         try {
 
@@ -37,10 +35,10 @@ public class PersonalProfileListAdapter extends BaseAdapter {
 
         } catch (Exception e) {
 
-            Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        Toast.makeText(context, user.getName(), Toast.LENGTH_SHORT).show();
+
     }
 
 

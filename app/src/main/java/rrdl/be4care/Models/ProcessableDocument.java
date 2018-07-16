@@ -1,25 +1,13 @@
 package rrdl.be4care.Models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Date;
+public class ProcessableDocument {
 
-import io.realm.RealmObject;
-@Entity
-public class Document {
+
     @SerializedName("url")
     @Expose
-    @PrimaryKey
-    @NonNull
     private String url;
     @SerializedName("star")
     @Expose
@@ -42,12 +30,7 @@ public class Document {
     @SerializedName("note")
     @Expose
     private String note;
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("usersId")
-    @Expose
-    private String usersId;
+
 
     public String getUrl() {
         return url;
@@ -113,20 +96,6 @@ public class Document {
         this.note = note;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsersId() {
-        return usersId;
-    }
-
-    public void setUsersId(String usersId) {
-        this.usersId = usersId;
-    }
 
 }

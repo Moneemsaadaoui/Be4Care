@@ -92,11 +92,17 @@ public class Repertoire extends Fragment {
             Button addmed = dialog.findViewById(R.id.addmed);
             Button liststruck = dialog.findViewById(R.id.liststruct);
             Button addstruck = dialog.findViewById(R.id.addstruct);
+            listmed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getFragmentManager().beginTransaction().replace(R.id.MainContainer,new allDoctors()).commit();
+                    dialog.dismiss();
+                }
+            });
             addmed.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view1) {
-                    getFragmentManager().beginTransaction().replace(R.id.MainContainer,new allDoctors()).commit();
-                    dialog.dismiss();
+
                 }
             });
             addstruck.setOnClickListener(view11 -> {

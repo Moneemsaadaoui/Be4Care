@@ -53,7 +53,6 @@ public class GetMyDoctors {
         get.enqueue(new Callback<List<Doctor>>() {
             @Override
             public void onResponse(Call<List<Doctor>> call, Response<List<Doctor>> response) {
-                Toast.makeText(mContext, response.body().toString(), Toast.LENGTH_SHORT).show();
                 mDoctorList=response.body();
                 Call<List<Structure>>getstruck=apiservice.load_my_struck(prefs.getString("AUTH",""));
                 getstruck.enqueue(new Callback<List<Structure>>() {

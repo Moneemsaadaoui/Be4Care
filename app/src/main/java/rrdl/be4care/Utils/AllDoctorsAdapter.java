@@ -1,5 +1,6 @@
 package rrdl.be4care.Utils;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
@@ -20,11 +21,13 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Structure;
 import rrdl.be4care.R;
@@ -34,6 +37,7 @@ implements Filterable{
     private Context mContext;
     private List<Doctor>mDoctors;
     private List<Doctor>mDoctorsfiltered;
+    private List<Doctor>mydocs;
     private SearchView sv;
     public AllDoctorsAdapter(Context context, List<Doctor> doctors, SearchView sv){
         mContext=context;
@@ -51,7 +55,12 @@ implements Filterable{
                 getFilter().filter(s);
                 return false;
             }
+
         });
+        RoomDB db= RoomDB.getINSTANCE(mContext);
+
+        mydocs=db.Dao().getdoctors();
+        mDoctorsfiltered.removeAll(mydocs);
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -117,7 +126,8 @@ implements Filterable{
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://peaceful-forest-76384.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create());
-
+        final ProgressDialog dialog = ProgressDialog.show(mContext, "",
+                "Chargement...", true);
         Retrofit retrofit = builder.build();
         ApiService apiservice = retrofit.create(ApiService.class);
         Call<Doctor>adddoctor=apiservice.adddoctor(prefs.getString("AUTH",""),doc);
@@ -125,13 +135,16 @@ implements Filterable{
             @Override
             public void onResponse(Call<Doctor> call, Response<Doctor> response) {
             if(response.isSuccessful()){
-                Toast.makeText(mContext, "Success adding doc", Toast.LENGTH_SHORT).show();
+                Toasty.info(mContext,"Medicin ajouté avec success").show();
+                dialog.dismiss();
             }
+            dialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<Doctor> call, Throwable t) {
-
+            Toasty.error(mContext,"Echec de l'operation").show();
+            dialog.dismiss();
             }
         });
     }
@@ -142,7 +155,7 @@ implements Filterable{
             super(itemView);
             name=itemView.findViewById(R.id.doclistTitle);
             star=itemView.findViewById(R.id.fav);
-            add=itemView.findViewById(R.id.add);
+            add=itemView.findViewById(R.id.adddoctor);
 
         }
     }

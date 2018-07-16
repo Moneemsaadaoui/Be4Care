@@ -35,7 +35,6 @@ public class RepertoireAdapter extends RecyclerView.Adapter<RepertoireAdapter.Vi
     public RepertoireAdapter(Context context, List<Doctor> response) {
         mContext = context;
         this.response = response;
-        Toast.makeText(context, this.response.size() + " as a size", Toast.LENGTH_SHORT).show();
     }
 
     @Override
