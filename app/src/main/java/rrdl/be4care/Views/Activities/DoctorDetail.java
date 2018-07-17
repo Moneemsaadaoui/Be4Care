@@ -2,6 +2,7 @@ package rrdl.be4care.Views.Activities;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -32,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Controllers.GetDoctorDetail;
 import rrdl.be4care.Controllers.GetMyDoctors;
 import rrdl.be4care.Models.Doctor;
+import rrdl.be4care.Models.Document;
 import rrdl.be4care.Models.User;
 import rrdl.be4care.R;
 import rrdl.be4care.Utils.ApiService;
@@ -118,47 +122,111 @@ public class DoctorDetail extends AppCompatActivity {
                 final Dialog dialog = new Dialog(DoctorDetail.this, R.style.NewDialog);
                 dialog.requestWindowFeature(DoctorDetail.this.getWindow().FEATURE_NO_TITLE);
                 dialog.setCancelable(true);
-                dialog.setContentView(R.layout.detailpopup);
+                dialog.setContentView(R.layout.document_option);
                 dialog.getWindow().setBackgroundDrawableResource(R.color.space_transparent);
                 dialog.show();
-                Button modif = dialog.findViewById(R.id.edit);
-                Button addmed = dialog.findViewById(R.id.add);
-                addmed.setOnClickListener(new View.OnClickListener() {
+                Button modif = dialog.findViewById(R.id.modify);
+                Button favori = dialog.findViewById(R.id.favori);
+                Button delete = dialog.findViewById(R.id.delete);
+                if (doc.getStar()) {
+                    favori.setText("Demarquer comme Raccourcis");
+                }
+                favori.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
                                 .addConverterFactory(GsonConverterFactory.create());
                         Retrofit retrofit = builder.build();
                         ApiService apiservice = retrofit.create(ApiService.class);
-                        Call<Doctor> get = apiservice.adddoctor(prefs.getString("AUTH",""),doc);
-                        get.enqueue(new Callback<Doctor>() {
+
+                        JsonObject obj = new JsonObject();
+                        if (doc.getStar()) {
+                            obj.addProperty("star", false);
+                        } else {
+                            obj.addProperty("star", true);
+                        }
+                        Call<Doctor> favourite = apiservice.favoritedoctor(prefs.getString("AUTH", ""), doc.getId(), obj);
+                        favourite.enqueue(new Callback<Doctor>() {
                             @Override
                             public void onResponse(Call<Doctor> call, Response<Doctor> response) {
-                                Toasty.success(DoctorDetail.this,"Medicin ajouté avec success").show();
+                                if (response.isSuccessful()) {
+                                    if (doc.getStar())
+                                        favori.setText("Demarquer comme Raccourcis");
+                                } else {
+                                    favori.setText("marquer comme Raccourcis");
+                                }
+                                dialog.dismiss();
+                                Log.e("TAG", response.toString());
+                                Toasty.success(getApplicationContext(), "Operation Terminée").show();
                             }
 
                             @Override
                             public void onFailure(Call<Doctor> call, Throwable t) {
-
-                                Toasty.error(DoctorDetail.this,"Echec de l'operation").show();
+                                Toasty.error(getApplicationContext(), "Echec de l'operation").show();
+                                dialog.dismiss();
                             }
                         });
                     }
                 });
-                modif.setOnClickListener(new View.OnClickListener() {
+
+
+                delete.setOnClickListener(new View.OnClickListener()
+
+                {
+                    @Override
+                    public void onClick(View view) {
+                        final ProgressDialog dialogloads = ProgressDialog.show(DoctorDetail.this, "",
+                                "Chargement...", true);
+                        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
+                                .addConverterFactory(GsonConverterFactory.create());
+                        Retrofit retrofit = builder.build();
+                        ApiService apiservice = retrofit.create(ApiService.class);
+                        Call<JsonObject> del = apiservice.delete_doctor(prefs.getString("AUTH", ""), doc.getId());
+                        del.enqueue(new Callback<JsonObject>() {
+                            @Override
+                            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                                if (response.isSuccessful()) {
+                                    Toasty.success(DoctorDetail.this, "Operation terminée").show();
+                                }
+                                dialogloads.dismiss();
+                                dialog.dismiss();
+                                DoctorDetail.this.finish();
+                            }
+
+                            @Override
+                            public void onFailure(Call<JsonObject> call, Throwable t) {
+                                dialog.dismiss();
+                                dialogloads.dismiss();
+                                Toasty.error(DoctorDetail.this, "Echec de l'operation").show();
+                            }
+                        });
+                    }
+                });
+                modif.setOnClickListener(new View.OnClickListener()
+
+                {
                     @Override
                     public void onClick(View view) {
                         address.setEnabled(true);
                         numtel.setEnabled(true);
                         email.setEnabled(true);
                         sturct.setEnabled(true);
+                        validate.setVisibility(View.VISIBLE);
                     }
                 });
             }
         });
-        validate.setOnClickListener(new View.OnClickListener() {
+        validate.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View view) {
+                final ProgressDialog dialogloads = ProgressDialog.show(DoctorDetail.this, "",
+                        "Chargement...", true);
+                address.setEnabled(false);
+                numtel.setEnabled(false);
+                email.setEnabled(false);
+                sturct.setEnabled(false);
                 Retrofit.Builder builder = new Retrofit.Builder()
                         .baseUrl("https://peaceful-forest-76384.herokuapp.com/")
                         .addConverterFactory(GsonConverterFactory.create());
@@ -166,13 +234,18 @@ public class DoctorDetail extends AppCompatActivity {
                 Retrofit retrofit = builder.build();
                 ApiService apiservice = retrofit.create(ApiService.class);
                 Call<List<Doctor>> get = apiservice.getalldoctors(prefs.getString("AUTH", ""));
+
             }
         });
-        title = findViewById(R.id.drname);
+        title =
+
+                findViewById(R.id.drname);
+
         Gson gson = new Gson();
         doc = gson.fromJson(getIntent().getStringExtra("REF"), Doctor.class);
-        Toast.makeText(this, doc.getFullName() + " from details", Toast.LENGTH_SHORT).show();
-        GetDoctorDetail getDoctorDetail = new GetDoctorDetail(this, doc, title, address, numtel, email, sturct, spec);
+        Toast.makeText(DoctorDetail.this, doc.getFullName() + " from details", Toast.LENGTH_SHORT).show();
+
+        GetDoctorDetail getDoctorDetail = new GetDoctorDetail(DoctorDetail.this, doc, title, address, numtel, email, sturct, spec);
         getDoctorDetail.getDetails();
     }
 }

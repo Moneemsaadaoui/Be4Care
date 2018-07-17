@@ -92,6 +92,16 @@ public interface ApiService {
     @DELETE("/api/users/me/documents/{id}")
     Call<JsonObject>delete_document(@Header("Authorization") String AuthToken,@Path("id")String id);
 
+
+    @DELETE("/api/users/me/doctors/{id}")
+    Call<JsonObject>delete_doctor(@Header("Authorization") String AuthToken,@Path("id")String id);
+
     @PUT("/api/users/me/documents/{fk}")
     Call<Document>favoritedocument(@Header("Authorization") String AuthToken,@Path("fk")String id,@Body JsonObject obj);
+
+    @PUT("/api/users/me/healthStructs/{fk}")
+    Call<Structure>favoritestruck(@Header("Authorization") String AuthToken,@Path("fk")String id,@Body JsonObject obj);
+
+    @PUT("/api/users/me/doctors/{fk}")
+    Call<Doctor>favoritedoctor(@Header("Authorization") String AuthToken,@Path("fk")String id,@Body JsonObject obj);
 }

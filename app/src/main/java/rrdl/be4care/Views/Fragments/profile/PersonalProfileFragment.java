@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -95,6 +96,8 @@ public class PersonalProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personalprofile, container, false);
         final View popup = inflater.inflate(R.layout.popup_login, container, false);
         final EditText id, name, lastname, numtel, birth, sex;
+        CollapsingToolbarLayout ctl=view.findViewById(R.id.CollapsingToolbarLayout1);
+
         id = view.findViewById(R.id.identifiant);
         name = view.findViewById(R.id.name);
         lastname = view.findViewById(R.id.lastname);
@@ -109,7 +112,7 @@ public class PersonalProfileFragment extends Fragment {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.MainContainer, new ProfileFragment()).commit();
+            getFragmentManager().popBackStack();
             }
         });
         editbutton.setOnClickListener(new View.OnClickListener() {

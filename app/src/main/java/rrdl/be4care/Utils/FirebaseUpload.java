@@ -68,7 +68,10 @@ public class FirebaseUpload {
                 final Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Log.i("TAG", downloadUrl.toString());
                 link.addProperty("url", downloadUrl.toString());
+                mProgressDialog.dismiss();
 
+                final ProgressDialog dialog = ProgressDialog.show(mContext, "",
+                        "Analyse en cours...", true);
                 retrofit2.Call<JsonObject> analyse = apiservice.analyse(prefs.getString("AUTH", ""), link);
                 analyse.enqueue(new Callback<JsonObject>() {
                     @Override
@@ -80,7 +83,9 @@ public class FirebaseUpload {
                             intent.putExtra("url", downloadUrl.toString());
                             mActivity.startActivity(intent);
                         } else {
-                            Toasty.error(mContext,"Erreur de l'analyse").show();
+                            Toasty.error(mContext,"Erreur de l'analyse automatique").show();
+
+
                         }
                     }
 
@@ -89,21 +94,20 @@ public class FirebaseUpload {
                         Intent infointent=new Intent(mContext,DocInfoActivity.class);
                         infointent.putExtra("url",downloadUrl.toString());
                         mActivity.startActivity(infointent);
-                        Toast.makeText(mContext, "Failed analysis", Toast.LENGTH_SHORT).show();
+                        Toasty.error(mContext,"Erreur de l'analyse automatique").show();
+
                     }
                 });
-                Toast.makeText(mContext, downloadUrl.toString(), Toast.LENGTH_SHORT).show();
-                mProgressDialog.dismiss();
-
 
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Toast.makeText(mContext, exception.getMessage(), Toast.LENGTH_SHORT).show();
+                Toasty.error(mContext, "Erreur", Toast.LENGTH_SHORT).show();
                 // ...
-                Toast.makeText(mContext, "ERROR", Toast.LENGTH_SHORT).show();
+
                 mProgressDialog.dismiss();
+
 
             }
         });
