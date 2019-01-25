@@ -96,8 +96,6 @@ public class PersonalProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personalprofile, container, false);
         final View popup = inflater.inflate(R.layout.popup_login, container, false);
         final EditText id, name, lastname, numtel, birth, sex;
-        CollapsingToolbarLayout ctl=view.findViewById(R.id.CollapsingToolbarLayout1);
-
         id = view.findViewById(R.id.identifiant);
         name = view.findViewById(R.id.name);
         lastname = view.findViewById(R.id.lastname);
@@ -108,13 +106,7 @@ public class PersonalProfileFragment extends Fragment {
         Button editbutton = view.findViewById(R.id.edit);
         final Button Validate = view.findViewById(R.id.validate);
         Validate.setVisibility(View.GONE);
-        Button back = view.findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            getFragmentManager().popBackStack();
-            }
-        });
+
         editbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

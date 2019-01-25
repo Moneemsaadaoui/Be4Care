@@ -82,6 +82,7 @@ public class FirebaseUpload {
                             intent.putExtra("ocr", response.body().toString());
                             intent.putExtra("url", downloadUrl.toString());
                             mActivity.startActivity(intent);
+                            Toasty.success(mContext,"document ajouté avec succes").show();
                         } else {
                             Toasty.error(mContext,"Erreur de l'analyse automatique").show();
 

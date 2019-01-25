@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,9 +21,17 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rrdl.be4care.Models.Doctor;
 import rrdl.be4care.Models.Document;
+import rrdl.be4care.Models.User;
 import rrdl.be4care.R;
+import rrdl.be4care.Utils.ApiService;
+import rrdl.be4care.Utils.FillPersonalInfo;
 import rrdl.be4care.Utils.RoomDB;
 import rrdl.be4care.Utils.RoundedImageView;
 import rrdl.be4care.Utils.UIUtils;
@@ -90,11 +99,52 @@ public class ProfileFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
         Button contacts=view.findViewById(R.id.contact);
         Button profile=view.findViewById(R.id.profilebtn);
-        RoundedImageView riv=view.findViewById(R.id.profilepic);
+        ImageView riv=view.findViewById(R.id.profilepic);
+        final SharedPreferences prefs = getActivity().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
+
+        RoomDB db = RoomDB.getINSTANCE(getContext());
+        User user = db.Dao().getuser();
+        if (user != null && !user.getEmail().equals("")) {
+
+        }
+        Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://peaceful-forest-76384.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        final ApiService apiservice = retrofit.create(ApiService.class);
+        final Call<User> get = apiservice.load_user(prefs.getString("AUTH", ""));
+        get.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (response.isSuccessful() && !response.body().getName().equals("")
+                                && !response.body().getEmail().equals("") &&
+                                !response.body().getSex().equals("") &&
+                                !response.body().getLastName().equals("") &&
+                                !response.body().getPhNumber().equals("") &&
+                                !response.body().getBDate().equals("")
+                                && !response.body().getPUrl().equals("")) {
+                            try {
+                                db.Dao().insertUser(response.body());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }).start();
 
 
-        Bitmap bmp= BitmapFactory.decodeResource(getContext().getResources(),R.drawable.stephane);
-        riv.setImageBitmap(bmp);
+                Glide.with(getContext()).load(response.body().getPUrl())
+                        .asBitmap().centerCrop().diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .into(UIUtils.getRoundedImageTarget(getContext(), riv, 70));
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+            }
+        });
         Button apropos=view.findViewById(R.id.apropos);
        Button repertoire=view.findViewById(R.id.Répertoire);
        repertoire.setOnClickListener(new View.OnClickListener() {

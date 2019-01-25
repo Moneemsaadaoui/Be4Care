@@ -86,6 +86,7 @@ public class DocumentsFragment extends Fragment {
         CollapsingToolbarLayout collapsingToolbarLayout;
         toolbar = (Toolbar) view.findViewById(R.id.toolbar1);
         collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.CollapsingToolbarLayout1);
+
         mSwipeRefreshLayout = view.findViewById(R.id.swiperefresh);
         Button sort = view.findViewById(R.id.sort);
 

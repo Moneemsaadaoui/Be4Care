@@ -36,7 +36,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <rrdl.be4care.Utils.RoundedImageView
+                <ImageView
                     android:id="@+id/profilepic"
                     android:layout_width="45dp"
                     android:layout_height="45dp"

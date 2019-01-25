@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements DoctorListingFrag
         SharedPreferences prefs = getSharedPreferences("GLOBAL", MODE_PRIVATE);
         if (prefs == null) {
             prefs.edit().putString("TOKEN", getIntent().getExtras().getString("TOKEN")).commit();
+
         }
 
         BottomBar mBottomBar;

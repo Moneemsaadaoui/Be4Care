@@ -39,6 +39,8 @@ public class DocInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_doc_info);
+
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("GLOBAL", Context.MODE_PRIVATE);
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl("https://peaceful-forest-76384.herokuapp.com/")
@@ -46,7 +48,6 @@ public class DocInfoActivity extends AppCompatActivity {
 
         Retrofit retrofit = builder.build();
         ApiService apiservice = retrofit.create(ApiService.class);
-        setContentView(R.layout.activity_doc_info);
         date = findViewById(R.id.Date);
         note = findViewById(R.id.Notes);
         type = findViewById(R.id.Doctype);
